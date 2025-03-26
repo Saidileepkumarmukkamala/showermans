@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
+import HeroCarousel from './HeroCarousel';
 
 const Hero = () => {
   const textRef = useRef<HTMLDivElement>(null);
@@ -72,28 +73,12 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero Image */}
+          {/* Hero Carousel */}
           <div 
             ref={imageRef}
             className="opacity-0 transition-opacity duration-1000 ease-out delay-300"
           >
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden glass-card">
-                <img 
-                  src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-                  alt="Premium Liquor Collection" 
-                  className="w-full h-full object-cover" 
-                />
-              </div>
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-gold/10 filter blur-xl mix-blend-multiply" />
-              <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
-                <div className="bg-white/90 backdrop-blur-sm shadow-xl rounded-full p-4 w-24 h-24 flex flex-col items-center justify-center animate-image-glow">
-                  <span className="text-xs font-medium text-muted-foreground">Up to</span>
-                  <span className="text-xl font-bold text-gold">30%</span>
-                  <span className="text-sm font-medium">Off</span>
-                </div>
-              </div>
-            </div>
+            <HeroCarousel />
           </div>
         </div>
       </div>

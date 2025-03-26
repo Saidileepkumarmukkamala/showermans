@@ -61,28 +61,28 @@ const Footer = () => {
             <h3 className="text-lg font-medium mb-4">Categories</h3>
             <ul className="space-y-2">
               <li>
+                <Link to="/category/rare bottles" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                  Rare Bottles
+                </Link>
+              </li>
+              <li>
                 <Link to="/category/whiskey" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Whiskey
                 </Link>
               </li>
               <li>
-                <Link to="/category/vodka" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
-                  Vodka
+                <Link to="/category/tequila" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                  Tequila
                 </Link>
               </li>
               <li>
-                <Link to="/category/gin" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
-                  Gin
+                <Link to="/category/cognac" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                  Cognac & Brandy
                 </Link>
               </li>
               <li>
                 <Link to="/category/wine" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Wine
-                </Link>
-              </li>
-              <li>
-                <Link to="/category/champagne" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
-                  Champagne
                 </Link>
               </li>
             </ul>
@@ -102,7 +102,10 @@ const Footer = () => {
                 +1 734 427-0930
               </li>
               <li className="text-sm opacity-80">
-                Mon-Sat: 9:00 AM - 9:00 PM
+                Mon-Sat: 10:00 AM - 9:00 PM
+              </li>
+              <li className="text-sm opacity-80">
+                Sun: 11:00 AM - 7:00 PM
               </li>
             </ul>
           </div>

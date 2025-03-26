@@ -39,7 +39,7 @@ const Index = () => {
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src="https://images.unsplash.com/photo-1608877607386-8698047d065a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+              src="https://images.unsplash.com/photo-1598666604625-47b5bb4a2e5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
               alt="Premium Whiskey Collection" 
               className="w-full h-full object-cover"
             />
@@ -79,7 +79,7 @@ const Index = () => {
                 Why Choose Us
               </span>
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-                The Corino Experience
+                The Showerman's Experience
               </h2>
               <p className="text-muted-foreground">
                 We pride ourselves on offering the highest quality products and exceptional service to our valued customers.
