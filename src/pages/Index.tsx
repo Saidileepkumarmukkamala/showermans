@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -26,8 +25,8 @@ const Index = () => {
     });
   }, []);
 
-  // Find Jack Daniel's for the promotion banner
-  const promotionProduct = products.find(p => p.name === "Jack Daniel's Old No. 7") || products[8];
+  // Use the uploaded Johnnie Walker image
+  const johnnieWalkerImagePath = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -40,18 +39,18 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner - Updated with specific product image and improved alt text */}
+        {/* Promotion Banner - Updated with Johnnie Walker image */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src={promotionProduct.image} 
-              alt={promotionProduct.name} 
+              src={johnnieWalkerImagePath} 
+              alt="Johnnie Walker Black Label" 
               className="w-full h-full object-cover"
               onError={(e) => {
                 console.log("Failed to load promotion banner image");
-                // Fallback image if the primary one fails to load
-                e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0515/6139/5329/products/JackDanielsOldNo.7_700ml_Angled_73d7eb1d-cf73-4aac-a64e-b4a7b1e63634.jpg";
-                e.currentTarget.alt = "Premium Whiskey Collection";
+                // Fallback to the same image as it's the one we want
+                e.currentTarget.src = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
+                e.currentTarget.alt = "Johnnie Walker Black Label";
               }}
             />
             <div className="absolute inset-0 bg-black/60" />

@@ -7,8 +7,8 @@ import { products } from '@/data/products';
 const heroImages = [
   {
     id: 1,
-    src: products[0].image, // Macallan 18 Years
-    alt: products[0].name
+    src: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png", // Johnnie Walker Black Label
+    alt: "Johnnie Walker Black Label"
   },
   {
     id: 2,
@@ -102,8 +102,8 @@ const HeroCarousel = () => {
                   onError={e => {
                     // Fallback image if the primary one fails to load
                     console.log(`Failed to load image: ${image.src}`);
-                    e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0105/4464/9843/products/machaeaayeeaadquaddabiabigaduabsabrabiabmaciaamabcabsacuaa_600x.png";
-                    e.currentTarget.alt = "Premium spirits";
+                    e.currentTarget.src = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
+                    e.currentTarget.alt = "Johnnie Walker Black Label";
                   }}
                 />
                 

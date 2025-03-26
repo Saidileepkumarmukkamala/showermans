@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
@@ -32,8 +31,9 @@ const Hero = () => {
     };
   }, []);
 
-  // Get the Macallan 18 Years for the hero image
-  const heroProduct = products[0];
+  // Use the uploaded Johnnie Walker Black Label image
+  const heroImageSrc = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
+  const heroImageAlt = "Johnnie Walker Black Label";
 
   return (
     <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
@@ -85,19 +85,20 @@ const Hero = () => {
             <div className="relative rounded-2xl overflow-hidden glass-card">
               <div className="aspect-[16/9] w-full overflow-hidden">
                 <img 
-                  src={heroProduct.image} 
-                  alt={heroProduct.name} 
+                  src={heroImageSrc} 
+                  alt={heroImageAlt} 
                   className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105" 
                   onError={(e) => {
                     console.log("Failed to load hero image");
-                    e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0105/4464/9843/products/machaeaayeeaadquaddabiabigaduabsabrabiabmaciaamabcabsacuaa_600x.png";
-                    e.currentTarget.alt = "Premium spirits";
+                    // If somehow the image fails, we keep the same backup
+                    e.currentTarget.src = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
+                    e.currentTarget.alt = "Johnnie Walker Black Label";
                   }}
                 />
                 
                 {/* Caption overlay for better UX */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6 rounded-sm">
-                  <h3 className="text-white text-xl md:text-2xl font-serif font-bold">{heroProduct.name}</h3>
+                  <h3 className="text-white text-xl md:text-2xl font-serif font-bold">{heroImageAlt}</h3>
                 </div>
               </div>
               
