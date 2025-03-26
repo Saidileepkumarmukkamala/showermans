@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Logo & About */}
           <div className="md:col-span-1">
             <div className="mb-4">
-              <h3 className="text-xl font-serif font-bold mb-2">CORINO</h3>
+              <h3 className="text-xl font-serif font-bold mb-2">Showerman's Fine Wine & Liquor</h3>
               <p className="text-sm leading-relaxed opacity-80">
                 Premium liquor store featuring a curated selection of the finest wines, spirits, and craft beers from around the world.
               </p>
@@ -100,7 +100,7 @@ const Footer = () => {
                 123 Main Street, New York, NY 10001
               </li>
               <li className="text-sm opacity-80">
-                info@corino.com
+                info@showermans.com
               </li>
               <li className="text-sm opacity-80">
                 +1 (555) 123-4567
@@ -114,7 +114,7 @@ const Footer = () => {
 
         <div className="border-t border-white/10 mt-12 pt-8 text-center">
           <p className="text-sm opacity-70">
-            © {new Date().getFullYear()} Corino Liquor Store. All rights reserved.
+            © {new Date().getFullYear()} Showerman's Fine Wine & Liquor. All rights reserved.
           </p>
         </div>
       </div>

@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center">
-            <span className="text-xl md:text-2xl font-serif font-bold">CORINO</span>
+            <span className="text-xl md:text-2xl font-serif font-bold">Showerman's Fine Wine & Liquor</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -91,7 +91,7 @@ const Navbar = () => {
           )}
         >
           <div className="flex justify-between items-center mb-8">
-            <span className="text-xl font-serif font-bold">CORINO</span>
+            <span className="text-xl font-serif font-bold">Showerman's Fine Wine & Liquor</span>
             <button 
               className="p-1.5 hover:bg-secondary rounded-full transition-colors duration-200"
               onClick={() => setMobileMenuOpen(false)}
