@@ -81,19 +81,19 @@ const Hero = () => {
             <div className="relative rounded-2xl overflow-hidden glass-card">
               <div className="aspect-[16/9] w-full overflow-hidden">
                 <img 
-                  src="/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png" 
-                  alt="Rare Bottles Collection" 
+                  src="/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png" 
+                  alt="Johnny Walker Black Label" 
                   className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105" 
                   onError={(e) => {
                     console.log("Failed to load hero image");
-                    e.currentTarget.src = "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png";
+                    e.currentTarget.src = "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png";
                     e.currentTarget.alt = "Premium spirits";
                   }}
                 />
                 
                 {/* Caption overlay for better UX */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6 rounded-sm">
-                  <h3 className="text-white text-xl md:text-2xl font-serif font-bold">Rare Bottles Collection</h3>
+                  <h3 className="text-white text-xl md:text-2xl font-serif font-bold">Johnny Walker Black Label</h3>
                 </div>
               </div>
               
