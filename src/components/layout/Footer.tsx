@@ -97,13 +97,13 @@ const Footer = () => {
             <h3 className="text-lg font-medium mb-4">Contact Info</h3>
             <ul className="space-y-3">
               <li className="text-sm opacity-80">
-                123 Main Street, New York, NY 10001
+                15333 Merriman Road, Livonia, Michigan, USA, 48154
               </li>
               <li className="text-sm opacity-80">
-                info@showermans.com
+                showermans@gmail.com
               </li>
               <li className="text-sm opacity-80">
-                +1 (555) 123-4567
+                +1 734 427-0930
               </li>
               <li className="text-sm opacity-80">
                 Mon-Sat: 9:00 AM - 9:00 PM
