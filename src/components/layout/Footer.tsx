@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -16,13 +17,13 @@ const Footer = () => {
               </p>
             </div>
             <div className="flex space-x-4 mt-6">
-              <a href="#" className="hover:text-gold transition-colors duration-200">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors duration-200">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-gold transition-colors duration-200">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors duration-200">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-gold transition-colors duration-200">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors duration-200">
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
@@ -33,29 +34,24 @@ const Footer = () => {
             <h3 className="text-lg font-medium mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/category/all" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Shop
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
-                  Categories
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/about" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/contact" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -65,29 +61,29 @@ const Footer = () => {
             <h3 className="text-lg font-medium mb-4">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/category/whiskey" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Whiskey
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/category/vodka" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Vodka
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/category/gin" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Gin
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/category/wine" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Wine
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
+                <Link to="/category/champagne" className="text-sm opacity-80 hover:opacity-100 hover:text-gold transition-colors duration-200">
                   Champagne
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

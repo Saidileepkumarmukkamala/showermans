@@ -1,31 +1,32 @@
 
 import React, { useRef, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const categories = [
   {
     id: 1,
     name: "Whiskey",
     description: "Single Malt & Blended",
-    image: "https://images.unsplash.com/photo-1574072431553-c930ec8f2382?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.pexels.com/photos/602750/pexels-photo-602750.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: 2,
     name: "Vodka",
     description: "Premium & Flavored",
-    image: "https://images.unsplash.com/photo-1608885898957-a52fa9af1a45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.pexels.com/photos/1304540/pexels-photo-1304540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: 3,
     name: "Gin",
     description: "Botanical & Dry",
-    image: "https://images.unsplash.com/photo-1630573829701-682047c86e3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.pexels.com/photos/5947021/pexels-photo-5947021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
     id: 4,
     name: "Wine",
     description: "Red, White & Rosé",
-    image: "https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "https://images.pexels.com/photos/2912108/pexels-photo-2912108.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
 ];
 
@@ -95,7 +96,7 @@ const Categories = () => {
               className="category-item opacity-0 translate-y-8 transition-all duration-500"
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="category-card group h-full">
+              <Link to={`/category/${category.name.toLowerCase()}`} className="category-card group h-full block">
                 <div className="relative h-full rounded-lg overflow-hidden">
                   {/* Category Image */}
                   <img 
@@ -108,16 +109,15 @@ const Categories = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
                     <h3 className="text-xl font-medium mb-1">{category.name}</h3>
                     <p className="text-sm text-white/80 mb-4">{category.description}</p>
-                    <a 
-                      href={`#${category.name.toLowerCase()}`}
+                    <span 
                       className="inline-flex items-center text-sm font-medium text-white group-hover:text-gold transition-colors duration-200"
                     >
                       Explore Collection
                       <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-200" />
-                    </a>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

@@ -1,75 +1,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import ProductCard from './ProductCard';
-
-// Sample product data
-const products = [
-  {
-    id: 1,
-    name: "Macallan 18 Years",
-    category: "Whiskey",
-    price: 299.99,
-    image: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    isNew: true
-  },
-  {
-    id: 2,
-    name: "Grey Goose Original",
-    category: "Vodka",
-    price: 45.99,
-    originalPrice: 55.99,
-    image: "https://images.unsplash.com/photo-1608885898957-a52fa9af1a45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    isSale: true
-  },
-  {
-    id: 3,
-    name: "Hendrick's Gin",
-    category: "Gin",
-    price: 39.99,
-    image: "https://images.unsplash.com/photo-1547781668-fa96d8856693?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 4,
-    name: "Dom Pérignon Vintage",
-    category: "Champagne",
-    price: 199.99,
-    image: "https://images.unsplash.com/photo-1593536587119-3fcea3bee29e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    isNew: true
-  },
-  {
-    id: 5,
-    name: "Rémy Martin XO",
-    category: "Cognac",
-    price: 179.99,
-    originalPrice: 199.99,
-    image: "https://images.unsplash.com/photo-1557682204-e53b55fd750c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    isSale: true
-  },
-  {
-    id: 6,
-    name: "Patrón Silver",
-    category: "Tequila",
-    price: 49.99,
-    image: "https://images.unsplash.com/photo-1656895703071-4db5757988db?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 7,
-    name: "Château Margaux",
-    category: "Wine",
-    price: 399.99,
-    image: "https://images.unsplash.com/photo-1597130203392-6570a259ce6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    isNew: true
-  },
-  {
-    id: 8,
-    name: "Monkey 47",
-    category: "Gin",
-    price: 79.99,
-    originalPrice: 89.99,
-    image: "https://images.unsplash.com/photo-1543253687-c931c8e01820?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    isSale: true
-  }
-];
+import { products } from '@/data/products';
 
 const FeaturedProducts = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -107,6 +39,9 @@ const FeaturedProducts = () => {
     };
   }, []);
 
+  // Get only 8 featured products
+  const featuredProducts = products.slice(0, 8);
+
   return (
     <section id="shop" className="section-padding">
       <div className="container mx-auto px-4 md:px-6">
@@ -131,7 +66,7 @@ const FeaturedProducts = () => {
           ref={productsRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
         >
-          {products.map((product, index) => (
+          {featuredProducts.map((product, index) => (
             <div 
               key={product.id}
               className="product-item opacity-0 translate-y-8 transition-all duration-500"

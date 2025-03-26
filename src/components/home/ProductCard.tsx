@@ -3,6 +3,7 @@ import React from 'react';
 import { ShoppingCart, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 
 interface ProductCardProps {
   id: number;
@@ -29,8 +30,20 @@ const ProductCard = ({
 }: ProductCardProps) => {
   // Fallback image in case the provided one is missing or fails to load
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = 'https://images.unsplash.com/photo-1516146544193-b54a65682f16?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+    e.currentTarget.src = 'https://images.pexels.com/photos/1879610/pexels-photo-1879610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
     e.currentTarget.alt = 'Product Image';
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toast.success(`Added ${name} to cart`);
+  };
+
+  const handleAddToWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toast.success(`Added ${name} to wishlist`);
   };
 
   return (
@@ -69,10 +82,7 @@ const ProductCard = ({
         <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
           <button 
             className="p-2 bg-white rounded-full shadow-md hover:bg-accent hover:text-white transition-colors duration-200"
-            onClick={(e) => {
-              e.preventDefault();
-              console.log('Added to wishlist:', name);
-            }}
+            onClick={handleAddToWishlist}
           >
             <Heart className="h-4 w-4" />
           </button>
@@ -94,10 +104,7 @@ const ProductCard = ({
           
           <button 
             className="p-2 bg-primary text-white rounded-full hover:bg-accent transition-colors duration-200"
-            onClick={(e) => {
-              e.preventDefault();
-              console.log('Added to cart:', name);
-            }}
+            onClick={handleAddToCart}
           >
             <ShoppingCart className="h-4 w-4" />
           </button>
