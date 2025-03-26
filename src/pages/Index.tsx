@@ -35,16 +35,17 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner - Updated with reliable image source */}
+        {/* Promotion Banner - Updated with high-quality image from onlineliquor.com */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src="https://cdn.shopify.com/s/files/1/0474/1849/3562/files/whisky-banner_2000x.jpg" 
+              src="https://onlineliquor.com.au/cdn/shop/files/Whisky-banner-website-desktop_1944x.jpg?v=1614147171" 
               alt="Premium Whiskey Collection" 
               className="w-full h-full object-cover"
               onError={(e) => {
+                console.log("Failed to load promotion banner image");
                 // Fallback image if the primary one fails to load
-                e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/Whisky_750x.jpg";
+                e.currentTarget.src = "https://onlineliquor.com.au/cdn/shop/collections/Whiskey_1200x630_93a5a795-5e7d-4fb0-9ba3-11f20f7bbde2_1200x630.jpg?v=1612505457";
                 e.currentTarget.alt = "Premium Whiskey";
               }}
             />

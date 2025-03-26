@@ -8,55 +8,55 @@ const categories = [
     id: 1,
     name: "Rare Bottles",
     description: "Store Picks & Limited Editions",
-    image: "https://images.unsplash.com/photo-1518760105280-256e5efef91f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/products/Macallan-Rare-Cask-2020-Release-Single-Malt-Scotch-Whisky-700ml_580x.jpg?v=1610095927",
   },
   {
     id: 2,
-    name: "Whiskey",
+    name: "Whisky",
     description: "Single Malt & Blended",
-    image: "https://images.unsplash.com/photo-1527281400683-1aae777175f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/collections/Whiskey_1200x630_93a5a795-5e7d-4fb0-9ba3-11f20f7bbde2_1200x630.jpg?v=1612505457",
   },
   {
     id: 3,
     name: "Tequila",
     description: "Blanco, Reposado & Añejo",
-    image: "https://images.unsplash.com/photo-1660919486107-3a6a68888387?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/collections/Tequila-mezcal_1200x630.jpg?v=1612506139",
   },
   {
     id: 4,
     name: "Cognac",
     description: "Cognac & Fine Brandy",
-    image: "https://images.unsplash.com/photo-1605753540488-0021d452cd96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/collections/Brandy_1200x630_cd42a9f2-4c76-4c3b-87b5-a889bb4d72bc_1200x630.jpg?v=1612505731",
   },
   {
     id: 5,
     name: "Vodka",
     description: "Premium & Flavored",
-    image: "https://images.unsplash.com/photo-1614313511387-1436a4480ebb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/collections/Vodka_1200x630_fdb12dad-6a3a-4d7f-a384-d923c5be69f8_1200x630.jpg?v=1612505654",
   },
   {
     id: 6,
     name: "Gin",
     description: "London Dry & Botanical",
-    image: "https://images.unsplash.com/photo-1607622750671-6cd9a99eabd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/collections/Gin_1200x630_f98fc651-95a5-45b2-8e65-15e1b7c548df_1200x630.jpg?v=1612505542",
   },
   {
     id: 7,
     name: "Rum",
     description: "Dark, Spiced & White",
-    image: "https://images.unsplash.com/photo-1571976533653-4163684f91fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/collections/Rum_1200x630_c20ba697-9d87-46ba-bb96-8d42fef338b7_1200x630.jpg?v=1612505576",
   },
   {
     id: 8,
     name: "Wine",
     description: "Red, White & Rosé",
-    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/collections/Wine_1200x630_704ab85b-1d65-4387-abc4-fafcc06f6040_1200x630.jpg?v=1612505702",
   },
   {
     id: 9,
     name: "Champagne",
     description: "Champagne & Sparkling Wine",
-    image: "https://images.unsplash.com/photo-1546171044-6a27abe05599?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    image: "https://onlineliquor.com.au/cdn/shop/collections/Champagne_1200x630_ba90df19-6e28-431e-b778-14b5679f1bb3_1200x630.jpg?v=1612505682",
   },
 ];
 
@@ -126,13 +126,18 @@ const Categories = () => {
               className="category-item opacity-0 translate-y-8 transition-all duration-500"
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <Link to={`/category/${category.name.toLowerCase()}`} className="category-card group h-full block">
+              <Link to={`/category/${category.name.toLowerCase().replace(/\s+/g, '-')}`} className="category-card group h-full block">
                 <div className="relative h-full rounded-lg overflow-hidden">
                   {/* Category Image */}
                   <img 
                     src={category.image} 
                     alt={category.name}
                     className="w-full h-64 object-cover transform transition-transform duration-700 group-hover:scale-110"
+                    onError={(e) => {
+                      console.log(`Failed to load category image: ${category.image}`);
+                      // Fallback to a generic category image if load fails
+                      e.currentTarget.src = "https://onlineliquor.com.au/cdn/shop/t/3/assets/placeholder_1200x.png?v=113871083e82fe24a0c5";
+                    }}
                   />
                   
                   {/* Overlay */}

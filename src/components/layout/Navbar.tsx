@@ -1,12 +1,95 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, Search, ShoppingCart, User, X } from 'lucide-react';
+import { Menu, Search, ShoppingCart, User, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+
+// Comprehensive category structure based on onlineliquor.com
+const categoryStructure = {
+  "Rare Bottles": {
+    path: "/category/rare-bottles",
+    subcategories: [
+      { name: "Store Picks", path: "/category/store-picks" },
+      { name: "Limited Editions", path: "/category/limited-editions" },
+      { name: "Collector's Items", path: "/category/collectors-items" }
+    ]
+  },
+  "Whisky": {
+    path: "/category/whiskey",
+    subcategories: [
+      { name: "Scotch", path: "/category/scotch" },
+      { name: "Bourbon", path: "/category/bourbon" },
+      { name: "Japanese Whisky", path: "/category/japanese-whisky" },
+      { name: "Irish Whiskey", path: "/category/irish-whiskey" },
+      { name: "Single Malt", path: "/category/single-malt" }
+    ]
+  },
+  "Tequila": {
+    path: "/category/tequila",
+    subcategories: [
+      { name: "Blanco", path: "/category/tequila-blanco" },
+      { name: "Reposado", path: "/category/tequila-reposado" },
+      { name: "Añejo", path: "/category/tequila-anejo" },
+      { name: "Mezcal", path: "/category/mezcal" }
+    ]
+  },
+  "Cognac & Brandy": {
+    path: "/category/cognac",
+    subcategories: [
+      { name: "VS", path: "/category/cognac-vs" },
+      { name: "VSOP", path: "/category/cognac-vsop" },
+      { name: "XO", path: "/category/cognac-xo" },
+      { name: "Armagnac", path: "/category/armagnac" }
+    ]
+  },
+  "Vodka": {
+    path: "/category/vodka",
+    subcategories: [
+      { name: "Plain", path: "/category/vodka-plain" },
+      { name: "Flavored", path: "/category/vodka-flavored" },
+      { name: "Premium", path: "/category/vodka-premium" }
+    ]
+  },
+  "Gin": {
+    path: "/category/gin",
+    subcategories: [
+      { name: "London Dry", path: "/category/london-dry-gin" },
+      { name: "Navy Strength", path: "/category/navy-strength-gin" },
+      { name: "Botanical", path: "/category/botanical-gin" }
+    ]
+  },
+  "Rum": {
+    path: "/category/rum",
+    subcategories: [
+      { name: "Dark", path: "/category/dark-rum" },
+      { name: "Spiced", path: "/category/spiced-rum" },
+      { name: "White", path: "/category/white-rum" },
+      { name: "Aged", path: "/category/aged-rum" }
+    ]
+  },
+  "Wine": {
+    path: "/category/wine",
+    subcategories: [
+      { name: "Red", path: "/category/red-wine" },
+      { name: "White", path: "/category/white-wine" },
+      { name: "Rosé", path: "/category/rose-wine" },
+      { name: "Sparkling", path: "/category/sparkling-wine" }
+    ]
+  },
+  "Champagne": {
+    path: "/category/champagne",
+    subcategories: [
+      { name: "Brut", path: "/category/brut-champagne" },
+      { name: "Rosé", path: "/category/rose-champagne" },
+      { name: "Vintage", path: "/category/vintage-champagne" }
+    ]
+  }
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +103,14 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleCategoryHover = (category: string) => {
+    setActiveCategory(category);
+  };
+
+  const handleMouseLeave = () => {
+    setActiveCategory(null);
+  };
 
   return (
     <header 
@@ -36,27 +127,54 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-6">
             <Link to="/" className="text-primary hover:text-gold transition-colors duration-200 font-medium">
               Home
             </Link>
             <Link to="/category/all" className="text-primary hover:text-gold transition-colors duration-200 font-medium">
-              Shop
+              Shop All
             </Link>
+            
+            {/* Mega Menu */}
             <div className="relative group">
-              <button className="text-primary hover:text-gold transition-colors duration-200 font-medium flex items-center">
-                Categories
+              <button 
+                className="text-primary hover:text-gold transition-colors duration-200 font-medium flex items-center"
+                onMouseEnter={() => handleCategoryHover('categories')}
+              >
+                Categories <ChevronDown className="h-4 w-4 ml-1" />
               </button>
-              <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                <div className="py-1">
-                  <Link to="/category/whiskey" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Whiskey</Link>
-                  <Link to="/category/vodka" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Vodka</Link>
-                  <Link to="/category/gin" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gin</Link>
-                  <Link to="/category/wine" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wine</Link>
-                  <Link to="/category/champagne" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Champagne</Link>
+              
+              {activeCategory === 'categories' && (
+                <div 
+                  className="absolute left-1/2 -translate-x-1/2 mt-2 w-screen max-w-6xl bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-200 z-50 grid grid-cols-3 gap-4 p-6"
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {Object.entries(categoryStructure).map(([category, { path, subcategories }]) => (
+                    <div key={category} className="p-4">
+                      <Link 
+                        to={path} 
+                        className="font-medium text-lg text-primary hover:text-gold transition-colors duration-200"
+                      >
+                        {category}
+                      </Link>
+                      <ul className="mt-2 space-y-1">
+                        {subcategories.map((sub) => (
+                          <li key={sub.name}>
+                            <Link 
+                              to={sub.path} 
+                              className="text-muted-foreground hover:text-gold transition-colors duration-200"
+                            >
+                              {sub.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
-              </div>
+              )}
             </div>
+            
             <Link to="/about" className="text-primary hover:text-gold transition-colors duration-200 font-medium">
               About
             </Link>
@@ -98,7 +216,7 @@ const Navbar = () => {
       >
         <div 
           className={cn(
-            "fixed top-0 right-0 h-full w-[75%] max-w-sm bg-white p-6 shadow-lg transform transition-transform duration-300",
+            "fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white p-6 shadow-lg transform transition-transform duration-300 overflow-y-auto",
             mobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >
@@ -117,18 +235,39 @@ const Navbar = () => {
               Home
             </Link>
             <Link to="/category/all" onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-gold transition-colors duration-200 text-lg font-medium">
-              Shop
+              Shop All
             </Link>
+            
+            {/* Mobile Categories Accordion */}
             <div className="space-y-2">
               <p className="text-primary font-medium text-lg">Categories</p>
-              <div className="pl-4 space-y-2">
-                <Link to="/category/whiskey" onClick={() => setMobileMenuOpen(false)} className="block text-primary hover:text-gold transition-colors duration-200">Whiskey</Link>
-                <Link to="/category/vodka" onClick={() => setMobileMenuOpen(false)} className="block text-primary hover:text-gold transition-colors duration-200">Vodka</Link>
-                <Link to="/category/gin" onClick={() => setMobileMenuOpen(false)} className="block text-primary hover:text-gold transition-colors duration-200">Gin</Link>
-                <Link to="/category/wine" onClick={() => setMobileMenuOpen(false)} className="block text-primary hover:text-gold transition-colors duration-200">Wine</Link>
-                <Link to="/category/champagne" onClick={() => setMobileMenuOpen(false)} className="block text-primary hover:text-gold transition-colors duration-200">Champagne</Link>
+              <div className="pl-4 space-y-4">
+                {Object.entries(categoryStructure).map(([category, { path, subcategories }]) => (
+                  <div key={category} className="space-y-2">
+                    <Link 
+                      to={path} 
+                      onClick={() => setMobileMenuOpen(false)} 
+                      className="block text-primary hover:text-gold transition-colors duration-200 font-medium"
+                    >
+                      {category}
+                    </Link>
+                    <div className="pl-4 space-y-1">
+                      {subcategories.map((sub) => (
+                        <Link 
+                          key={sub.name}
+                          to={sub.path} 
+                          onClick={() => setMobileMenuOpen(false)} 
+                          className="block text-muted-foreground hover:text-gold transition-colors duration-200 text-sm"
+                        >
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+            
             <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-primary hover:text-gold transition-colors duration-200 text-lg font-medium">
               About
             </Link>

@@ -8,33 +8,39 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-// Updated with proper liquor store related images
+// Updated with high-quality liquor store images from onlineliquor.com
 const heroImages = [
   {
     id: 1,
-    src: "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/slider-01-1050x550_2400x.jpg",
+    src: "https://onlineliquor.com.au/cdn/shop/files/onlineliqorbannerDesktop_1944x.jpg?v=1614140048",
     alt: "Premium spirits collection"
   },
   {
     id: 2,
-    src: "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/slider-02-1050x550_2400x.jpg",
+    src: "https://onlineliquor.com.au/cdn/shop/files/Whiskey-collection-onlineliquor_1944x.jpg?v=1628812869",
     alt: "Whiskey selection"
   },
   {
     id: 3,
-    src: "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/slider-03-1050x550_2400x.jpg",
+    src: "https://onlineliquor.com.au/cdn/shop/files/Wine-collection_1944x.jpg?v=1614143630",
     alt: "Fine wine collection"
   },
   {
     id: 4,
-    src: "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/Hennessy-XO-Cognac-700ml_750x.jpg",
-    alt: "Rare cognac collection"
+    src: "https://onlineliquor.com.au/cdn/shop/files/Champagne-desktop_1944x.jpg?v=1614206197",
+    alt: "Champagne collection"
+  },
+  {
+    id: 5,
+    src: "https://onlineliquor.com.au/cdn/shop/files/Cognac-collection-desktop_1944x.jpg?v=1614210198",
+    alt: "Premium cognac selection"
   }
 ];
 
 const HeroCarousel = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [api, setApi] = useState<any>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   
   // Set loaded state when component mounts
   useEffect(() => {
@@ -45,25 +51,49 @@ const HeroCarousel = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Auto-play the carousel
+  // Auto-play the carousel with improved reliability
   useEffect(() => {
     if (!api) return;
 
     // Set up auto-play interval
     const interval = setInterval(() => {
       api.scrollNext();
-    }, 4000); // Change slide every 4 seconds
+      
+      // Update current slide for indicators
+      setCurrentSlide(prev => {
+        const nextSlide = prev + 1 >= heroImages.length ? 0 : prev + 1;
+        return nextSlide;
+      });
+    }, 5000); // Change slide every 5 seconds for better viewing experience
+
+    // Handle manual navigation events
+    const onSelect = () => {
+      if (!api) return;
+      setCurrentSlide(api.selectedScrollSnap());
+    };
+    
+    api.on("select", onSelect);
 
     // Cleanup on component unmount
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      api.off("select", onSelect);
+    };
   }, [api]);
+
+  // Handle dot indicator clicks
+  const scrollToSlide = (index: number) => {
+    if (!api) return;
+    api.scrollTo(index);
+    setCurrentSlide(index);
+  };
 
   return (
     <div className={`relative rounded-2xl overflow-hidden glass-card transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <Carousel 
         opts={{ 
           loop: true, 
-          duration: 40 
+          duration: 600 // Smoother transitions
         }} 
         setApi={setApi}
         className="w-full"
@@ -71,25 +101,45 @@ const HeroCarousel = () => {
         <CarouselContent>
           {heroImages.map((image) => (
             <CarouselItem key={image.id}>
-              <div className="aspect-[4/3] w-full overflow-hidden">
+              <div className="aspect-[16/9] w-full overflow-hidden">
                 <img 
                   src={image.src} 
                   alt={image.alt}
                   className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105"
                   onError={(e) => {
                     // Fallback image if the primary one fails to load
-                    e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/Vodka_750x.jpg";
+                    console.log(`Failed to load image: ${image.src}`);
+                    e.currentTarget.src = "https://onlineliquor.com.au/cdn/shop/files/onlineliqorbannerDesktop_1944x.jpg?v=1614140048";
                     e.currentTarget.alt = "Premium spirits";
                   }}
                 />
+                
+                {/* Caption overlay for better UX */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-white text-xl md:text-2xl font-serif font-bold">{image.alt}</h3>
+                </div>
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
         
-        {/* Navigation arrows (still visible but carousel will auto-play) */}
+        {/* Navigation arrows (visible but carousel will auto-play) */}
         <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10" />
         <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10" />
+        
+        {/* Dot indicators for enhanced user experience */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 z-10">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToSlide(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                currentSlide === index ? "bg-white w-4" : "bg-white/50"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </Carousel>
       
       <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-gold/10 filter blur-xl mix-blend-multiply" />
