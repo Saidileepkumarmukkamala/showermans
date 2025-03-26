@@ -35,13 +35,18 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner */}
+        {/* Promotion Banner - Updated with reliable image source */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src="https://images.unsplash.com/photo-1598666604625-47b5bb4a2e5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+              src="https://cdn.shopify.com/s/files/1/0474/1849/3562/files/whisky-banner_2000x.jpg" 
               alt="Premium Whiskey Collection" 
               className="w-full h-full object-cover"
+              onError={(e) => {
+                // Fallback image if the primary one fails to load
+                e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/Whisky_750x.jpg";
+                e.currentTarget.alt = "Premium Whiskey";
+              }}
             />
             <div className="absolute inset-0 bg-black/60" />
           </div>

@@ -8,34 +8,36 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+// Updated with proper liquor store related images
 const heroImages = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+    src: "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/slider-01-1050x550_2400x.jpg",
     alt: "Premium spirits collection"
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1609951651791-703dec449b3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Whiskey tasting experience"
+    src: "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/slider-02-1050x550_2400x.jpg",
+    alt: "Whiskey selection"
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1516358045903-b686e6bd3814?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Fine wine selection"
+    src: "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/slider-03-1050x550_2400x.jpg",
+    alt: "Fine wine collection"
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1508253730651-e5ace40d34ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    alt: "Rare bourbon collection"
+    src: "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/Hennessy-XO-Cognac-700ml_750x.jpg",
+    alt: "Rare cognac collection"
   }
 ];
 
 const HeroCarousel = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [api, setApi] = useState<any>(null);
   
+  // Set loaded state when component mounts
   useEffect(() => {
-    // Delay setting loaded to true to ensure smooth animation
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 300);
@@ -43,9 +45,29 @@ const HeroCarousel = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Auto-play the carousel
+  useEffect(() => {
+    if (!api) return;
+
+    // Set up auto-play interval
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 4000); // Change slide every 4 seconds
+
+    // Cleanup on component unmount
+    return () => clearInterval(interval);
+  }, [api]);
+
   return (
     <div className={`relative rounded-2xl overflow-hidden glass-card transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-      <Carousel opts={{ loop: true, duration: 40 }}>
+      <Carousel 
+        opts={{ 
+          loop: true, 
+          duration: 40 
+        }} 
+        setApi={setApi}
+        className="w-full"
+      >
         <CarouselContent>
           {heroImages.map((image) => (
             <CarouselItem key={image.id}>
@@ -54,13 +76,20 @@ const HeroCarousel = () => {
                   src={image.src} 
                   alt={image.alt}
                   className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105"
+                  onError={(e) => {
+                    // Fallback image if the primary one fails to load
+                    e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0474/1849/3562/files/Vodka_750x.jpg";
+                    e.currentTarget.alt = "Premium spirits";
+                  }}
                 />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2" />
-        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2" />
+        
+        {/* Navigation arrows (still visible but carousel will auto-play) */}
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10" />
+        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10" />
       </Carousel>
       
       <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-gold/10 filter blur-xl mix-blend-multiply" />
