@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import HeroCarousel from './HeroCarousel';
 
 const Hero = () => {
   const textRef = useRef<HTMLDivElement>(null);
@@ -65,21 +64,48 @@ const Hero = () => {
                 Shop Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <Link 
-                to="#categories" 
+              <a 
+                href="#categories" 
                 className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary border border-primary hover:bg-primary/5 transition-colors duration-200"
               >
                 Explore Categories
-              </Link>
+              </a>
             </div>
           </div>
 
-          {/* Hero Carousel */}
+          {/* Hero Image */}
           <div 
             ref={imageRef}
             className="opacity-0 transition-opacity duration-1000 ease-out delay-300"
           >
-            <HeroCarousel />
+            <div className="relative rounded-2xl overflow-hidden glass-card">
+              <div className="aspect-[16/9] w-full overflow-hidden">
+                <img 
+                  src="/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png" 
+                  alt="Rare Bottles Collection" 
+                  className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105" 
+                  onError={(e) => {
+                    console.log("Failed to load hero image");
+                    e.currentTarget.src = "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png";
+                    e.currentTarget.alt = "Premium spirits";
+                  }}
+                />
+                
+                {/* Caption overlay for better UX */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6 rounded-sm">
+                  <h3 className="text-white text-xl md:text-2xl font-serif font-bold">Rare Bottles Collection</h3>
+                </div>
+              </div>
+              
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-gold/10 filter blur-xl mix-blend-multiply" />
+              <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
+                <div className="bg-white/90 backdrop-blur-sm shadow-xl rounded-full p-4 w-24 h-24 flex flex-col items-center justify-center animate-image-glow">
+                  <span className="text-xs font-medium text-muted-foreground">Up to</span>
+                  <span className="text-xl font-bold text-gold">30%</span>
+                  <span className="text-sm font-medium">Off</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

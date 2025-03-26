@@ -7,7 +7,6 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
@@ -135,7 +134,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex items-center space-x-6">
             <Link to="/" className="text-primary hover:text-gold transition-colors duration-200 font-medium">
               Home
             </Link>
@@ -143,12 +142,15 @@ const Navbar = () => {
               Shop All
             </Link>
             
-            {/* Mega Menu - Using NavigationMenu from shadcn/ui for proper dropdown functionality */}
+            {/* Mega Menu - Using NavigationMenu from shadcn/ui with improved styling */}
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-primary hover:text-gold transition-colors duration-200 font-medium bg-transparent">
-                    Categories
+                  <NavigationMenuTrigger className="text-primary hover:text-gold transition-colors duration-200 font-medium bg-transparent h-auto p-0 after:hidden">
+                    <span className="flex items-center">
+                      Categories
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    </span>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="bg-white rounded-md shadow-lg p-6">
                     <div className="grid grid-cols-3 gap-4 w-[800px]">
