@@ -8,6 +8,7 @@ import Categories from '@/components/home/Categories';
 import Newsletter from '@/components/home/Newsletter';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { products } from '@/data/products';
 
 const Index = () => {
   useEffect(() => {
@@ -25,6 +26,9 @@ const Index = () => {
     });
   }, []);
 
+  // Find Jack Daniel's for the promotion banner
+  const promotionProduct = products.find(p => p.name === "Jack Daniel's Old No. 7") || products[8];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -40,13 +44,13 @@ const Index = () => {
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src="/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png" 
-              alt="Johnny Walker Black Label Whiskey" 
+              src={promotionProduct.image} 
+              alt={promotionProduct.name} 
               className="w-full h-full object-cover"
               onError={(e) => {
                 console.log("Failed to load promotion banner image");
                 // Fallback image if the primary one fails to load
-                e.currentTarget.src = "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png";
+                e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0515/6139/5329/products/JackDanielsOldNo.7_700ml_Angled_73d7eb1d-cf73-4aac-a64e-b4a7b1e63634.jpg";
                 e.currentTarget.alt = "Premium Whiskey Collection";
               }}
             />

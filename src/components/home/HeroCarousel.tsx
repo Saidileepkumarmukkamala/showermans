@@ -1,28 +1,36 @@
+
 import React, { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { products } from '@/data/products';
 
-// Updated with the uploaded images and improved descriptions
-const heroImages = [{
-  id: 1,
-  src: "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png",
-  alt: "Premium Spirits Collection"
-}, {
-  id: 2,
-  src: "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png",
-  alt: "Johnny Walker Black Label"
-}, {
-  id: 3,
-  src: "/lovable-uploads/6d31f34c-7095-4a38-870e-7c43c306b9bd.png",
-  alt: "Patrón Silver Tequila"
-}, {
-  id: 4,
-  src: "/lovable-uploads/b09daaab-5591-481a-b97c-c681378f045b.png",
-  alt: "Rémy Martin XO Cognac"
-}, {
-  id: 5,
-  src: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
-  alt: "Grey Goose Vodka"
-}];
+// Select premium products for the hero carousel
+const heroImages = [
+  {
+    id: 1,
+    src: products[0].image, // Macallan 18 Years
+    alt: products[0].name
+  },
+  {
+    id: 2,
+    src: products[8].image, // Jack Daniel's
+    alt: products[8].name
+  },
+  {
+    id: 3,
+    src: products[5].image, // Patrón Silver
+    alt: products[5].name
+  },
+  {
+    id: 4,
+    src: products[4].image, // Rémy Martin XO
+    alt: products[4].name
+  },
+  {
+    id: 5,
+    src: products[1].image, // Grey Goose
+    alt: products[1].name
+  }
+];
 
 const HeroCarousel = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -94,7 +102,7 @@ const HeroCarousel = () => {
                   onError={e => {
                     // Fallback image if the primary one fails to load
                     console.log(`Failed to load image: ${image.src}`);
-                    e.currentTarget.src = "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png";
+                    e.currentTarget.src = "https://cdn.shopify.com/s/files/1/0105/4464/9843/products/machaeaayeeaadquaddabiabigaduabsabrabiabmaciaamabcabsacuaa_600x.png";
                     e.currentTarget.alt = "Premium spirits";
                   }}
                 />
