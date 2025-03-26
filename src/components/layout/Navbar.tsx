@@ -3,6 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { Menu, Search, ShoppingCart, User, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 // Comprehensive category structure based on onlineliquor.com
 const categoryStructure = {
@@ -89,7 +97,7 @@ const categoryStructure = {
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -104,12 +112,12 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleCategoryHover = (category: string) => {
-    setActiveCategory(category);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveCategory(null);
+  const toggleMobileCategory = (category: string) => {
+    if (activeMobileCategory === category) {
+      setActiveMobileCategory(null);
+    } else {
+      setActiveMobileCategory(category);
+    }
   };
 
   return (
@@ -135,45 +143,44 @@ const Navbar = () => {
               Shop All
             </Link>
             
-            {/* Mega Menu */}
-            <div className="relative group">
-              <button 
-                className="text-primary hover:text-gold transition-colors duration-200 font-medium flex items-center"
-                onMouseEnter={() => handleCategoryHover('categories')}
-              >
-                Categories <ChevronDown className="h-4 w-4 ml-1" />
-              </button>
-              
-              {activeCategory === 'categories' && (
-                <div 
-                  className="absolute left-1/2 -translate-x-1/2 mt-2 w-screen max-w-6xl bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-200 z-50 grid grid-cols-3 gap-4 p-6"
-                  onMouseLeave={handleMouseLeave}
-                >
-                  {Object.entries(categoryStructure).map(([category, { path, subcategories }]) => (
-                    <div key={category} className="p-4">
-                      <Link 
-                        to={path} 
-                        className="font-medium text-lg text-primary hover:text-gold transition-colors duration-200"
-                      >
-                        {category}
-                      </Link>
-                      <ul className="mt-2 space-y-1">
-                        {subcategories.map((sub) => (
-                          <li key={sub.name}>
-                            <Link 
-                              to={sub.path} 
-                              className="text-muted-foreground hover:text-gold transition-colors duration-200"
-                            >
-                              {sub.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+            {/* Mega Menu - Using NavigationMenu from shadcn/ui for proper dropdown functionality */}
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-primary hover:text-gold transition-colors duration-200 font-medium bg-transparent">
+                    Categories
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="bg-white rounded-md shadow-lg p-6">
+                    <div className="grid grid-cols-3 gap-4 w-[800px]">
+                      {Object.entries(categoryStructure).map(([category, { path, subcategories }]) => (
+                        <div key={category} className="p-4">
+                          <Link 
+                            to={path} 
+                            className="font-medium text-lg text-primary hover:text-gold transition-colors duration-200"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {category}
+                          </Link>
+                          <ul className="mt-2 space-y-1">
+                            {subcategories.map((sub) => (
+                              <li key={sub.name}>
+                                <Link 
+                                  to={sub.path} 
+                                  className="text-muted-foreground hover:text-gold transition-colors duration-200"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  {sub.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
             
             <Link to="/about" className="text-primary hover:text-gold transition-colors duration-200 font-medium">
               About
@@ -244,20 +251,28 @@ const Navbar = () => {
               <div className="pl-4 space-y-4">
                 {Object.entries(categoryStructure).map(([category, { path, subcategories }]) => (
                   <div key={category} className="space-y-2">
-                    <Link 
-                      to={path} 
-                      onClick={() => setMobileMenuOpen(false)} 
-                      className="block text-primary hover:text-gold transition-colors duration-200 font-medium"
-                    >
-                      {category}
-                    </Link>
-                    <div className="pl-4 space-y-1">
+                    <div className="flex justify-between items-center">
+                      <Link 
+                        to={path} 
+                        onClick={() => setMobileMenuOpen(false)} 
+                        className="block text-primary hover:text-gold transition-colors duration-200 font-medium"
+                      >
+                        {category}
+                      </Link>
+                      <button 
+                        onClick={() => toggleMobileCategory(category)}
+                        className="p-1 hover:bg-secondary rounded-full"
+                      >
+                        <ChevronDown className={`h-4 w-4 transition-transform ${activeMobileCategory === category ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                    <div className={`pl-4 space-y-1 ${activeMobileCategory === category ? 'block' : 'hidden'}`}>
                       {subcategories.map((sub) => (
                         <Link 
                           key={sub.name}
                           to={sub.path} 
                           onClick={() => setMobileMenuOpen(false)} 
-                          className="block text-muted-foreground hover:text-gold transition-colors duration-200 text-sm"
+                          className="block text-muted-foreground hover:text-gold transition-colors duration-200 text-sm py-1"
                         >
                           {sub.name}
                         </Link>

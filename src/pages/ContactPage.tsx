@@ -90,7 +90,7 @@ const ContactPage = () => {
                         +1 734 427-0930
                       </p>
                       <p className="text-muted-foreground text-sm mt-1">
-                        Mon-Sat: 9:00 AM - 9:00 PM
+                        Mon-Sat: 10:00 AM - 9:00 PM
                       </p>
                     </div>
                   </div>
@@ -185,38 +185,38 @@ const ContactPage = () => {
         <section className="py-16 md:py-24 bg-secondary/50">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Business Hours */}
+              {/* Business Hours - UPDATED with correct hours */}
               <div>
                 <h3 className="text-2xl font-serif font-bold mb-6">Business Hours</h3>
                 <div className="bg-white p-6 rounded-lg">
                   <ul className="space-y-4">
                     <li className="flex justify-between">
                       <span className="font-medium">Monday</span>
-                      <span>9:00 AM - 9:00 PM</span>
+                      <span>10:00 AM - 9:00 PM</span>
                     </li>
                     <li className="flex justify-between">
                       <span className="font-medium">Tuesday</span>
-                      <span>9:00 AM - 9:00 PM</span>
+                      <span>10:00 AM - 9:00 PM</span>
                     </li>
                     <li className="flex justify-between">
                       <span className="font-medium">Wednesday</span>
-                      <span>9:00 AM - 9:00 PM</span>
+                      <span>10:00 AM - 9:00 PM</span>
                     </li>
                     <li className="flex justify-between">
                       <span className="font-medium">Thursday</span>
-                      <span>9:00 AM - 9:00 PM</span>
+                      <span>10:00 AM - 9:00 PM</span>
                     </li>
                     <li className="flex justify-between">
                       <span className="font-medium">Friday</span>
-                      <span>9:00 AM - 9:00 PM</span>
+                      <span>10:00 AM - 9:00 PM</span>
                     </li>
                     <li className="flex justify-between">
                       <span className="font-medium">Saturday</span>
-                      <span>9:00 AM - 9:00 PM</span>
+                      <span>10:00 AM - 9:00 PM</span>
                     </li>
                     <li className="flex justify-between">
                       <span className="font-medium">Sunday</span>
-                      <span>Closed</span>
+                      <span>11:00 AM - 7:00 PM</span>
                     </li>
                   </ul>
                 </div>

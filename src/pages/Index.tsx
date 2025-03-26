@@ -35,17 +35,17 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner - Updated with high-quality image from onlineliquor.com */}
+        {/* Promotion Banner - Updated with reliable image */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src="https://onlineliquor.com.au/cdn/shop/files/Whisky-banner-website-desktop_1944x.jpg?v=1614147171" 
+              src="https://i.imgur.com/OAqPnHy.jpg" 
               alt="Premium Whiskey Collection" 
               className="w-full h-full object-cover"
               onError={(e) => {
                 console.log("Failed to load promotion banner image");
                 // Fallback image if the primary one fails to load
-                e.currentTarget.src = "https://onlineliquor.com.au/cdn/shop/collections/Whiskey_1200x630_93a5a795-5e7d-4fb0-9ba3-11f20f7bbde2_1200x630.jpg?v=1612505457";
+                e.currentTarget.src = "https://i.imgur.com/SHxmIYk.jpg";
                 e.currentTarget.alt = "Premium Whiskey";
               }}
             />
@@ -64,7 +64,7 @@ const Index = () => {
                 Discover our curated selection of rare and aged whiskies from renowned distilleries around the world. Limited stock available.
               </p>
               <a 
-                href="#shop" 
+                href="#categories" 
                 className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary bg-white hover:bg-white/90 transition-colors duration-200"
               >
                 Shop Collection

@@ -8,31 +8,31 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-// Updated with high-quality liquor store images from onlineliquor.com
+// Updated with reliable image URLs from a different source
 const heroImages = [
   {
     id: 1,
-    src: "https://onlineliquor.com.au/cdn/shop/files/onlineliqorbannerDesktop_1944x.jpg?v=1614140048",
+    src: "https://i.imgur.com/TYtlFzy.jpg",
     alt: "Premium spirits collection"
   },
   {
     id: 2,
-    src: "https://onlineliquor.com.au/cdn/shop/files/Whiskey-collection-onlineliquor_1944x.jpg?v=1628812869",
+    src: "https://i.imgur.com/V2TFb9f.jpg",
     alt: "Whiskey selection"
   },
   {
     id: 3,
-    src: "https://onlineliquor.com.au/cdn/shop/files/Wine-collection_1944x.jpg?v=1614143630",
+    src: "https://i.imgur.com/KAuXi5P.jpg",
     alt: "Fine wine collection"
   },
   {
     id: 4,
-    src: "https://onlineliquor.com.au/cdn/shop/files/Champagne-desktop_1944x.jpg?v=1614206197",
+    src: "https://i.imgur.com/E1yKpBU.jpg",
     alt: "Champagne collection"
   },
   {
     id: 5,
-    src: "https://onlineliquor.com.au/cdn/shop/files/Cognac-collection-desktop_1944x.jpg?v=1614210198",
+    src: "https://i.imgur.com/8DSKn8W.jpg",
     alt: "Premium cognac selection"
   }
 ];
@@ -109,7 +109,7 @@ const HeroCarousel = () => {
                   onError={(e) => {
                     // Fallback image if the primary one fails to load
                     console.log(`Failed to load image: ${image.src}`);
-                    e.currentTarget.src = "https://onlineliquor.com.au/cdn/shop/files/onlineliqorbannerDesktop_1944x.jpg?v=1614140048";
+                    e.currentTarget.src = "https://i.imgur.com/TYtlFzy.jpg";
                     e.currentTarget.alt = "Premium spirits";
                   }}
                 />
