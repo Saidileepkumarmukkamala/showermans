@@ -7,6 +7,7 @@ import FeaturedProducts from '@/components/home/FeaturedProducts';
 import Categories from '@/components/home/Categories';
 import Newsletter from '@/components/home/Newsletter';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   useEffect(() => {
@@ -35,17 +36,17 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner - Updated with reliable image */}
+        {/* Promotion Banner - Updated with uploaded image */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src="https://i.imgur.com/OAqPnHy.jpg" 
+              src="/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png" 
               alt="Premium Whiskey Collection" 
               className="w-full h-full object-cover"
               onError={(e) => {
                 console.log("Failed to load promotion banner image");
                 // Fallback image if the primary one fails to load
-                e.currentTarget.src = "https://i.imgur.com/SHxmIYk.jpg";
+                e.currentTarget.src = "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png";
                 e.currentTarget.alt = "Premium Whiskey";
               }}
             />
@@ -63,13 +64,13 @@ const Index = () => {
               <p className="text-white/80 mb-8">
                 Discover our curated selection of rare and aged whiskies from renowned distilleries around the world. Limited stock available.
               </p>
-              <a 
-                href="#categories" 
+              <Link 
+                to="/category/whiskey" 
                 className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary bg-white hover:bg-white/90 transition-colors duration-200"
               >
                 Shop Collection
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
+              </Link>
             </div>
           </div>
         </section>

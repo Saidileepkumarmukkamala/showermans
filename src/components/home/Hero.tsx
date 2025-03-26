@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import HeroCarousel from './HeroCarousel';
 
 const Hero = () => {
@@ -57,19 +58,19 @@ const Hero = () => {
               Curated collection of the finest liquors from around the world. Explore premium quality spirits for the most discerning connoisseurs.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a 
-                href="#shop" 
+              <Link 
+                to="/category/all" 
                 className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-white bg-primary hover:bg-primary/90 transition-colors duration-200"
               >
                 Shop Now
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-              <a 
-                href="#categories" 
+              </Link>
+              <Link 
+                to="#categories" 
                 className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary border border-primary hover:bg-primary/5 transition-colors duration-200"
               >
                 Explore Categories
-              </a>
+              </Link>
             </div>
           </div>
 

@@ -8,32 +8,32 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-// Updated with reliable image URLs from a different source
+// Updated with the uploaded images for better reliability
 const heroImages = [
   {
     id: 1,
-    src: "https://i.imgur.com/TYtlFzy.jpg",
-    alt: "Premium spirits collection"
+    src: "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png",
+    alt: "Rare Bottles Collection"
   },
   {
     id: 2,
-    src: "https://i.imgur.com/V2TFb9f.jpg",
-    alt: "Whiskey selection"
+    src: "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png",
+    alt: "Premium Whiskey Selection"
   },
   {
     id: 3,
-    src: "https://i.imgur.com/KAuXi5P.jpg",
-    alt: "Fine wine collection"
+    src: "/lovable-uploads/6d31f34c-7095-4a38-870e-7c43c306b9bd.png",
+    alt: "Tequila Collection"
   },
   {
     id: 4,
-    src: "https://i.imgur.com/E1yKpBU.jpg",
-    alt: "Champagne collection"
+    src: "/lovable-uploads/b09daaab-5591-481a-b97c-c681378f045b.png",
+    alt: "Cognac & Brandy Collection"
   },
   {
     id: 5,
-    src: "https://i.imgur.com/8DSKn8W.jpg",
-    alt: "Premium cognac selection"
+    src: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
+    alt: "Premium Vodka Selection"
   }
 ];
 
@@ -109,7 +109,7 @@ const HeroCarousel = () => {
                   onError={(e) => {
                     // Fallback image if the primary one fails to load
                     console.log(`Failed to load image: ${image.src}`);
-                    e.currentTarget.src = "https://i.imgur.com/TYtlFzy.jpg";
+                    e.currentTarget.src = "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png";
                     e.currentTarget.alt = "Premium spirits";
                   }}
                 />

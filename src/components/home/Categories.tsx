@@ -8,63 +8,63 @@ const categories = [
     id: 1,
     name: "Rare Bottles",
     description: "Store Picks & Limited Editions",
-    image: "https://i.imgur.com/aVq8qJr.jpg",
+    image: "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png",
     path: "/category/rare-bottles"
   },
   {
     id: 2,
     name: "Whisky",
     description: "Single Malt & Blended",
-    image: "https://i.imgur.com/SHxmIYk.jpg",
+    image: "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png",
     path: "/category/whiskey"
   },
   {
     id: 3,
     name: "Tequila",
     description: "Blanco, Reposado & Añejo",
-    image: "https://i.imgur.com/vYuHLdV.jpg",
+    image: "/lovable-uploads/6d31f34c-7095-4a38-870e-7c43c306b9bd.png",
     path: "/category/tequila"
   },
   {
     id: 4,
-    name: "Cognac",
+    name: "Cognac & Brandy",
     description: "Cognac & Fine Brandy",
-    image: "https://i.imgur.com/e1j8PF3.jpg",
+    image: "/lovable-uploads/b09daaab-5591-481a-b97c-c681378f045b.png",
     path: "/category/cognac"
   },
   {
     id: 5,
     name: "Vodka",
     description: "Premium & Flavored",
-    image: "https://i.imgur.com/BrF8DdS.jpg",
+    image: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
     path: "/category/vodka"
   },
   {
     id: 6,
     name: "Gin",
     description: "London Dry & Botanical",
-    image: "https://i.imgur.com/w3KHHV5.jpg",
+    image: "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png",
     path: "/category/gin"
   },
   {
     id: 7,
     name: "Rum",
     description: "Dark, Spiced & White",
-    image: "https://i.imgur.com/0d3CqDU.jpg",
+    image: "/lovable-uploads/a5c66092-426a-4cfc-bf22-37b6a578f033.png",
     path: "/category/rum"
   },
   {
     id: 8,
     name: "Wine",
     description: "Red, White & Rosé",
-    image: "https://i.imgur.com/jO2Xhbk.jpg",
+    image: "/lovable-uploads/5ca10da0-9bbc-4aea-b474-ad08aa087fd3.png",
     path: "/category/wine"
   },
   {
     id: 9,
     name: "Champagne",
     description: "Champagne & Sparkling Wine",
-    image: "https://i.imgur.com/JmRNTAI.jpg",
+    image: "/lovable-uploads/294f9495-a2b4-473e-8f35-05436e00092f.png",
     path: "/category/champagne"
   },
 ];
