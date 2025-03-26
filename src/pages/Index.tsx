@@ -36,18 +36,18 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner - Updated with uploaded image */}
+        {/* Promotion Banner - Updated with specific product image and improved alt text */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
               src="/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png" 
-              alt="Premium Whiskey Collection" 
+              alt="Johnny Walker Black Label Whiskey" 
               className="w-full h-full object-cover"
               onError={(e) => {
                 console.log("Failed to load promotion banner image");
                 // Fallback image if the primary one fails to load
                 e.currentTarget.src = "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png";
-                e.currentTarget.alt = "Premium Whiskey";
+                e.currentTarget.alt = "Premium Whiskey Collection";
               }}
             />
             <div className="absolute inset-0 bg-black/60" />

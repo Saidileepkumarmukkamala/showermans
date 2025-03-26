@@ -13,7 +13,7 @@ const categories = [
   },
   {
     id: 2,
-    name: "Whisky",
+    name: "Whiskey",
     description: "Single Malt & Blended",
     image: "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png",
     path: "/category/whiskey"
