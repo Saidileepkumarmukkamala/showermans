@@ -67,12 +67,12 @@ const Hero = () => {
           {/* Hero Image - Using the new uploaded image */}
           <div ref={imageRef} className="opacity-0 transition-opacity duration-1000 ease-out delay-300">
             <div className="relative rounded-2xl overflow-hidden glass-card">
-              {/* 30% Off Badge - Improved position and styling */}
-              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
+              {/* 30% Off Badge - Repositioned to top-right with partial extension */}
+              <div className="absolute -top-4 -right-4 z-10">
                 <div className="bg-white shadow-xl rounded-full flex flex-col items-center justify-center text-center animate-image-glow">
-                  <div className="px-4 py-3 w-24 h-24 md:w-28 md:h-28">
+                  <div className="px-4 py-3 w-20 h-20 md:w-24 md:h-24">
                     <span className="text-xs font-medium text-muted-foreground">Up to</span>
-                    <span className="text-2xl font-bold text-gold block">30%</span>
+                    <span className="text-xl md:text-2xl font-bold text-gold block">30%</span>
                     <span className="text-sm font-medium">Off</span>
                   </div>
                 </div>
