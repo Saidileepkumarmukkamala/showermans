@@ -43,7 +43,7 @@ const ProductCard = ({
   return <Link to={`/product/${id}`} className={cn("product-card-hover bg-white rounded-lg shadow-sm overflow-hidden block", className)}>
       {/* Product Image */}
       <div className="product-image-container relative">
-        <img src={image} alt={name} onError={handleImageError} className="w-full h-64 object-scale-down" />
+        <img src={image} alt={name} onError={handleImageError} className="w-full h-64 object-contain" />
         
         {/* Product Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
