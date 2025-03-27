@@ -26,7 +26,6 @@ const Index = () => {
 
   // Get the Macallan product for the promotion banner
   const macallanProduct = products.find(p => p.id === 1);
-  const promotionImagePath = macallanProduct ? macallanProduct.image : "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       
@@ -37,16 +36,9 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner - Using Macallan image */}
+        {/* Promotion Banner with amber-900 background */}
         <section className="py-16 relative overflow-hidden">
-          <div className="absolute inset-0">
-            <img src={promotionImagePath} alt="The Macallan 18 Years Double Cask" className="w-full h-full object-cover" onError={e => {
-            console.log("Failed to load promotion banner image");
-            e.currentTarget.src = "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
-            e.currentTarget.alt = "The Macallan 18 Years Double Cask";
-          }} />
-            <div className="absolute inset-0 rounded-md bg-amber-900" />
-          </div>
+          <div className="absolute inset-0 bg-amber-900 rounded-md" />
           
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="max-w-xl">
