@@ -1,16 +1,12 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { Award, Clock, Package, Users } from 'lucide-react';
-
 const AboutPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-grow pt-24">
@@ -51,11 +47,7 @@ const AboutPage = () => {
               </div>
               <div className="relative">
                 <div className="rounded-lg overflow-hidden">
-                  <img 
-                    src="https://images.pexels.com/photos/4271771/pexels-photo-4271771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                    alt="Wine cellar" 
-                    className="w-full h-auto"
-                  />
+                  <img alt="Wine cellar" src="/lovable-uploads/28a924f9-8f6e-431d-87a6-846b08c3e93f.jpg" className="w-full h-auto object-none" />
                 </div>
                 <div className="absolute -bottom-6 -right-6 bg-white shadow-lg rounded-lg p-4 w-32 h-32 md:w-40 md:h-40 flex flex-col items-center justify-center">
                   <span className="text-2xl md:text-3xl font-bold text-primary">49</span>
@@ -143,11 +135,7 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="rounded-lg overflow-hidden mb-4">
-                  <img 
-                    src="https://images.pexels.com/photos/8090137/pexels-photo-8090137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                    alt="Michael Showerman" 
-                    className="w-full h-auto aspect-square object-cover"
-                  />
+                  <img src="https://images.pexels.com/photos/8090137/pexels-photo-8090137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Michael Showerman" className="w-full h-auto aspect-square object-cover" />
                 </div>
                 <h3 className="text-xl font-medium mb-1">Michael Showerman</h3>
                 <p className="text-gold mb-2">Owner & Wine Director</p>
@@ -158,11 +146,7 @@ const AboutPage = () => {
               
               <div className="text-center">
                 <div className="rounded-lg overflow-hidden mb-4">
-                  <img 
-                    src="https://images.pexels.com/photos/8100067/pexels-photo-8100067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                    alt="Jennifer Showerman" 
-                    className="w-full h-auto aspect-square object-cover"
-                  />
+                  <img src="https://images.pexels.com/photos/8100067/pexels-photo-8100067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Jennifer Showerman" className="w-full h-auto aspect-square object-cover" />
                 </div>
                 <h3 className="text-xl font-medium mb-1">Jennifer Showerman</h3>
                 <p className="text-gold mb-2">General Manager</p>
@@ -173,11 +157,7 @@ const AboutPage = () => {
               
               <div className="text-center">
                 <div className="rounded-lg overflow-hidden mb-4">
-                  <img 
-                    src="https://images.pexels.com/photos/8100537/pexels-photo-8100537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-                    alt="David Chen" 
-                    className="w-full h-auto aspect-square object-cover"
-                  />
+                  <img src="https://images.pexels.com/photos/8100537/pexels-photo-8100537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="David Chen" className="w-full h-auto aspect-square object-cover" />
                 </div>
                 <h3 className="text-xl font-medium mb-1">David Chen</h3>
                 <p className="text-gold mb-2">Spirits Specialist</p>
@@ -191,8 +171,6 @@ const AboutPage = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default AboutPage;
