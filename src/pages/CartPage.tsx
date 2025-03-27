@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/components/ui/use-toast';
 
 const CartPage = () => {
-  const { items, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, clearCart, totalItems, totalPrice, getCartItemDetails } = useCart();
   const { toast } = useToast();
   
   const handleCheckout = () => {
@@ -20,7 +20,7 @@ const CartPage = () => {
     });
   };
   
-  if (items.length === 0) {
+  if (cartItems.length === 0) {
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar />
@@ -64,64 +64,69 @@ const CartPage = () => {
                 <Separator className="mb-4" />
                 
                 <div className="space-y-4">
-                  {items.map((item) => (
-                    <div key={item.id} className="flex items-center gap-4">
-                      <div className="h-24 w-24 rounded-md overflow-hidden bg-muted">
-                        <img 
-                          src={item.image} 
-                          alt={item.name} 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      
-                      <div className="flex-grow">
-                        <Link 
-                          to={`/product/${item.productId}`}
-                          className="font-medium hover:text-gold transition-colors"
-                        >
-                          {item.name}
-                        </Link>
-                        <p className="text-muted-foreground text-sm">
-                          ${item.price.toFixed(2)} each
-                        </p>
-                      </div>
-                      
-                      <div className="flex items-center gap-2">
-                        <Button 
-                          variant="outline" 
-                          size="icon" 
-                          className="h-8 w-8"
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          disabled={item.quantity <= 1}
-                        >
-                          <Minus size={14} />
-                        </Button>
-                        
-                        <span className="w-10 text-center">{item.quantity}</span>
-                        
-                        <Button 
-                          variant="outline" 
-                          size="icon" 
-                          className="h-8 w-8"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        >
-                          <Plus size={14} />
-                        </Button>
-                      </div>
-                      
-                      <div className="text-right min-w-[80px]">
-                        <div className="font-medium">
-                          ${(item.price * item.quantity).toFixed(2)}
+                  {cartItems.map((item) => {
+                    const itemDetails = getCartItemDetails(item);
+                    if (!itemDetails) return null;
+                    
+                    return (
+                      <div key={item.id} className="flex items-center gap-4">
+                        <div className="h-24 w-24 rounded-md overflow-hidden bg-muted">
+                          <img 
+                            src={itemDetails.product.image} 
+                            alt={itemDetails.product.name} 
+                            className="w-full h-full object-cover"
+                          />
                         </div>
-                        <button 
-                          onClick={() => removeFromCart(item.id)}
-                          className="text-sm text-destructive hover:underline mt-1"
-                        >
-                          Remove
-                        </button>
+                        
+                        <div className="flex-grow">
+                          <Link 
+                            to={`/product/${item.id}`}
+                            className="font-medium hover:text-gold transition-colors"
+                          >
+                            {itemDetails.product.name}
+                          </Link>
+                          <p className="text-muted-foreground text-sm">
+                            ${itemDetails.product.price.toFixed(2)} each
+                          </p>
+                        </div>
+                        
+                        <div className="flex items-center gap-2">
+                          <Button 
+                            variant="outline" 
+                            size="icon" 
+                            className="h-8 w-8"
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            disabled={item.quantity <= 1}
+                          >
+                            <Minus size={14} />
+                          </Button>
+                          
+                          <span className="w-10 text-center">{item.quantity}</span>
+                          
+                          <Button 
+                            variant="outline" 
+                            size="icon" 
+                            className="h-8 w-8"
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          >
+                            <Plus size={14} />
+                          </Button>
+                        </div>
+                        
+                        <div className="text-right min-w-[80px]">
+                          <div className="font-medium">
+                            ${(itemDetails.product.price * item.quantity).toFixed(2)}
+                          </div>
+                          <button 
+                            onClick={() => removeFromCart(item.id)}
+                            className="text-sm text-destructive hover:underline mt-1"
+                          >
+                            Remove
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
               
