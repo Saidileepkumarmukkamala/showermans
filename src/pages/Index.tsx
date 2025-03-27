@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -8,6 +9,7 @@ import Newsletter from '@/components/home/Newsletter';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { products } from '@/data/products';
+
 const Index = () => {
   useEffect(() => {
     // Smooth scroll to anchor links
@@ -26,6 +28,7 @@ const Index = () => {
 
   // Get the Macallan product for the promotion banner
   const macallanProduct = products.find(p => p.id === 1);
+  
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       
@@ -33,8 +36,8 @@ const Index = () => {
         {/* Hero Section */}
         <Hero />
         
-        {/* Featured Products */}
-        <FeaturedProducts />
+        {/* Categories */}
+        <Categories />
         
         {/* Promotion Banner with amber-900 background */}
         <section className="py-16 relative overflow-hidden">
@@ -59,8 +62,8 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Categories */}
-        <Categories />
+        {/* Featured Products */}
+        <FeaturedProducts />
         
         {/* Features */}
         <section className="section-padding">
@@ -124,4 +127,5 @@ const Index = () => {
       <Footer />
     </div>;
 };
+
 export default Index;
