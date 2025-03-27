@@ -1,4 +1,3 @@
-
 export interface Product {
   id: number;
   name: string;
@@ -74,8 +73,8 @@ export const products: Product[] = [
     name: "Dom Pérignon Vintage",
     category: "Champagne",
     price: 199.99,
-    // Corrected: Using Patrón Silver's image for Dom Pérignon
-    image: "/lovable-uploads/afe2eb7d-d6b4-4031-854f-23f91a100b3b.png",
+    // Corrected: Using proper Dom Pérignon image
+    image: "/lovable-uploads/4ab37fae-7adf-434f-a0ce-85987941644f.png",
     isNew: true,
     description: "Only the best grapes from the most exceptional years are used in the creation of Dom Pérignon. Each vintage is unique and reinterprets the uniqueness of the seasons. Dom Pérignon commits to this reinvention and expresses itself through each Vintage.",
     details: {
@@ -108,7 +107,7 @@ export const products: Product[] = [
     name: "Patrón Silver",
     category: "Tequila",
     price: 49.99,
-    // Corrected: Using Dom Pérignon's image for Patrón Silver
+    // Corrected: Using proper Patrón Silver image
     image: "/lovable-uploads/3f3fd353-7ef4-459d-816b-aded65a7a7e3.png",
     description: "Patrón Silver is handcrafted from the finest 100% Weber Blue Agave and is carefully distilled in small batches at Hacienda Patrón distillery in Jalisco, Mexico.",
     details: {
@@ -141,8 +140,8 @@ export const products: Product[] = [
     category: "Gin",
     price: 79.99,
     originalPrice: 89.99,
-    // Corrected: Using Monkey 47's image
-    image: "/lovable-uploads/4ab37fae-7adf-434f-a0ce-85987941644f.png",
+    // Corrected: Using proper Monkey 47 image
+    image: "/lovable-uploads/afe2eb7d-d6b4-4031-854f-23f91a100b3b.png",
     isSale: true,
     description: "Monkey 47 is a unique gin from the Black Forest in Germany. Made with 47 botanicals and bottled at 47%, it has an impressive complexity and balance.",
     details: {
