@@ -69,7 +69,7 @@ const Hero = () => {
             <div className="relative">
               {/* 30% Off Badge - Positioned to pop out from the image */}
               <div className="absolute -top-4 -right-4 z-10">
-                <div className="bg-white shadow-xl rounded-full flex flex-col items-center justify-center text-center animate-image-glow">
+                <div className="bg-white/70 backdrop-blur-sm shadow-lg rounded-full flex flex-col items-center justify-center text-center animate-pulse">
                   <div className="px-4 py-3 w-20 h-20 md:w-24 md:h-24">
                     <span className="text-xs font-medium text-muted-foreground">Up to</span>
                     <span className="text-xl md:text-2xl font-bold text-gold block">30%</span>
