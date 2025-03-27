@@ -33,9 +33,9 @@ const Hero = () => {
     };
   }, []);
 
-  // Updated to use the uploaded Hennessy image
-  const heroImageSrc = "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png";
-  const heroImageAlt = "Hennessy Cognac";
+  // Updated to use the uploaded Grey Goose image
+  const heroImageSrc = "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
+  const heroImageAlt = "Grey Goose Vodka";
 
   return (
     <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
@@ -92,8 +92,8 @@ const Hero = () => {
                   className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105" 
                   onError={(e) => {
                     console.log("Failed to load hero image");
-                    e.currentTarget.src = "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png";
-                    e.currentTarget.alt = "Hennessy Cognac";
+                    e.currentTarget.src = "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
+                    e.currentTarget.alt = "Grey Goose Vodka";
                   }}
                 />
               </div>

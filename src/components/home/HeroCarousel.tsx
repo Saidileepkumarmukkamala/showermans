@@ -3,32 +3,32 @@ import React, { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { products } from '@/data/products';
 
-// Select premium products for the hero carousel
+// Updated hero images to include the new uploaded images
 const heroImages = [
   {
     id: 1,
+    src: "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png", // Grey Goose Vodka
+    alt: "Grey Goose Vodka"
+  },
+  {
+    id: 2,
+    src: "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png", // Macallan 18
+    alt: "The Macallan 18 Years Double Cask"
+  },
+  {
+    id: 3,
     src: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png", // Johnnie Walker Black Label
     alt: "Johnnie Walker Black Label"
   },
   {
-    id: 2,
-    src: products[8].image, // Jack Daniel's
-    alt: products[8].name
-  },
-  {
-    id: 3,
+    id: 4,
     src: products[5].image, // Patrón Silver
     alt: products[5].name
   },
   {
-    id: 4,
+    id: 5,
     src: products[4].image, // Rémy Martin XO
     alt: products[4].name
-  },
-  {
-    id: 5,
-    src: products[1].image, // Grey Goose
-    alt: products[1].name
   }
 ];
 
@@ -102,8 +102,8 @@ const HeroCarousel = () => {
                   onError={e => {
                     // Fallback image if the primary one fails to load
                     console.log(`Failed to load image: ${image.src}`);
-                    e.currentTarget.src = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
-                    e.currentTarget.alt = "Johnnie Walker Black Label";
+                    e.currentTarget.src = "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
+                    e.currentTarget.alt = "Grey Goose Vodka";
                   }}
                 />
                 

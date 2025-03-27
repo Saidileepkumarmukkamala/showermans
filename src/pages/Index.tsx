@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -25,8 +26,8 @@ const Index = () => {
     });
   }, []);
 
-  // Use the uploaded Johnnie Walker image
-  const johnnieWalkerImagePath = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
+  // Use the uploaded Macallan image for the promotion banner
+  const promotionImagePath = "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -39,18 +40,17 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner - Updated with Johnnie Walker image */}
+        {/* Promotion Banner - Updated with Macallan image */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src={johnnieWalkerImagePath} 
-              alt="Johnnie Walker Black Label" 
+              src={promotionImagePath} 
+              alt="The Macallan 18 Years Double Cask" 
               className="w-full h-full object-cover"
               onError={(e) => {
                 console.log("Failed to load promotion banner image");
-                // Fallback to the same image as it's the one we want
-                e.currentTarget.src = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
-                e.currentTarget.alt = "Johnnie Walker Black Label";
+                e.currentTarget.src = "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
+                e.currentTarget.alt = "The Macallan 18 Years Double Cask";
               }}
             />
             <div className="absolute inset-0 bg-black/60" />
