@@ -1,3 +1,4 @@
+
 export interface Product {
   id: number;
   name: string;
@@ -157,7 +158,7 @@ export const products: Product[] = [
     name: "Jack Daniel's Old No. 7",
     category: "Whiskey",
     price: 29.99,
-    image: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
+    image: "/lovable-uploads/1bdddcca-625f-4ee1-b8d8-ecc2f0724f69.png",
     description: "Mellowed drop by drop through 10-feet of sugar maple charcoal, then matured in handcrafted barrels of our own making. And our Tennessee Whiskey doesn't follow a calendar. It's only ready when our tasters say it is.",
     details: {
       origin: "USA",
