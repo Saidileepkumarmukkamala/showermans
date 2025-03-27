@@ -1,12 +1,15 @@
+
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { products } from '@/data/products';
 import HeroCarousel from './HeroCarousel';
+
 const Hero = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -19,13 +22,16 @@ const Hero = () => {
     }, {
       threshold: 0.1
     });
+
     if (textRef.current) observer.observe(textRef.current);
     if (imageRef.current) observer.observe(imageRef.current);
+
     return () => {
       if (textRef.current) observer.unobserve(textRef.current);
       if (imageRef.current) observer.unobserve(imageRef.current);
     };
   }, []);
+
   return <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute top-0 left-0 right-0 h-full">
@@ -61,17 +67,19 @@ const Hero = () => {
           {/* Hero Image - Using the new uploaded image */}
           <div ref={imageRef} className="opacity-0 transition-opacity duration-1000 ease-out delay-300">
             <div className="relative rounded-2xl overflow-hidden glass-card">
-              <div className="aspect-[16/9] w-full overflow-hidden">
-                <img alt="Premium spirits collection" src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" className="w-full h-full transition-transform duration-10000 hover:scale-105 object-cover" />
+              {/* 30% Off Badge - Improved position and styling */}
+              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
+                <div className="bg-white shadow-xl rounded-full flex flex-col items-center justify-center text-center animate-image-glow">
+                  <div className="px-4 py-3 w-24 h-24 md:w-28 md:h-28">
+                    <span className="text-xs font-medium text-muted-foreground">Up to</span>
+                    <span className="text-2xl font-bold text-gold block">30%</span>
+                    <span className="text-sm font-medium">Off</span>
+                  </div>
+                </div>
               </div>
               
-              {/* 30% Off Badge - Increased visibility and size */}
-              <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
-                <div className="bg-white shadow-xl rounded-full p-5 w-28 h-28 flex flex-col items-center justify-center animate-image-glow px-0 py-0">
-                  <span className="text-xs font-medium text-muted-foreground">Up to</span>
-                  <span className="text-2xl font-bold text-gold">30%</span>
-                  <span className="text-sm font-medium">Off</span>
-                </div>
+              <div className="aspect-[16/9] w-full overflow-hidden">
+                <img alt="Premium spirits collection" src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" className="w-full h-full transition-transform duration-10000 hover:scale-105 object-cover" />
               </div>
             </div>
           </div>
@@ -79,4 +87,5 @@ const Hero = () => {
       </div>
     </div>;
 };
+
 export default Hero;
