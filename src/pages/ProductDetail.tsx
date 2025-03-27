@@ -36,6 +36,9 @@ const ProductDetail = () => {
     );
   }
   
+  // Convert single image to array for consistency
+  const productImages = Array.isArray(product.image) ? product.image : [product.image];
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -56,16 +59,16 @@ const ProductDetail = () => {
             <div className="glass-card p-4 rounded-lg mb-4">
               <div className="aspect-square overflow-hidden rounded-md">
                 <img 
-                  src={product.images[selectedImage]} 
+                  src={productImages[selectedImage] || productImages[0]} 
                   alt={product.name}
                   className="w-full h-full object-cover transition-all hover:scale-105"
                 />
               </div>
             </div>
             
-            {product.images.length > 1 && (
+            {productImages.length > 1 && (
               <div className="grid grid-cols-5 gap-2">
-                {product.images.map((image, index) => (
+                {productImages.map((image, index) => (
                   <button 
                     key={index}
                     className={`aspect-square overflow-hidden rounded-md ${selectedImage === index ? 'ring-2 ring-gold' : ''}`}
@@ -94,9 +97,9 @@ const ProductDetail = () => {
             
             <div className="flex items-baseline mb-6">
               <span className="text-2xl font-bold">${product.price.toFixed(2)}</span>
-              {product.oldPrice && (
+              {product.originalPrice && (
                 <span className="ml-2 text-muted-foreground line-through">
-                  ${product.oldPrice.toFixed(2)}
+                  ${product.originalPrice.toFixed(2)}
                 </span>
               )}
             </div>
@@ -114,31 +117,24 @@ const ProductDetail = () => {
             
             <div className="glass-card p-4 rounded-lg mb-8">
               <div className="flex flex-wrap gap-8">
-                {product.details.alcohol && (
+                {product.details?.alcohol && (
                   <div>
                     <p className="text-sm text-muted-foreground">Alcohol Content</p>
-                    <p className="font-medium">{product.details.alcohol}%</p>
+                    <p className="font-medium">{product.details.alcohol}</p>
                   </div>
                 )}
                 
-                {product.details.volume && (
+                {product.details?.volume && (
                   <div>
                     <p className="text-sm text-muted-foreground">Volume</p>
                     <p className="font-medium">{product.details.volume}</p>
                   </div>
                 )}
                 
-                {product.details.origin && (
+                {product.details?.origin && (
                   <div>
                     <p className="text-sm text-muted-foreground">Country</p>
                     <p className="font-medium">{product.details.origin}</p>
-                  </div>
-                )}
-                
-                {product.details.type && (
-                  <div>
-                    <p className="text-sm text-muted-foreground">Type</p>
-                    <p className="font-medium">{product.details.type}</p>
                   </div>
                 )}
               </div>
@@ -152,18 +148,22 @@ const ProductDetail = () => {
               </TabsList>
               
               <TabsContent value="description" className="p-4">
-                <p>{product.longDescription || product.description}</p>
+                <p>{product.description}</p>
               </TabsContent>
               
               <TabsContent value="details" className="p-4">
-                <ul className="space-y-2">
-                  {Object.entries(product.details || {}).map(([key, value]) => (
-                    <li key={key} className="flex justify-between">
-                      <span className="capitalize">{key}</span>
-                      <span className="font-medium">{value}</span>
-                    </li>
-                  ))}
-                </ul>
+                {product.details && (
+                  <ul className="space-y-2">
+                    {Object.entries(product.details).map(([key, value]) => (
+                      <li key={key} className="flex justify-between">
+                        <span className="capitalize">{key}</span>
+                        <span className="font-medium">
+                          {Array.isArray(value) ? value.join(', ') : String(value)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </TabsContent>
               
               <TabsContent value="shipping" className="p-4">
