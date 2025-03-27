@@ -146,16 +146,16 @@ const Navbar = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-primary hover:text-gold transition-colors duration-200 font-medium bg-transparent h-auto p-0 after:hidden">
+                  <NavigationMenuTrigger className="text-primary hover:text-gold transition-colors duration-200 font-medium bg-transparent h-auto p-0">
                     <span className="flex items-center">
                       Categories
                       <ChevronDown className="ml-1 h-4 w-4" />
                     </span>
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="bg-white rounded-md shadow-lg p-6">
-                    <div className="grid grid-cols-3 gap-4 w-[800px]">
+                  <NavigationMenuContent className="bg-white rounded-lg shadow-xl border border-gray-100 p-6 w-[800px] mt-2">
+                    <div className="grid grid-cols-3 gap-4">
                       {Object.entries(categoryStructure).map(([category, { path, subcategories }]) => (
-                        <div key={category} className="p-4">
+                        <div key={category} className="p-4 hover:bg-gray-50 rounded-md transition-colors duration-200">
                           <Link 
                             to={path} 
                             className="font-medium text-lg text-primary hover:text-gold transition-colors duration-200"
@@ -163,12 +163,12 @@ const Navbar = () => {
                           >
                             {category}
                           </Link>
-                          <ul className="mt-2 space-y-1">
+                          <ul className="mt-2 space-y-2">
                             {subcategories.map((sub) => (
                               <li key={sub.name}>
                                 <Link 
                                   to={sub.path} 
-                                  className="text-muted-foreground hover:text-gold transition-colors duration-200"
+                                  className="text-muted-foreground hover:text-gold transition-colors duration-200 block py-1"
                                   onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {sub.name}
