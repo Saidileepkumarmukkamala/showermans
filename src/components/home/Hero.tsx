@@ -33,9 +33,9 @@ const Hero = () => {
     };
   }, []);
 
-  // Use the uploaded Johnnie Walker Black Label image
-  const heroImageSrc = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
-  const heroImageAlt = "Johnnie Walker Black Label";
+  // Updated to use the uploaded Hennessy image
+  const heroImageSrc = "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png";
+  const heroImageAlt = "Hennessy Cognac";
 
   return (
     <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
@@ -92,8 +92,8 @@ const Hero = () => {
                   className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105" 
                   onError={(e) => {
                     console.log("Failed to load hero image");
-                    e.currentTarget.src = "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png";
-                    e.currentTarget.alt = "Johnnie Walker Black Label";
+                    e.currentTarget.src = "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png";
+                    e.currentTarget.alt = "Hennessy Cognac";
                   }}
                 />
               </div>
