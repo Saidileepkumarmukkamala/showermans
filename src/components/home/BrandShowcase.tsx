@@ -35,7 +35,7 @@ const BrandShowcase = () => {
       align: "start",
       slidesToScroll: 1,
       skipSnaps: false,
-      dragFree: false, // Use dragFree (valid property) instead of draggable
+      dragFree: false,
     },
     [
       Autoplay({ 
@@ -47,7 +47,7 @@ const BrandShowcase = () => {
   );
 
   return (
-    <section className="py-12 bg-white/70 backdrop-blur-sm overflow-hidden">
+    <section className="py-12 bg-gold/10 backdrop-blur-sm overflow-hidden border-y border-gold/20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-8">
           <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-2">
@@ -65,15 +65,17 @@ const BrandShowcase = () => {
                 key={`${brand.id}-${index}`} 
                 className="flex-none pl-4 md:pl-6 w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/6"
               >
-                <img 
-                  src={brand.logo} 
-                  alt={brand.name} 
-                  className="max-h-12 w-auto object-contain transition-opacity duration-300 opacity-90 hover:opacity-100" 
-                  onError={e => {
-                    console.log(`Failed to load brand image: ${brand.logo}`);
-                    e.currentTarget.src = "/placeholder.svg";
-                  }}
-                />
+                <div className="bg-white rounded-lg shadow-sm p-4 h-24 flex items-center justify-center">
+                  <img 
+                    src={brand.logo} 
+                    alt={brand.name} 
+                    className="max-h-16 w-auto object-contain transition-opacity duration-300 opacity-90 hover:opacity-100" 
+                    onError={e => {
+                      console.log(`Failed to load brand image: ${brand.logo}`);
+                      e.currentTarget.src = "/placeholder.svg";
+                    }}
+                  />
+                </div>
               </div>
             ))}
           </div>
