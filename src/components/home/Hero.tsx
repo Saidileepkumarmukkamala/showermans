@@ -51,8 +51,8 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Text Content - Natural height without forced flex */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+          {/* Text Content */}
           <div ref={textRef} className="relative z-10 opacity-100 p-8 rounded-xl glass-card-light">
             <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-4">
               Premium Selection
@@ -75,9 +75,9 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero Image - Match height to text container */}
+          {/* Hero Image - Now with height matching */}
           <div ref={imageRef} className="relative z-5 opacity-100 h-full">
-            <div className="relative h-full">
+            <div className="relative h-full flex items-center">
               {/* 30% Off Badge - Now with glassmorphism */}
               <div className="absolute top-0 right-0 z-10 transform translate-x-1/2 -translate-y-1/2">
                 <div className="glass-card-gold backdrop-blur-md shadow-lg rounded-full flex flex-col items-center justify-center text-center animate-pulse">
