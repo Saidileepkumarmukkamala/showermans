@@ -67,7 +67,7 @@ const Hero = () => {
               
               {/* 30% Off Badge - Increased visibility and size */}
               <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
-                <div className="bg-white shadow-xl rounded-full p-5 w-28 h-28 flex flex-col items-center justify-center animate-image-glow">
+                <div className="bg-white shadow-xl rounded-full p-5 w-28 h-28 flex flex-col items-center justify-center animate-image-glow px-0 py-0">
                   <span className="text-xs font-medium text-muted-foreground">Up to</span>
                   <span className="text-2xl font-bold text-gold">30%</span>
                   <span className="text-sm font-medium">Off</span>
