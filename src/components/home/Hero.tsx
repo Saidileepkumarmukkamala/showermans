@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
@@ -51,7 +50,7 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Text Content */}
           <div ref={textRef} className="relative z-10 opacity-100 p-8 rounded-xl glass-card-light">
             <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-4">
@@ -75,9 +74,9 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero Image - Reduced height to match text container */}
+          {/* Hero Image - With fixed height to match text container */}
           <div ref={imageRef} className="relative z-5 opacity-100">
-            <div className="relative">
+            <div className="relative" style={{ height: "420px" }}>
               {/* 30% Off Badge - Now with glassmorphism */}
               <div className="absolute top-0 right-0 z-10 transform translate-x-1/2 -translate-y-1/2">
                 <div className="glass-card-gold backdrop-blur-md shadow-lg rounded-full flex flex-col items-center justify-center text-center animate-pulse">
@@ -89,8 +88,8 @@ const Hero = () => {
                 </div>
               </div>
               
-              <div className="rounded-2xl overflow-hidden glass-card-heavy">
-                <div className="w-full overflow-hidden">
+              <div className="rounded-2xl overflow-hidden glass-card-heavy h-full flex items-center">
+                <div className="w-full overflow-hidden h-full">
                   <img 
                     alt="Premium spirits collection" 
                     src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" 
