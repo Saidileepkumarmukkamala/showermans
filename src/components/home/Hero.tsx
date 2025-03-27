@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
@@ -27,9 +28,11 @@ const Hero = () => {
     };
   }, []);
 
-  // Updated to use the Grey Goose image
-  const heroImageSrc = "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
-  const heroImageAlt = "Grey Goose Vodka";
+  // Get the Grey Goose image directly from the products array
+  const greyGooseProduct = products.find(p => p.id === 2);
+  const heroImageSrc = greyGooseProduct ? greyGooseProduct.image : "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
+  const heroImageAlt = greyGooseProduct ? greyGooseProduct.name : "Grey Goose Vodka";
+  
   return <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute top-0 left-0 right-0 h-full">

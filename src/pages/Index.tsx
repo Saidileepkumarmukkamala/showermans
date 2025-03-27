@@ -26,8 +26,9 @@ const Index = () => {
     });
   }, []);
 
-  // Use the Macallan image for the promotion banner
-  const promotionImagePath = "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
+  // Get the Macallan product for the promotion banner
+  const macallanProduct = products.find(p => p.id === 1);
+  const promotionImagePath = macallanProduct ? macallanProduct.image : "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
 
   return (
     <div className="min-h-screen flex flex-col">

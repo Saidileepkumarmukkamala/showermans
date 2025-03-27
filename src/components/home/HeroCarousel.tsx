@@ -3,32 +3,39 @@ import React, { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { products } from '@/data/products';
 
-// Updated hero images to ensure Macallan and Grey Goose are used correctly
+// Get product references for the hero images
+const macallan = products.find(p => p.id === 1);
+const greyGoose = products.find(p => p.id === 2);
+const johnnieWalker = products.find(p => p.id === 9) || { image: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png", name: "Johnnie Walker Black Label" };
+const patron = products.find(p => p.id === 6);
+const remyMartin = products.find(p => p.id === 5);
+
+// Updated hero images to use the correct references from the products
 const heroImages = [
   {
     id: 1,
-    src: "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png", // Grey Goose Vodka
-    alt: "Grey Goose Vodka"
+    src: greyGoose?.image || "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png",
+    alt: greyGoose?.name || "Grey Goose Vodka"
   },
   {
     id: 2,
-    src: "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png", // Macallan 18
-    alt: "The Macallan 18 Years Double Cask"
+    src: macallan?.image || "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png",
+    alt: macallan?.name || "The Macallan 18 Years Double Cask"
   },
   {
     id: 3,
-    src: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png", // Johnnie Walker Black Label
+    src: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
     alt: "Johnnie Walker Black Label"
   },
   {
     id: 4,
-    src: products[5].image, // Patrón Silver
-    alt: products[5].name
+    src: patron?.image || "",
+    alt: patron?.name || "Patrón Silver"
   },
   {
     id: 5,
-    src: products[4].image, // Rémy Martin XO
-    alt: products[4].name
+    src: remyMartin?.image || "",
+    alt: remyMartin?.name || "Rémy Martin XO"
   }
 ];
 

@@ -24,7 +24,8 @@ export const products: Product[] = [
     name: "Macallan 18 Years",
     category: "Whiskey",
     price: 299.99,
-    image: "https://cdn.shopify.com/s/files/1/0105/4464/9843/products/machaeaayeeaadquaddabiabigaduabsabrabiabmaciaamabcabsacuaa_600x.png",
+    // Updated image to use the correct uploaded image
+    image: "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png",
     isNew: true,
     description: "The Macallan 18 Year Old Sherry Oak is matured exclusively in hand-picked sherry seasoned oak casks from Jerez, Spain. A full-bodied palate of mature oak, ginger and raisin flavors.",
     details: {
@@ -41,7 +42,8 @@ export const products: Product[] = [
     category: "Vodka",
     price: 45.99,
     originalPrice: 55.99,
-    image: "https://cdn11.bigcommerce.com/s-d4ygz0v966/images/stencil/1280x1280/products/729/2326/GreyGoose-750__62202.1597243332.jpg",
+    // Updated image to use the correct uploaded image
+    image: "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png",
     isSale: true,
     description: "Grey Goose is made with soft winter wheat grown in Picardy, France and is distilled in the same region. It's then blended with spring water from Gensac-la-Pallue that has been naturally filtered through limestone.",
     details: {
