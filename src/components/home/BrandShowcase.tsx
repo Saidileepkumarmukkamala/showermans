@@ -1,51 +1,47 @@
 
 import React, { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 
-// Brand logos data
-const brands = [{
-  id: 1,
-  name: "Jameson",
-  logo: "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png"
-}, {
-  id: 2,
-  name: "Johnnie Walker",
-  logo: "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png"
-}, {
-  id: 3,
-  name: "Heineken",
-  logo: "/lovable-uploads/6d31f34c-7095-4a38-870e-7c43c306b9bd.png"
-}, {
-  id: 4,
-  name: "Avion",
-  logo: "/lovable-uploads/b09daaab-5591-481a-b97c-c681378f045b.png"
-}, {
-  id: 5,
-  name: "Budweiser",
-  logo: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png"
-}, {
-  id: 6,
-  name: "Jack Daniels",
-  logo: "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png"
-}, {
-  id: 7,
-  name: "Hennessy",
-  logo: "/lovable-uploads/a5c66092-426a-4cfc-bf22-37b6a578f033.png"
-}];
+// Brand logos data - using the uploaded images
+const brands = [
+  {
+    id: 1,
+    name: "FRS",
+    logo: "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png"
+  },
+  {
+    id: 2,
+    name: "APD",
+    logo: "/lovable-uploads/294f9495-a2b4-473e-8f35-05436e00092f.png"
+  },
+  {
+    id: 3,
+    name: "MMSI",
+    logo: "/lovable-uploads/a8db1b11-bb5d-4fcd-b5da-a5d5dc10765b.png"
+  }
+];
 
 const BrandShowcase = () => {
-  const [api, setApi] = useState<any>(null);
-
-  useEffect(() => {
-    if (!api) return;
-
-    // Auto-play the carousel with smoother timing
-    const interval = setInterval(() => {
-      api.scrollNext();
-    }, 2000); // Faster scrolling for smoother appearance
-    
-    return () => clearInterval(interval);
-  }, [api]);
+  // Using Embla's autoplay plugin directly
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true,
+      align: "start",
+      slidesToScroll: 1,
+      skipSnaps: false,
+      draggable: false, // Disable dragging to ensure continuous playback
+      speed: 8, // Slow down the transition speed for smoother scrolling
+    },
+    [
+      Autoplay({ 
+        delay: 2000, // 2 seconds delay between transitions
+        stopOnInteraction: false, // Continue autoplay even after user interaction
+        stopOnMouseEnter: false, // Don't pause on mouse enter
+      })
+    ]
+  );
 
   return (
     <section className="py-12 bg-white/70 backdrop-blur-sm overflow-hidden">
@@ -57,24 +53,14 @@ const BrandShowcase = () => {
           <h2 className="text-2xl md:text-3xl font-serif font-bold">Our Premium Brands</h2>
         </div>
 
-        <Carousel 
-          opts={{
-            align: "start",
-            loop: true,
-            dragFree: true,
-            containScroll: false,
-            skipSnaps: true,
-            slidesToScroll: 1
-          }} 
-          setApi={setApi} 
-          className="w-full"
-        >
-          <CarouselContent className="-ml-2 md:-ml-4">
-            {/* Duplicate the brand array for continuous scrolling effect */}
-            {[...brands, ...brands].map((brand, index) => (
-              <CarouselItem 
+        {/* Use the direct embla reference instead of the Carousel component */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {/* Triple the brand array for more continuous scrolling effect */}
+            {[...brands, ...brands, ...brands, ...brands].map((brand, index) => (
+              <div 
                 key={`${brand.id}-${index}`} 
-                className="pl-4 md:pl-6 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
+                className="flex-none pl-4 md:pl-6 w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/6"
               >
                 <img 
                   src={brand.logo} 
@@ -85,10 +71,10 @@ const BrandShowcase = () => {
                     e.currentTarget.src = "/placeholder.svg";
                   }}
                 />
-              </CarouselItem>
+              </div>
             ))}
-          </CarouselContent>
-        </Carousel>
+          </div>
+        </div>
       </div>
     </section>
   );
