@@ -66,9 +66,9 @@ const Hero = () => {
 
           {/* Hero Image - Using the new uploaded image */}
           <div ref={imageRef} className="opacity-0 transition-opacity duration-1000 ease-out delay-300">
-            <div className="relative rounded-2xl overflow-hidden glass-card">
-              {/* 30% Off Badge - Repositioned to top-right with partial extension */}
-              <div className="absolute -top-4 -right-4 z-10">
+            <div className="relative">
+              {/* 30% Off Badge - Positioned to pop out from the image */}
+              <div className="absolute -top-8 right-6 z-10">
                 <div className="bg-white shadow-xl rounded-full flex flex-col items-center justify-center text-center animate-image-glow">
                   <div className="px-4 py-3 w-20 h-20 md:w-24 md:h-24">
                     <span className="text-xs font-medium text-muted-foreground">Up to</span>
@@ -78,8 +78,10 @@ const Hero = () => {
                 </div>
               </div>
               
-              <div className="aspect-[16/9] w-full overflow-hidden">
-                <img alt="Premium spirits collection" src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" className="w-full h-full transition-transform duration-10000 hover:scale-105 object-cover" />
+              <div className="rounded-2xl overflow-hidden glass-card">
+                <div className="aspect-[16/9] w-full overflow-hidden">
+                  <img alt="Premium spirits collection" src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" className="w-full h-full transition-transform duration-10000 hover:scale-105 object-cover" />
+                </div>
               </div>
             </div>
           </div>
