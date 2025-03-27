@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
@@ -11,6 +10,17 @@ const Hero = () => {
   const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Make elements visible immediately to ensure buttons are clickable
+    if (textRef.current) {
+      textRef.current.classList.add('opacity-100');
+      textRef.current.classList.remove('opacity-0');
+    }
+    if (imageRef.current) {
+      imageRef.current.classList.add('opacity-100');
+      imageRef.current.classList.remove('opacity-0');
+    }
+
+    // Keep the observer for scroll animations elsewhere on page
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -22,9 +32,6 @@ const Hero = () => {
     }, {
       threshold: 0.1
     });
-
-    if (textRef.current) observer.observe(textRef.current);
-    if (imageRef.current) observer.observe(imageRef.current);
 
     return () => {
       if (textRef.current) observer.unobserve(textRef.current);
@@ -42,8 +49,8 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Text Content */}
-          <div ref={textRef} className="opacity-0 transition-opacity duration-1000 ease-out">
+          {/* Text Content - Removed transition-opacity and delay to make buttons interactive immediately */}
+          <div ref={textRef} className="relative z-10 opacity-100">
             <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-4">
               Premium Selection
             </span>
@@ -53,19 +60,20 @@ const Hero = () => {
             <p className="text-lg text-muted-foreground mb-8 max-w-lg">
               Curated collection of the finest liquors from around the world. Explore premium quality spirits for the most discerning connoisseurs.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/category/all" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-white bg-primary hover:bg-primary/90 transition-colors duration-200">
+            {/* Added z-10 and relative positioning to ensure buttons are clickable */}
+            <div className="flex flex-wrap gap-4 relative z-10">
+              <Link to="/category/all" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-white bg-primary hover:bg-primary/90 transition-colors duration-200 cursor-pointer">
                 Shop Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
-              <a href="#categories" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary border border-primary hover:bg-primary/5 transition-colors duration-200">
+              <a href="#categories" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary border border-primary hover:bg-primary/5 transition-colors duration-200 cursor-pointer">
                 Explore Categories
               </a>
             </div>
           </div>
 
-          {/* Hero Image - Using the new uploaded image */}
-          <div ref={imageRef} className="opacity-0 transition-opacity duration-1000 ease-out delay-300">
+          {/* Hero Image - Removed transition-opacity and delay to make content appear immediately */}
+          <div ref={imageRef} className="relative z-5 opacity-100">
             <div className="relative">
               {/* 30% Off Badge - Positioned to pop out half inside, half outside at the top right corner */}
               <div className="absolute top-0 right-0 z-10 transform translate-x-1/2 -translate-y-1/2">
