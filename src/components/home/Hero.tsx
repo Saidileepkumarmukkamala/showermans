@@ -67,8 +67,8 @@ const Hero = () => {
           {/* Hero Image - Using the new uploaded image */}
           <div ref={imageRef} className="opacity-0 transition-opacity duration-1000 ease-out delay-300">
             <div className="relative">
-              {/* 30% Off Badge - Positioned at the top right corner with 50% opacity */}
-              <div className="absolute top-0 right-0 z-10">
+              {/* 30% Off Badge - Positioned to pop out half inside, half outside at the top right corner */}
+              <div className="absolute top-0 right-0 z-10 transform translate-x-1/2 -translate-y-1/2">
                 <div className="bg-white/50 backdrop-blur-sm shadow-lg rounded-full flex flex-col items-center justify-center text-center animate-pulse">
                   <div className="px-4 py-3 w-20 h-20 md:w-24 md:h-24">
                     <span className="text-xs font-medium text-muted-foreground">Up to</span>
