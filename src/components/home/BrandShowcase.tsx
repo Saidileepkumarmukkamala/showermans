@@ -35,7 +35,7 @@ const BrandShowcase = () => {
     // Continue autoplay even after user interaction
     stopOnMouseEnter: false // Don't pause on mouse enter
   })]);
-  return <section className="py-12 bg-gold/10 backdrop-blur-sm overflow-hidden border-y border-gold/20">
+  return <section className="py-12 backdrop-blur-sm overflow-hidden border-y border-gold/20 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-8">
           <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-2">
