@@ -1,6 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
@@ -31,7 +30,7 @@ const BrandShowcase = () => {
       align: "start",
       slidesToScroll: 1,
       skipSnaps: false,
-      draggable: false, // Disable dragging to ensure continuous playback
+      dragFree: false, // Use dragFree (valid property) instead of draggable
       speed: 8, // Slow down the transition speed for smoother scrolling
     },
     [
