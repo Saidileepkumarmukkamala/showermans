@@ -47,7 +47,7 @@ const AboutPage = () => {
               </div>
               <div className="relative">
                 <div className="rounded-lg overflow-hidden">
-                  <img alt="Wine cellar" src="/lovable-uploads/28a924f9-8f6e-431d-87a6-846b08c3e93f.jpg" className="w-full h-auto object-none" />
+                  <img alt="Wine cellar" src="/lovable-uploads/28a924f9-8f6e-431d-87a6-846b08c3e93f.jpg" className="w-full h-auto object-fill" />
                 </div>
                 <div className="absolute -bottom-6 -right-6 bg-white shadow-lg rounded-lg p-4 w-32 h-32 md:w-40 md:h-40 flex flex-col items-center justify-center">
                   <span className="text-2xl md:text-3xl font-bold text-primary">49</span>
