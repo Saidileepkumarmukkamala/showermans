@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
@@ -31,18 +32,23 @@ const brands = [{
   name: "Hennessy",
   logo: "/lovable-uploads/a5c66092-426a-4cfc-bf22-37b6a578f033.png"
 }];
+
 const BrandShowcase = () => {
   const [api, setApi] = useState<any>(null);
+
   useEffect(() => {
     if (!api) return;
 
-    // Auto-play the carousel
+    // Auto-play the carousel with smoother timing
     const interval = setInterval(() => {
       api.scrollNext();
-    }, 3000);
+    }, 2000); // Faster scrolling for smoother appearance
+    
     return () => clearInterval(interval);
   }, [api]);
-  return <section className="py-12 bg-white/70 backdrop-blur-sm">
+
+  return (
+    <section className="py-12 bg-white/70 backdrop-blur-sm overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-8">
           <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-2">
@@ -51,23 +57,41 @@ const BrandShowcase = () => {
           <h2 className="text-2xl md:text-3xl font-serif font-bold">Our Premium Brands</h2>
         </div>
 
-        <Carousel opts={{
-        align: "start",
-        loop: true,
-        dragFree: true
-      }} setApi={setApi} className="w-full">
+        <Carousel 
+          opts={{
+            align: "start",
+            loop: true,
+            dragFree: true,
+            containScroll: false,
+            skipSnaps: true,
+            slidesToScroll: 1
+          }} 
+          setApi={setApi} 
+          className="w-full"
+        >
           <CarouselContent className="-ml-2 md:-ml-4">
-            {brands.map(brand => <CarouselItem key={brand.id} className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6">
-                <div className="glass-card p-6 rounded-xl h-24 flex items-center justify-center group hover:border-gold/30 transition-all duration-300 bg-orange-900">
-                  <img src={brand.logo} alt={brand.name} className="max-h-12 max-w-32 object-contain opacity-75 group-hover:opacity-100 transition-opacity duration-300 grayscale group-hover:grayscale-0" onError={e => {
-                console.log(`Failed to load brand image: ${brand.logo}`);
-                e.currentTarget.src = "/placeholder.svg";
-              }} />
-                </div>
-              </CarouselItem>)}
+            {/* Duplicate the brand array for continuous scrolling effect */}
+            {[...brands, ...brands].map((brand, index) => (
+              <CarouselItem 
+                key={`${brand.id}-${index}`} 
+                className="pl-4 md:pl-6 basis-1/3 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
+              >
+                <img 
+                  src={brand.logo} 
+                  alt={brand.name} 
+                  className="max-h-12 w-auto object-contain transition-opacity duration-300 opacity-90 hover:opacity-100" 
+                  onError={e => {
+                    console.log(`Failed to load brand image: ${brand.logo}`);
+                    e.currentTarget.src = "/placeholder.svg";
+                  }}
+                />
+              </CarouselItem>
+            ))}
           </CarouselContent>
         </Carousel>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default BrandShowcase;
