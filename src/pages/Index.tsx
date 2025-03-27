@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -9,7 +8,6 @@ import Newsletter from '@/components/home/Newsletter';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { products } from '@/data/products';
-
 const Index = () => {
   useEffect(() => {
     // Smooth scroll to anchor links
@@ -29,9 +27,7 @@ const Index = () => {
   // Get the Macallan product for the promotion banner
   const macallanProduct = products.find(p => p.id === 1);
   const promotionImagePath = macallanProduct ? macallanProduct.image : "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-grow">
@@ -44,17 +40,12 @@ const Index = () => {
         {/* Promotion Banner - Using Macallan image */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
-            <img 
-              src={promotionImagePath} 
-              alt="The Macallan 18 Years Double Cask" 
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                console.log("Failed to load promotion banner image");
-                e.currentTarget.src = "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
-                e.currentTarget.alt = "The Macallan 18 Years Double Cask";
-              }}
-            />
-            <div className="absolute inset-0 bg-black/60" />
+            <img src={promotionImagePath} alt="The Macallan 18 Years Double Cask" className="w-full h-full object-cover" onError={e => {
+            console.log("Failed to load promotion banner image");
+            e.currentTarget.src = "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
+            e.currentTarget.alt = "The Macallan 18 Years Double Cask";
+          }} />
+            <div className="absolute inset-0 bg-black rounded-md" />
           </div>
           
           <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -68,10 +59,7 @@ const Index = () => {
               <p className="text-white/80 mb-8">
                 Discover our curated selection of rare and aged whiskies from renowned distilleries around the world. Limited stock available.
               </p>
-              <Link 
-                to="/category/whiskey" 
-                className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary bg-white hover:bg-white/90 transition-colors duration-200"
-              >
+              <Link to="/category/whiskey" className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary bg-white hover:bg-white/90 transition-colors duration-200">
                 Shop Collection
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
@@ -142,8 +130,6 @@ const Index = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
