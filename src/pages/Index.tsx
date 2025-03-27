@@ -39,9 +39,18 @@ const Index = () => {
         {/* Categories */}
         <Categories />
         
-        {/* Promotion Banner with amber-900 background */}
-        <section className="py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-amber-900 rounded-md" />
+        {/* Promotion Banner with whiskey bottles background image */}
+        <section className="py-16 relative overflow-hidden rounded-md">
+          {/* Background image with overlay */}
+          <div className="absolute inset-0">
+            <img 
+              src="/lovable-uploads/2f8cebd6-fce7-4648-a875-4cbc73e740aa.png" 
+              alt="Premium whiskey collection" 
+              className="w-full h-full object-cover" 
+            />
+            {/* Dark overlay to ensure text remains readable */}
+            <div className="absolute inset-0 bg-black/40"></div>
+          </div>
           
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="max-w-xl">
