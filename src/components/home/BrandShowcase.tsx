@@ -19,6 +19,11 @@ const brands = [
     id: 3,
     name: "MMSI",
     logo: "/lovable-uploads/a8db1b11-bb5d-4fcd-b5da-a5d5dc10765b.png"
+  },
+  {
+    id: 4,
+    name: "Budweiser",
+    logo: "/lovable-uploads/d7238c25-b6af-406d-96e6-4deca1c57731.png"
   }
 ];
 
