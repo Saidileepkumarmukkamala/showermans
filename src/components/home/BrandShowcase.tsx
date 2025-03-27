@@ -42,7 +42,8 @@ const BrandShowcase = () => {
     stopOnMouseEnter: false // Don't pause on mouse enter
   })]);
   
-  return <section className="py-12 backdrop-blur-sm overflow-hidden border-y border-gold/20 bg-white">
+  return (
+    <section className="py-12 overflow-hidden border-y border-gold/20 bg-transparent">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-8">
           <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-2">
@@ -55,12 +56,13 @@ const BrandShowcase = () => {
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {/* Triple the brand array for more continuous scrolling effect */}
-            {[...brands, ...brands, ...brands, ...brands].map((brand, index) => <div key={`${brand.id}-${index}`} className="flex-none pl-4 md:pl-6 w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/6">
-                <div className="rounded-lg shadow-sm p-4 h-24 flex items-center justify-center bg-white">
+            {[...brands, ...brands, ...brands, ...brands].map((brand, index) => (
+              <div key={`${brand.id}-${index}`} className="flex-none pl-4 md:pl-6 w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/6">
+                <div className="glass-card-light rounded-lg p-4 h-24 flex items-center justify-center border border-gold/10 transition-all duration-300 hover:border-gold/30 hover:shadow-md">
                   <img 
                     src={brand.logo} 
                     alt={brand.name} 
-                    className={`max-h-16 w-auto object-contain transition-opacity duration-300 opacity-90 hover:opacity-100 ${
+                    className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 ${
                       brand.name === "Budweiser" || brand.name === "Jack Daniel's" ? "filter invert" : ""
                     }`} 
                     onError={e => {
@@ -69,11 +71,13 @@ const BrandShowcase = () => {
                     }} 
                   />
                 </div>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default BrandShowcase;
