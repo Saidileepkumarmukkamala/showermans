@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ShoppingCart, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -40,31 +41,31 @@ const ProductCard = ({
     e.stopPropagation();
     toast.success(`Added ${name} to wishlist`);
   };
-  return <Link to={`/product/${id}`} className={cn("product-card-hover bg-white rounded-lg shadow-sm overflow-hidden block", className)}>
+  return <Link to={`/product/${id}`} className={cn("product-card-hover glass-card rounded-lg overflow-hidden block", className)}>
       {/* Product Image */}
       <div className="product-image-container relative">
         <img src={image} alt={name} onError={handleImageError} className="w-full h-64 object-contain" />
         
-        {/* Product Badges */}
+        {/* Product Badges - Now with glassmorphism */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
-          {isNew && <span className="inline-block py-1 px-2 text-xs font-medium bg-blue-500 text-white rounded">
+          {isNew && <span className="inline-block py-1 px-2 text-xs font-medium glass-card-light text-blue-500 rounded">
               New
             </span>}
           
-          {isSale && <span className="inline-block py-1 px-2 text-xs font-medium bg-accent text-white rounded">
+          {isSale && <span className="inline-block py-1 px-2 text-xs font-medium glass-card-gold rounded">
               Sale
             </span>}
         </div>
         
-        {/* Quick Actions */}
+        {/* Quick Actions - With glassmorphism */}
         <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button className="p-2 bg-white rounded-full shadow-md hover:bg-accent hover:text-white transition-colors duration-200" onClick={handleAddToWishlist}>
+          <button className="p-2 glass-card-light rounded-full hover:bg-white/80 transition-colors duration-200" onClick={handleAddToWishlist}>
             <Heart className="h-4 w-4" />
           </button>
         </div>
       </div>
       
-      {/* Product Info */}
+      {/* Product Info - Enhanced with glassmorphism */}
       <div className="p-4">
         <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{category}</span>
         <h3 className="font-serif font-medium text-lg mt-1 mb-2">{name}</h3>
@@ -75,7 +76,7 @@ const ProductCard = ({
             {originalPrice && <span className="text-sm text-muted-foreground line-through">${originalPrice.toFixed(2)}</span>}
           </div>
           
-          <button className="p-2 bg-primary text-white rounded-full hover:bg-accent transition-colors duration-200" onClick={handleAddToCart}>
+          <button className="p-2 glass-button-gold rounded-full transition-colors duration-200" onClick={handleAddToCart}>
             <ShoppingCart className="h-4 w-4" />
           </button>
         </div>

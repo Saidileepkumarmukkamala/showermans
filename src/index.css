@@ -53,8 +53,37 @@
 }
 
 @layer components {
+  /* Enhanced glassmorphism styles */
   .glass-card {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-sm;
+    @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-sm;
+  }
+  
+  .glass-card-heavy {
+    @apply bg-white/80 backdrop-blur-xl border border-white/30 shadow-md;
+  }
+  
+  .glass-card-light {
+    @apply bg-white/40 backdrop-blur-sm border border-white/10 shadow-sm;
+  }
+  
+  .glass-card-gold {
+    @apply bg-gold/10 backdrop-blur-md border border-gold/20 shadow-sm text-gold;
+  }
+  
+  .glass-nav {
+    @apply bg-white/70 backdrop-blur-md border-b border-white/20 shadow-sm transition-all duration-300;
+  }
+  
+  .glass-button {
+    @apply bg-white/60 backdrop-blur-md hover:bg-white/80 border border-white/20 shadow-sm transition-all duration-300;
+  }
+  
+  .glass-button-gold {
+    @apply bg-gold/20 backdrop-blur-md text-gold hover:bg-gold/30 border border-gold/20 shadow-sm transition-all duration-300;
+  }
+  
+  .glass-input {
+    @apply bg-white/60 backdrop-blur-md border border-white/20 focus:border-gold/30 focus:ring-gold/20 shadow-sm;
   }
   
   .text-balance {

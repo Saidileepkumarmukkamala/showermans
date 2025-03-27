@@ -164,7 +164,7 @@ const Navbar = () => {
       setActiveMobileCategory(category);
     }
   };
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-4", isScrolled && "bg-white/90 backdrop-blur-sm shadow-sm py-3")}>
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", isScrolled ? "glass-nav py-3" : "bg-transparent py-4")}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -191,7 +191,7 @@ const Navbar = () => {
                       <ChevronDown className="ml-1 h-4 w-4" />
                     </span>
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="bg-white rounded-md shadow-lg p-6">
+                  <NavigationMenuContent className="glass-card-heavy rounded-md shadow-lg p-6">
                     <div className="grid grid-cols-3 gap-4 w-[800px]">
                       {Object.entries(categoryStructure).map(([category, {
                       path,
@@ -224,31 +224,31 @@ const Navbar = () => {
 
           {/* Action Icons */}
           <div className="flex items-center space-x-4">
-            <button className="p-1.5 hover:bg-secondary rounded-full transition-colors duration-200">
+            <button className="p-1.5 hover:bg-white/30 backdrop-blur-sm rounded-full transition-colors duration-200">
               <Search className="h-5 w-5" />
             </button>
-            <button className="p-1.5 hover:bg-secondary rounded-full transition-colors duration-200">
+            <button className="p-1.5 hover:bg-white/30 backdrop-blur-sm rounded-full transition-colors duration-200">
               <User className="h-5 w-5" />
             </button>
-            <Link to="/cart" className="p-1.5 hover:bg-secondary rounded-full transition-colors duration-200 relative">
+            <Link to="/cart" className="p-1.5 hover:bg-white/30 backdrop-blur-sm rounded-full transition-colors duration-200 relative">
               <ShoppingCart className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 bg-gold text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                 0
               </span>
             </Link>
-            <button className="md:hidden p-1.5 hover:bg-secondary rounded-full transition-colors duration-200" onClick={() => setMobileMenuOpen(true)}>
+            <button className="md:hidden p-1.5 hover:bg-white/30 backdrop-blur-sm rounded-full transition-colors duration-200" onClick={() => setMobileMenuOpen(true)}>
               <Menu className="h-5 w-5" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={cn("fixed inset-0 bg-black/50 z-50 transition-opacity duration-300", mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none")}>
-        <div className={cn("fixed top-0 right-0 h-full w-[85%] max-w-sm bg-white p-6 shadow-lg transform transition-transform duration-300 overflow-y-auto", mobileMenuOpen ? "translate-x-0" : "translate-x-full")}>
+      {/* Mobile Menu with glassmorphism */}
+      <div className={cn("fixed inset-0 bg-black/50 backdrop-blur-sm z-50 transition-opacity duration-300", mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none")}>
+        <div className={cn("fixed top-0 right-0 h-full w-[85%] max-w-sm glass-card-heavy p-6 shadow-lg transform transition-transform duration-300 overflow-y-auto", mobileMenuOpen ? "translate-x-0" : "translate-x-full")}>
           <div className="flex justify-between items-center mb-8">
             <span className="text-xl font-serif font-bold">Showerman's Fine Wine & Liquor</span>
-            <button className="p-1.5 hover:bg-secondary rounded-full transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
+            <button className="p-1.5 hover:bg-white/30 backdrop-blur-sm rounded-full transition-colors duration-200" onClick={() => setMobileMenuOpen(false)}>
               <X className="h-5 w-5" />
             </button>
           </div>
