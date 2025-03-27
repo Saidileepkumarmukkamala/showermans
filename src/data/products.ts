@@ -1,4 +1,3 @@
-
 export interface Product {
   id: number;
   name: string;
@@ -59,7 +58,7 @@ export const products: Product[] = [
     name: "Hendrick's Gin",
     category: "Gin",
     price: 39.99,
-    image: "/lovable-uploads/294f9495-a2b4-473e-8f35-05436e00092f.png",
+    image: "https://drive.google.com/file/d/1XCB82ftEVALG0F8m0jB-Gse4uD0YJslR/view?usp=sharing",
     description: "Hendrick's Gin is a superb, super-premium gin handcrafted in Scotland. The unusual distillation process combined with the oddly delicious infusion of rose and cucumber yields a one-of-a-kind gin.",
     details: {
       origin: "Scotland",
