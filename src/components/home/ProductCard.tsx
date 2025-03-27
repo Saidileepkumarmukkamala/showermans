@@ -4,6 +4,7 @@ import { ShoppingCart, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   id: number;
@@ -28,6 +29,8 @@ const ProductCard = ({
   isSale = false,
   className
 }: ProductCardProps) => {
+  const { addToCart } = useCart();
+  
   // Fallback image in case the provided one is missing or fails to load
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src = 'https://images.pexels.com/photos/1879610/pexels-photo-1879610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
@@ -37,7 +40,7 @@ const ProductCard = ({
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toast.success(`Added ${name} to cart`);
+    addToCart(id, 1);
   };
 
   const handleAddToWishlist = (e: React.MouseEvent) => {

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
@@ -39,7 +40,8 @@ const Hero = () => {
     };
   }, []);
 
-  return <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
+  return (
+    <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
       {/* Background Effects - Enhanced with glassmorphism */}
       <div className="absolute top-0 left-0 right-0 h-full">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/60 to-transparent opacity-70" />
@@ -50,8 +52,8 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Text Content - Now with glassmorphism effects */}
-          <div ref={textRef} className="relative z-10 opacity-100 p-8 rounded-xl glass-card-light">
+          {/* Text Content - Now with consistent height */}
+          <div ref={textRef} className="relative z-10 opacity-100 p-8 rounded-xl glass-card-light h-full flex flex-col justify-center">
             <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-4">
               Premium Selection
             </span>
@@ -73,9 +75,9 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero Image with enhanced glassmorphism */}
-          <div ref={imageRef} className="relative z-5 opacity-100">
-            <div className="relative">
+          {/* Hero Image with matched height to text */}
+          <div ref={imageRef} className="relative z-5 opacity-100 h-full">
+            <div className="relative h-full">
               {/* 30% Off Badge - Now with glassmorphism */}
               <div className="absolute top-0 right-0 z-10 transform translate-x-1/2 -translate-y-1/2">
                 <div className="glass-card-gold backdrop-blur-md shadow-lg rounded-full flex flex-col items-center justify-center text-center animate-pulse">
@@ -87,16 +89,21 @@ const Hero = () => {
                 </div>
               </div>
               
-              <div className="rounded-2xl overflow-hidden glass-card-heavy">
-                <div className="aspect-[16/9] w-full overflow-hidden">
-                  <img alt="Premium spirits collection" src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" className="w-full h-full transition-transform duration-10000 hover:scale-105 object-cover" />
+              <div className="rounded-2xl overflow-hidden glass-card-heavy h-full flex items-center">
+                <div className="w-full overflow-hidden">
+                  <img 
+                    alt="Premium spirits collection" 
+                    src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" 
+                    className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105" 
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Hero;
