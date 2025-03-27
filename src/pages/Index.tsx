@@ -45,7 +45,7 @@ const Index = () => {
             e.currentTarget.src = "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
             e.currentTarget.alt = "The Macallan 18 Years Double Cask";
           }} />
-            <div className="absolute inset-0 bg-black rounded-md" />
+            <div className="absolute inset-0 rounded-md bg-amber-900" />
           </div>
           
           <div className="container mx-auto px-4 md:px-6 relative z-10">
