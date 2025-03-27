@@ -6,6 +6,7 @@ import Hero from '@/components/home/Hero';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
 import Categories from '@/components/home/Categories';
 import Newsletter from '@/components/home/Newsletter';
+import BrandShowcase from '@/components/home/BrandShowcase';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { products } from '@/data/products';
@@ -35,6 +36,9 @@ const Index = () => {
       <main className="flex-grow">
         {/* Hero Section */}
         <Hero />
+        
+        {/* Brand Showcase - Added between Hero and Categories */}
+        <BrandShowcase />
         
         {/* Categories */}
         <Categories />
