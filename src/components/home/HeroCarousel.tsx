@@ -6,7 +6,7 @@ import { products } from '@/data/products';
 // Get product references for the hero images
 const macallan = products.find(p => p.id === 1);
 const greyGoose = products.find(p => p.id === 2);
-const johnnieWalker = products.find(p => p.id === 9) || { image: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png", name: "Johnnie Walker Black Label" };
+const johnnieWalker = products.find(p => p.id === 9);
 const patron = products.find(p => p.id === 6);
 const remyMartin = products.find(p => p.id === 5);
 
@@ -24,17 +24,17 @@ const heroImages = [
   },
   {
     id: 3,
-    src: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
-    alt: "Johnnie Walker Black Label"
+    src: johnnieWalker?.image || "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
+    alt: johnnieWalker?.name || "Johnnie Walker Black Label"
   },
   {
     id: 4,
-    src: patron?.image || "",
+    src: patron?.image || "/lovable-uploads/a5c66092-426a-4cfc-bf22-37b6a578f033.png",
     alt: patron?.name || "Patrón Silver"
   },
   {
     id: 5,
-    src: remyMartin?.image || "",
+    src: remyMartin?.image || "/lovable-uploads/b09daaab-5591-481a-b97c-c681378f045b.png",
     alt: remyMartin?.name || "Rémy Martin XO"
   }
 ];

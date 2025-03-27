@@ -59,7 +59,7 @@ export const products: Product[] = [
     name: "Hendrick's Gin",
     category: "Gin",
     price: 39.99,
-    image: "https://cdn.shopify.com/s/files/1/0013/2477/7569/products/hendricks_gin_900x.jpg",
+    image: "/lovable-uploads/294f9495-a2b4-473e-8f35-05436e00092f.png",
     description: "Hendrick's Gin is a superb, super-premium gin handcrafted in Scotland. The unusual distillation process combined with the oddly delicious infusion of rose and cucumber yields a one-of-a-kind gin.",
     details: {
       origin: "Scotland",
@@ -74,7 +74,7 @@ export const products: Product[] = [
     name: "Dom Pérignon Vintage",
     category: "Champagne",
     price: 199.99,
-    image: "https://cdn.shopify.com/s/files/1/0043/2709/9519/products/01-dom-perignon-vintage-2012-champagne-75cl_1080x.jpg",
+    image: "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png",
     isNew: true,
     description: "Only the best grapes from the most exceptional years are used in the creation of Dom Pérignon. Each vintage is unique and reinterprets the uniqueness of the seasons. Dom Pérignon commits to this reinvention and expresses itself through each Vintage.",
     details: {
@@ -91,7 +91,7 @@ export const products: Product[] = [
     category: "Cognac",
     price: 179.99,
     originalPrice: 199.99,
-    image: "https://www.thewhiskyexchange.com/c/40/cognac?filter=true&rfdata=~price.36~brand.358",
+    image: "/lovable-uploads/b09daaab-5591-481a-b97c-c681378f045b.png",
     isSale: true,
     description: "Rémy Martin XO is composed of eaux-de-vie coming exclusively from the most sought-after vineyards of Cognac: Grande Champagne and Petite Champagne. These eaux-de-vie offer an extraordinary aromatic complexity and exceptionally long finish.",
     details: {
@@ -107,7 +107,7 @@ export const products: Product[] = [
     name: "Patrón Silver",
     category: "Tequila",
     price: 49.99,
-    image: "https://cdn11.bigcommerce.com/s-7a906/images/stencil/1280x1280/products/10325/10909/Patron-Silver-Tequila__01426.1647206131.jpg",
+    image: "/lovable-uploads/a5c66092-426a-4cfc-bf22-37b6a578f033.png",
     description: "Patrón Silver is handcrafted from the finest 100% Weber Blue Agave and is carefully distilled in small batches at Hacienda Patrón distillery in Jalisco, Mexico.",
     details: {
       origin: "Mexico",
@@ -139,7 +139,7 @@ export const products: Product[] = [
     category: "Gin",
     price: 79.99,
     originalPrice: 89.99,
-    image: "https://cdn.shopify.com/s/files/1/0371/7573/4151/products/Monkey47Gin1_1000x.jpg",
+    image: "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png",
     isSale: true,
     description: "Monkey 47 is a unique gin from the Black Forest in Germany. Made with 47 botanicals and bottled at 47%, it has an impressive complexity and balance.",
     details: {
@@ -155,7 +155,7 @@ export const products: Product[] = [
     name: "Jack Daniel's Old No. 7",
     category: "Whiskey",
     price: 29.99,
-    image: "https://cdn.shopify.com/s/files/1/0515/6139/5329/products/JackDanielsOldNo.7_700ml_Angled_73d7eb1d-cf73-4aac-a64e-b4a7b1e63634.jpg",
+    image: "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
     description: "Mellowed drop by drop through 10-feet of sugar maple charcoal, then matured in handcrafted barrels of our own making. And our Tennessee Whiskey doesn't follow a calendar. It's only ready when our tasters say it is.",
     details: {
       origin: "USA",
@@ -170,7 +170,7 @@ export const products: Product[] = [
     name: "Belvedere Vodka",
     category: "Vodka",
     price: 32.99,
-    image: "https://cdn.shopify.com/s/files/1/0031/8025/8561/products/Belvedere-Vodka-700ML.png",
+    image: "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png",
     description: "Created from 600 years of Polish vodka-making tradition, Belvedere is produced using 100% Polska rye and water from its own natural well, with no additives or sugar.",
     details: {
       origin: "Poland",
@@ -185,7 +185,7 @@ export const products: Product[] = [
     name: "Moet & Chandon Imperial Brut",
     category: "Champagne",
     price: 49.99,
-    image: "https://cdn.shopify.com/s/files/1/0246/5787/4308/products/moet-chandon-brut-imperial-champagne-750ml_1024x1024.jpg",
+    image: "/lovable-uploads/5ca10da0-9bbc-4aea-b474-ad08aa087fd3.png",
     description: "Moët Impérial is the House's iconic champagne. Created in 1869, it embodies Moët & Chandon's unique style, a style distinguished by its bright fruitiness, its seductive palate and its elegant maturity.",
     details: {
       origin: "France",
@@ -200,7 +200,7 @@ export const products: Product[] = [
     name: "Oban 14 Year Old",
     category: "Whiskey",
     price: 79.99,
-    image: "https://cdn11.bigcommerce.com/s-d4ygz0v966/images/stencil/1280x1280/products/11229/29793/Oban-14-Year-Old-1__88417.1679063630.jpg",
+    image: "/lovable-uploads/6d31f34c-7095-4a38-870e-7c43c306f9bd.png",
     description: "Oban 14 Year Old is a classic Highland malt with a smoky sweetness. Notes of citrus, smooth sweetness and a hint of sea-salt and peaty smokiness.",
     details: {
       origin: "Scotland",
