@@ -1,3 +1,4 @@
+
 import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -19,7 +20,12 @@ const brands = [{
   id: 4,
   name: "Budweiser",
   logo: "/lovable-uploads/d7238c25-b6af-406d-96e6-4deca1c57731.png"
+}, {
+  id: 5,
+  name: "Jack Daniel's",
+  logo: "/lovable-uploads/b7cdd800-7470-480b-958d-7fb505ee3bf9.png"
 }];
+
 const BrandShowcase = () => {
   // Using Embla's autoplay plugin directly
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -35,6 +41,7 @@ const BrandShowcase = () => {
     // Continue autoplay even after user interaction
     stopOnMouseEnter: false // Don't pause on mouse enter
   })]);
+  
   return <section className="py-12 backdrop-blur-sm overflow-hidden border-y border-gold/20 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-8">
@@ -50,10 +57,17 @@ const BrandShowcase = () => {
             {/* Triple the brand array for more continuous scrolling effect */}
             {[...brands, ...brands, ...brands, ...brands].map((brand, index) => <div key={`${brand.id}-${index}`} className="flex-none pl-4 md:pl-6 w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/6">
                 <div className="rounded-lg shadow-sm p-4 h-24 flex items-center justify-center bg-white">
-                  <img src={brand.logo} alt={brand.name} className={`max-h-16 w-auto object-contain transition-opacity duration-300 opacity-90 hover:opacity-100 ${brand.name === "Budweiser" ? "filter invert" : ""}`} onError={e => {
-                console.log(`Failed to load brand image: ${brand.logo}`);
-                e.currentTarget.src = "/placeholder.svg";
-              }} />
+                  <img 
+                    src={brand.logo} 
+                    alt={brand.name} 
+                    className={`max-h-16 w-auto object-contain transition-opacity duration-300 opacity-90 hover:opacity-100 ${
+                      brand.name === "Budweiser" || brand.name === "Jack Daniel's" ? "filter invert" : ""
+                    }`} 
+                    onError={e => {
+                      console.log(`Failed to load brand image: ${brand.logo}`);
+                      e.currentTarget.src = "/placeholder.svg";
+                    }} 
+                  />
                 </div>
               </div>)}
           </div>
@@ -61,4 +75,5 @@ const BrandShowcase = () => {
       </div>
     </section>;
 };
+
 export default BrandShowcase;
