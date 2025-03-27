@@ -5,9 +5,11 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { products } from '@/data/products';
 import HeroCarousel from './HeroCarousel';
+
 const Hero = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -20,18 +22,15 @@ const Hero = () => {
     }, {
       threshold: 0.1
     });
+    
     if (textRef.current) observer.observe(textRef.current);
     if (imageRef.current) observer.observe(imageRef.current);
+    
     return () => {
       if (textRef.current) observer.unobserve(textRef.current);
       if (imageRef.current) observer.unobserve(imageRef.current);
     };
   }, []);
-
-  // Get the Grey Goose image directly from the products array
-  const greyGooseProduct = products.find(p => p.id === 2);
-  const heroImageSrc = greyGooseProduct ? greyGooseProduct.image : "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
-  const heroImageAlt = greyGooseProduct ? greyGooseProduct.name : "Grey Goose Vodka";
   
   return <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
       {/* Background Effects */}
@@ -65,15 +64,15 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero Image */}
+          {/* Hero Image - Using the new uploaded image */}
           <div ref={imageRef} className="opacity-0 transition-opacity duration-1000 ease-out delay-300">
             <div className="relative rounded-2xl overflow-hidden glass-card">
               <div className="aspect-[16/9] w-full overflow-hidden">
-                <img src={heroImageSrc} alt={heroImageAlt} onError={e => {
-                console.log("Failed to load hero image");
-                e.currentTarget.src = "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
-                e.currentTarget.alt = "Grey Goose Vodka";
-              }} className="w-full h-full transition-transform duration-10000 hover:scale-105 object-scale-down" />
+                <img 
+                  src="/lovable-uploads/b55decef-0602-49e0-90e9-045021ab6403.png" 
+                  alt="Premium spirits collection" 
+                  className="w-full h-full transition-transform duration-10000 hover:scale-105 object-scale-down" 
+                />
               </div>
               
               {/* 30% Off Badge - Increased visibility and size */}
@@ -90,4 +89,5 @@ const Hero = () => {
       </div>
     </div>;
 };
+
 export default Hero;
