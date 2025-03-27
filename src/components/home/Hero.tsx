@@ -4,11 +4,9 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { products } from '@/data/products';
 import HeroCarousel from './HeroCarousel';
-
 const Hero = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     // Make elements visible immediately to ensure buttons are clickable
     if (textRef.current) {
@@ -32,15 +30,12 @@ const Hero = () => {
     }, {
       threshold: 0.1
     });
-
     return () => {
       if (textRef.current) observer.unobserve(textRef.current);
       if (imageRef.current) observer.unobserve(imageRef.current);
     };
   }, []);
-
-  return (
-    <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
+  return <div className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
       {/* Background Effects - Enhanced with glassmorphism */}
       <div className="absolute top-0 left-0 right-0 h-full">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/60 to-transparent opacity-70" />
@@ -76,7 +71,9 @@ const Hero = () => {
 
           {/* Hero Image - With fixed height to match text container */}
           <div ref={imageRef} className="relative z-5 opacity-100">
-            <div className="relative" style={{ height: "420px" }}>
+            <div className="relative" style={{
+            height: "420px"
+          }}>
               {/* 30% Off Badge - Now with glassmorphism */}
               <div className="absolute top-0 right-0 z-10 transform translate-x-1/2 -translate-y-1/2">
                 <div className="glass-card-gold backdrop-blur-md shadow-lg rounded-full flex flex-col items-center justify-center text-center animate-pulse">
@@ -90,19 +87,13 @@ const Hero = () => {
               
               <div className="rounded-2xl overflow-hidden glass-card-heavy h-full flex items-center">
                 <div className="w-full overflow-hidden h-full">
-                  <img 
-                    alt="Premium spirits collection" 
-                    src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" 
-                    className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105" 
-                  />
+                  <img alt="Premium spirits collection" src="/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png" className="w-full h-full transition-transform duration-10000 hover:scale-105 object-cover" />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Hero;
