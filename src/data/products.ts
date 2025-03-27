@@ -58,7 +58,7 @@ export const products: Product[] = [
     name: "Hendrick's Gin",
     category: "Gin",
     price: 39.99,
-    image: "https://drive.google.com/file/d/1XCB82ftEVALG0F8m0jB-Gse4uD0YJslR/view?usp=sharing",
+    image: "/lovable-uploads/a8db1b11-bb5d-4fcd-b5da-a5d5dc10765b.png",
     description: "Hendrick's Gin is a superb, super-premium gin handcrafted in Scotland. The unusual distillation process combined with the oddly delicious infusion of rose and cucumber yields a one-of-a-kind gin.",
     details: {
       origin: "Scotland",
