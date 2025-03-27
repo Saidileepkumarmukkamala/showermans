@@ -1,3 +1,4 @@
+
 export interface Product {
   id: number;
   name: string;
@@ -73,7 +74,7 @@ export const products: Product[] = [
     name: "Dom Pérignon Vintage",
     category: "Champagne",
     price: 199.99,
-    image: "/lovable-uploads/7f36a108-d7d7-4b7a-87c2-993b8eed804b.png",
+    image: "/lovable-uploads/3f3fd353-7ef4-459d-816b-aded65a7a7e3.png",
     isNew: true,
     description: "Only the best grapes from the most exceptional years are used in the creation of Dom Pérignon. Each vintage is unique and reinterprets the uniqueness of the seasons. Dom Pérignon commits to this reinvention and expresses itself through each Vintage.",
     details: {
@@ -90,7 +91,7 @@ export const products: Product[] = [
     category: "Cognac",
     price: 179.99,
     originalPrice: 199.99,
-    image: "/lovable-uploads/b09daaab-5591-481a-b97c-c681378f045b.png",
+    image: "/lovable-uploads/360eb85e-ddf4-4ca5-9164-96c80523e308.png",
     isSale: true,
     description: "Rémy Martin XO is composed of eaux-de-vie coming exclusively from the most sought-after vineyards of Cognac: Grande Champagne and Petite Champagne. These eaux-de-vie offer an extraordinary aromatic complexity and exceptionally long finish.",
     details: {
@@ -106,7 +107,7 @@ export const products: Product[] = [
     name: "Patrón Silver",
     category: "Tequila",
     price: 49.99,
-    image: "/lovable-uploads/a5c66092-426a-4cfc-bf22-37b6a578f033.png",
+    image: "/lovable-uploads/afe2eb7d-d6b4-4031-854f-23f91a100b3b.png",
     description: "Patrón Silver is handcrafted from the finest 100% Weber Blue Agave and is carefully distilled in small batches at Hacienda Patrón distillery in Jalisco, Mexico.",
     details: {
       origin: "Mexico",
@@ -121,7 +122,7 @@ export const products: Product[] = [
     name: "Château Margaux 2015",
     category: "Wine",
     price: 399.99,
-    image: "https://www.wine.com/product/images/w_1440,h_1812,c_fit/j9o9o6vqstimf6gntarw.jpg",
+    image: "/lovable-uploads/b55decef-0602-49e0-90e9-045021ab6403.png",
     isNew: true,
     description: "Château Margaux 2015 is one of the greatest vintages of this First Growth Bordeaux estate. It shows incredible power and finesse, with remarkable aromas of dark berries, violets, minerals, and spice.",
     details: {
@@ -138,7 +139,7 @@ export const products: Product[] = [
     category: "Gin",
     price: 79.99,
     originalPrice: 89.99,
-    image: "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png",
+    image: "/lovable-uploads/4ab37fae-7adf-434f-a0ce-85987941644f.png",
     isSale: true,
     description: "Monkey 47 is a unique gin from the Black Forest in Germany. Made with 47 botanicals and bottled at 47%, it has an impressive complexity and balance.",
     details: {
@@ -214,7 +215,7 @@ export const products: Product[] = [
     name: "Veuve Clicquot Yellow Label",
     category: "Champagne",
     price: 59.99,
-    image: "https://cdn11.bigcommerce.com/s-d4ygz0v966/images/stencil/1280x1280/products/2209/5750/Veuve_Clicquot_Yellow_Label_Brut__10087.1592853574.jpg",
+    image: "/lovable-uploads/5ca10da0-9bbc-4aea-b474-ad08aa087fd3.png",
     isNew: true,
     description: "Veuve Clicquot Yellow Label manages to reconcile two opposing factors - strength and silkiness - and to hold them in perfect balance with aromatic intensity and a lot of freshness.",
     details: {
