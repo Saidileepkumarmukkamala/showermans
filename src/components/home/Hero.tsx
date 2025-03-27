@@ -52,8 +52,8 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Text Content - Now with consistent height */}
-          <div ref={textRef} className="relative z-10 opacity-100 p-8 rounded-xl glass-card-light h-full flex flex-col justify-center">
+          {/* Text Content - Natural height without forced flex */}
+          <div ref={textRef} className="relative z-10 opacity-100 p-8 rounded-xl glass-card-light">
             <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-4">
               Premium Selection
             </span>
@@ -75,7 +75,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero Image with matched height to text */}
+          {/* Hero Image - Match height to text container */}
           <div ref={imageRef} className="relative z-5 opacity-100 h-full">
             <div className="relative h-full">
               {/* 30% Off Badge - Now with glassmorphism */}
