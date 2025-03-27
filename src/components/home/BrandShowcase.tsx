@@ -31,7 +31,6 @@ const BrandShowcase = () => {
       slidesToScroll: 1,
       skipSnaps: false,
       dragFree: false, // Use dragFree (valid property) instead of draggable
-      speed: 8, // Slow down the transition speed for smoother scrolling
     },
     [
       Autoplay({ 
