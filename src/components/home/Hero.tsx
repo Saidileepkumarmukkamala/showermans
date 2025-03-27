@@ -33,7 +33,7 @@ const Hero = () => {
     };
   }, []);
 
-  // Updated to use the uploaded Grey Goose image
+  // Updated to use the Grey Goose image
   const heroImageSrc = "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
   const heroImageAlt = "Grey Goose Vodka";
 

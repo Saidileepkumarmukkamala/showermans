@@ -26,7 +26,7 @@ const Index = () => {
     });
   }, []);
 
-  // Use the uploaded Macallan image for the promotion banner
+  // Use the Macallan image for the promotion banner
   const promotionImagePath = "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png";
 
   return (
@@ -40,7 +40,7 @@ const Index = () => {
         {/* Featured Products */}
         <FeaturedProducts />
         
-        {/* Promotion Banner - Updated with Macallan image */}
+        {/* Promotion Banner - Using Macallan image */}
         <section className="py-16 relative overflow-hidden">
           <div className="absolute inset-0">
             <img 

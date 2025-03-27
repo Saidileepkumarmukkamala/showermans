@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { products } from '@/data/products';
 
-// Updated hero images to include the new uploaded images
+// Updated hero images to ensure Macallan and Grey Goose are used correctly
 const heroImages = [
   {
     id: 1,
