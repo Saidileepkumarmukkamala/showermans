@@ -29,12 +29,14 @@ const heroImages = [
   },
   {
     id: 4,
-    src: patron?.image || "/lovable-uploads/a5c66092-426a-4cfc-bf22-37b6a578f033.png",
+    // Updated to use the corrected Patrón image
+    src: patron?.image || "/lovable-uploads/3f3fd353-7ef4-459d-816b-aded65a7a7e3.png",
     alt: patron?.name || "Patrón Silver"
   },
   {
     id: 5,
-    src: remyMartin?.image || "/lovable-uploads/b09daaab-5591-481a-b97c-c681378f045b.png",
+    // Updated to use the corrected Rémy Martin image
+    src: remyMartin?.image || "/lovable-uploads/360eb85e-ddf4-4ca5-9164-96c80523e308.png",
     alt: remyMartin?.name || "Rémy Martin XO"
   }
 ];
