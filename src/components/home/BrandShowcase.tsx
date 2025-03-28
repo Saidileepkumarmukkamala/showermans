@@ -51,6 +51,16 @@ const brands = [{
                   id: 15,
                     name: "CM",
                     logo: "https://media.captainmorgan.com/media/uucn5gzb/black-logo.png?mode=crop"
+},
+  {
+                  id: 16,
+                    name: "yellow tail",
+                    logo: "https://www.yellowtailwine.com/wp-content/themes/yellowtail/resources/logos/Logo-new.svg"
+},
+  {
+                  id: 17,
+                    name: "Barefoot",
+                    logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fflyclipart.com%2Fthumbs%2Fthis-post-originally-appeared-in-barefoot-wines-logo-1534637.png&f=1&nofb=1&ipt=6a22d77dccc6c138ed6d1003c2961d90bc0a40b20feda663fd92028e9bd26f99"
 }];
 
 const BrandShowcase = () => {
