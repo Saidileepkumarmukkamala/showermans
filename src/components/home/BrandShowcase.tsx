@@ -101,6 +101,11 @@ const brands = [{
                   id: 25,
                     name: "Miclobultra",
                     logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flogos-world.net%2Fwp-content%2Fuploads%2F2022%2F07%2FMichelob-Ultra-Symbol.png&f=1&nofb=1&ipt=cbff90c792c9c2934051948366b9adb4b02669ec7cfe7758cfe5749331d303a1&ipo=images"
+},
+  {
+                  id: 26,
+                    name: "Samuealadams",
+                    logo: "https://www.samueladams.com//app_media/SamAdamsRedux/2023/global/SamuelAdams-White-BlueDrop-2023.file"
 }];
 
 const BrandShowcase = () => {
