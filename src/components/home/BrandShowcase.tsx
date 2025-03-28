@@ -1,22 +1,9 @@
-
 import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-// Brand logos data - using the uploaded images
+// Filtered brand logos - only keeping Budweiser, Jack Daniel's, and Heineken
 const brands = [{
-  id: 1,
-  name: "FRS",
-  logo: "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png"
-}, {
-  id: 2,
-  name: "APD",
-  logo: "/lovable-uploads/294f9495-a2b4-473e-8f35-05436e00092f.png"
-}, {
-  id: 3,
-  name: "MMSI",
-  logo: "/lovable-uploads/a8db1b11-bb5d-4fcd-b5da-a5d5dc10765b.png"
-}, {
   id: 4,
   name: "Budweiser",
   logo: "/lovable-uploads/d7238c25-b6af-406d-96e6-4deca1c57731.png"
@@ -24,10 +11,6 @@ const brands = [{
   id: 5,
   name: "Jack Daniel's",
   logo: "/lovable-uploads/b7cdd800-7470-480b-958d-7fb505ee3bf9.png"
-}, {
-  id: 6,
-  name: "New Brand",
-  logo: "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png"
 }, {
   id: 7,
   name: "Heineken",
@@ -71,7 +54,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 ${
-                      brand.name === "Budweiser" || brand.name === "Jack Daniel's" ? "filter invert" : ""
+                      brand.name === "Budweiser" || brand.name === "Jack Daniel's" || brand.name === "Heineken" ? "filter invert" : ""
                     }`} 
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
