@@ -61,6 +61,11 @@ const brands = [{
                   id: 17,
                     name: "Barefoot",
                     logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fflyclipart.com%2Fthumbs%2Fthis-post-originally-appeared-in-barefoot-wines-logo-1534637.png&f=1&nofb=1&ipt=6a22d77dccc6c138ed6d1003c2961d90bc0a40b20feda663fd92028e9bd26f99"
+},
+  {
+                  id: 18,
+                    name: "GreyGoose",
+                    logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Eiv_b3vGG-2RN6jY4HHTxwHaCe%26pid%3DApi&f=1&ipt=b5e74265a937f7423ce3b77131dd17b6e8540d99bf79d1a0a0222c14e3880ea7&ipo=images"
 }];
 
 const BrandShowcase = () => {
