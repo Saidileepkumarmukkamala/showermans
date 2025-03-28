@@ -76,6 +76,16 @@ const brands = [{
                   id: 20,
                     name: "CoorsLight",
                     logo: "https://www.coorslight.com/themes/custom/coorslight/coorslight_logo.png"
+},
+  {
+                  id: 21,
+                    name: "Modelo",
+                    logo: "https://www.modelousa.com/cdn/shop/files/logo-modelo_f936c80e-331f-430e-a91e-44793911808c.png?v=1638415041"
+},
+  {
+                  id: 22,
+                    name: "stella",
+                    logo: "https://www.stellaartois.com/stellaLogo_.png"
 }];
 
 const BrandShowcase = () => {
@@ -110,7 +120,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${
-                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight"].includes(brand.name) ? "" : "invert"
+                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella"].includes(brand.name) ? "" : "invert"
                   }`}
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
