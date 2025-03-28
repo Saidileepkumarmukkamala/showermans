@@ -111,6 +111,11 @@ const brands = [{
                   id: 27,
                     name: "rollingrock",
                     logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Flarge%2F2x%2Frolling-rock-2-logo-png-transparent.png&f=1&nofb=1&ipt=949f24099df2750d98afda5c755b0684d31eb3b9495764c6cac5c9bc9fdad6fa&ipo=images"
+},
+  {
+                  id: 28,
+                    name: "patron",
+                    logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fpatron-tequila-logo-15o6lu0j3vqnialr.png&f=1&nofb=1&ipt=c61c6794cf44d74a8fd33423389e5df7727040e6e54e272a877d099b0d47030d&ipo=images"
 }];
 
 const BrandShowcase = () => {
@@ -145,7 +150,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${
-                    ["Johnnie Walker","Heineken", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella", "bluemoon", "guinness", "Miclobultra","rollingrock"].includes(brand.name) ? "" : "invert"
+                    ["Johnnie Walker","Heineken", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella", "bluemoon", "guinness", "Miclobultra","rollingrock","patron"].includes(brand.name) ? "" : "invert"
                   }`}
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
