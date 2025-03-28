@@ -46,6 +46,11 @@ const brands = [{
                   id: 14,
                     name: "Donjulio",
                     logo: "https://www.donjulio.com/icons/dj-logo.svg"
+},
+  {
+                  id: 15,
+                    name: "CM",
+                    logo: "https://media.captainmorgan.com/media/uucn5gzb/black-logo.png?mode=crop"
 }];
 
 const BrandShowcase = () => {
