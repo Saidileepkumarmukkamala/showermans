@@ -28,6 +28,10 @@ const brands = [{
   id: 6,
   name: "New Brand",
   logo: "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png"
+}, {
+  id: 7,
+  name: "Heineken",
+  logo: "/lovable-uploads/04a6035b-7724-4fe7-a0a7-562b975c7b8c.png"
 }];
 
 const BrandShowcase = () => {
