@@ -2,6 +2,7 @@ import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
+// Updated brand logos - added Hennessy, Jameson, and Avion
 const brands = [{
   id: 4,
   name: "Budweiser",
@@ -30,7 +31,8 @@ const brands = [{
   id: 11,
   name: "Avion",
   logo: "https://tequilaavion.com/wp-content/uploads/2022/06/logo-avion.svg"
-}, {
+},
+  {
   id: 12,
   name: "Titos",
   logo: "https://www.titosvodka.com/static/img/logo-dark.svg"
@@ -68,7 +70,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${
-                      ["Johnnie Walker", "Titos"].includes(brand.name) ? "" : "invert"
+                      brand.name === "Johnnie Walker" ? "" : "invert"
                     }`} 
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
