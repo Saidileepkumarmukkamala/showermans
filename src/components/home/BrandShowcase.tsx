@@ -31,6 +31,11 @@ const brands = [{
   id: 11,
   name: "Avion",
   logo: "https://tequilaavion.com/wp-content/uploads/2022/06/logo-avion.svg"
+},
+  {
+  id: 12,
+  name: "Titos",
+  logo: "https://www.titosvodka.com/static/img/logo-dark.svg"
 }];
 
 const BrandShowcase = () => {
