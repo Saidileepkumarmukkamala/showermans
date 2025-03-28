@@ -24,6 +24,10 @@ const brands = [{
   id: 5,
   name: "Jack Daniel's",
   logo: "/lovable-uploads/b7cdd800-7470-480b-958d-7fb505ee3bf9.png"
+}, {
+  id: 6,
+  name: "New Brand",
+  logo: "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png"
 }];
 
 const BrandShowcase = () => {
@@ -58,7 +62,7 @@ const BrandShowcase = () => {
             {/* Triple the brand array for more continuous scrolling effect */}
             {[...brands, ...brands, ...brands, ...brands].map((brand, index) => (
               <div key={`${brand.id}-${index}`} className="flex-none pl-4 md:pl-6 w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/6">
-                <div className="glass-card-light rounded-lg p-4 h-24 flex items-center justify-center border border-gold/10 transition-all duration-300 hover:border-gold/30 hover:shadow-md">
+                <div className="glass-card rounded-lg p-4 h-24 flex items-center justify-center border border-gold/20 transition-all duration-300 hover:border-gold/40 hover:shadow-md">
                   <img 
                     src={brand.logo} 
                     alt={brand.name} 
