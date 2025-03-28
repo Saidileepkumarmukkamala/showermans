@@ -13,13 +13,13 @@ const brands = [{
   name: "Jack Daniel's",
   logo: "/lovable-uploads/b7cdd800-7470-480b-958d-7fb505ee3bf9.png"
 }, {
-  id: 8,
+  id: 7,
   name: "Heineken",
   logo: "/lovable-uploads/04a6035b-7724-4fe7-a0a7-562b975c7b8c.png"
 }, {
   id: 8,
   name: "Johnnie Walker",
-  logo: "https://duckduckgo.com/i/1e6f13cfded3844d.png"
+  logo: "https://www.johnniewalker.com/_next/static/media/header-logo.c677900c.svg"
 }, {
   id: 9,
   name: "Hennessy",
