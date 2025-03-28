@@ -41,6 +41,11 @@ const brands = [{
                   id: 13,
                     name: "maker's mark",
                     logo: "https://www.makersmark.com/themes/custom/bsi_tokens_theme/bsi_tokens_subtheme/logo.svg"
+},
+  {
+                  id: 14,
+                    name: "Donjulio",
+                    logo: "https://www.donjulio.com/icons/dj-logo.svg"
 }];
 
 const BrandShowcase = () => {
