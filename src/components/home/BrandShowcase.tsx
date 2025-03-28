@@ -66,6 +66,16 @@ const brands = [{
                   id: 18,
                     name: "GreyGoose",
                     logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Eiv_b3vGG-2RN6jY4HHTxwHaCe%26pid%3DApi&f=1&ipt=b5e74265a937f7423ce3b77131dd17b6e8540d99bf79d1a0a0222c14e3880ea7&ipo=images"
+},
+  {
+                  id: 19,
+                    name: "MillerLite",
+                    logo: "https://www.millerlite.com/sites/millerlite/files/logo-ML_0.png"
+},
+  {
+                  id: 20,
+                    name: "CoorsLight",
+                    logo: "https://www.coorslight.com/themes/custom/coorslight/coorslight_logo.png"
 }];
 
 const BrandShowcase = () => {
@@ -100,7 +110,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${
-                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose"].includes(brand.name) ? "" : "invert"
+                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","MillerLite","CoorsLight"].includes(brand.name) ? "" : "invert"
                   }`}
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
