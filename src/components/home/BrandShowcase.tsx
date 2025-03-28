@@ -3,7 +3,7 @@ import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-// Updated brand logos - added Johnnie Walker
+// Updated brand logos - added Hennessy, Jameson, and Avion
 const brands = [{
   id: 4,
   name: "Budweiser",
@@ -20,6 +20,18 @@ const brands = [{
   id: 8,
   name: "Johnnie Walker",
   logo: "https://www.johnniewalker.com/_next/static/media/header-logo.c677900c.svg"
+}, {
+  id: 9,
+  name: "Hennessy",
+  logo: "https://www.hennessy.com/themes/custom/hennessy/assets/images/logo-hennessy-white.png"
+}, {
+  id: 10,
+  name: "Jameson",
+  logo: "https://www.jamesonwhiskey.com/wp-content/themes/global-gutenberg-theme/static/images/icons-logos/jameson-logo.svg"
+}, {
+  id: 11,
+  name: "Avion",
+  logo: "https://tequilaavion.com/wp-content/uploads/2022/06/logo-avion.svg"
 }];
 
 const BrandShowcase = () => {
@@ -58,9 +70,7 @@ const BrandShowcase = () => {
                   <img 
                     src={brand.logo} 
                     alt={brand.name} 
-                    className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 ${
-                      brand.name === "Budweiser" || brand.name === "Jack Daniel's" || brand.name === "Heineken" || brand.name === "Johnnie Walker" ? "filter invert" : ""
-                    }`} 
+                    className="max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter invert" 
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
                       e.currentTarget.src = "/placeholder.svg";
