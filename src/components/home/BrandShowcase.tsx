@@ -106,6 +106,11 @@ const brands = [{
                   id: 26,
                     name: "Samuealadams",
                     logo: "https://www.samueladams.com//app_media/SamAdamsRedux/2023/global/SamuelAdams-White-BlueDrop-2023.file"
+},
+  {
+                  id: 27,
+                    name: "rollingrock",
+                    logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.freebiesupply.com%2Flogos%2Flarge%2F2x%2Frolling-rock-2-logo-png-transparent.png&f=1&nofb=1&ipt=949f24099df2750d98afda5c755b0684d31eb3b9495764c6cac5c9bc9fdad6fa&ipo=images"
 }];
 
 const BrandShowcase = () => {
