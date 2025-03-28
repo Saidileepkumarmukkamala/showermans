@@ -96,6 +96,11 @@ const brands = [{
                   id: 24,
                     name: "guinness",
                     logo: "https://duckduckgo.com/i/b381c669fbaf7e2d.png"
+},
+  {
+                  id: 25,
+                    name: "Miclobultra",
+                    logo: "https://www.michelobultra.com/img/logos/newLogo.png"
 }];
 
 const BrandShowcase = () => {
