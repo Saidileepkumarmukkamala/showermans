@@ -65,20 +65,22 @@ const BrandShowcase = () => {
           <div className="flex">
             {/* Triple the brand array for more continuous scrolling effect */}
             {[...brands, ...brands, ...brands, ...brands].map((brand, index) => (
-              <div key={`${brand.id}-${index}`} className="flex-none pl-4 md:pl-6 w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/6">
-                <div className="p-4 h-24 flex items-center justify-center bg-transparent transition-all duration-300">
-                  <img 
-                    src={brand.logo} 
-                    alt={brand.name} 
-                    className="max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter invert" 
-                    onError={e => {
-                      console.log(`Failed to load brand image: ${brand.logo}`);
-                      e.currentTarget.src = "/placeholder.svg";
-                    }} 
-                  />
-                </div>
+            <div key={`${brand.id}-${index}`} className="flex-none pl-4 md:pl-6 w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/6">
+              <div className="p-4 h-24 flex items-center justify-center bg-transparent transition-all duration-300">
+                <img 
+                  src={brand.logo} 
+                  alt={brand.name} 
+                  className={
+                    `max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${brand.name === "Johnnie Walker" ? "invert brightness-[2]" : "invert"}`
+                  }
+                  onError={e => {
+                    console.log(`Failed to load brand image: ${brand.logo}`);
+                    e.currentTarget.src = "/placeholder.svg";
+                  }} 
+                />
               </div>
-            ))}
+            </div>
+          ))}
           </div>
         </div>
       </div>
