@@ -47,7 +47,7 @@ const BrandShowcase = () => {
   })]);
   
   return (
-    <section className="py-12 overflow-hidden border-y border-gold/20 bg-transparent">
+    <section className="py-12 overflow-hidden bg-transparent">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-8">
           <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-2">
