@@ -36,6 +36,11 @@ const brands = [{
   id: 12,
   name: "Titos",
   logo: "https://www.titosvodka.com/static/img/logo-dark.svg"
+},
+  {
+                  id: 13,
+                    name: "maker's mark",
+                    logo: "https://www.makersmark.com/themes/custom/bsi_tokens_theme/bsi_tokens_subtheme/logo.svg"
 }];
 
 const BrandShowcase = () => {
