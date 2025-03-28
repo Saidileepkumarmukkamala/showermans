@@ -19,7 +19,7 @@ const brands = [{
 }, {
   id: 8,
   name: "Johnnie Walker",
-  logo: "https://www.johnniewalker.com/_next/static/media/header-logo.c677900c.svg"
+  logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngmart.com%2Ffiles%2F22%2FJohnnie-Walker-Logo-PNG-Clipart.png&f=1&nofb=1&ipt=4cca2db186d63285ccc67d1812f2e883bed21d98b5111602d2e7a7f69e5c4916&ipo=images"
 }, {
   id: 9,
   name: "Hennessy",
