@@ -13,7 +13,7 @@ const brands = [{
   name: "Jack Daniel's",
   logo: "/lovable-uploads/b7cdd800-7470-480b-958d-7fb505ee3bf9.png"
 }, {
-  id: 7,
+  id: 8,
   name: "Heineken",
   logo: "/lovable-uploads/04a6035b-7724-4fe7-a0a7-562b975c7b8c.png"
 }, {
