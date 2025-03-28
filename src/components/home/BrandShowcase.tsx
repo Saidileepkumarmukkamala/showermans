@@ -1,8 +1,9 @@
+
 import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
-// Filtered brand logos - only keeping Budweiser, Jack Daniel's, and Heineken
+// Updated brand logos - added Johnnie Walker
 const brands = [{
   id: 4,
   name: "Budweiser",
@@ -15,6 +16,10 @@ const brands = [{
   id: 7,
   name: "Heineken",
   logo: "/lovable-uploads/04a6035b-7724-4fe7-a0a7-562b975c7b8c.png"
+}, {
+  id: 8,
+  name: "Johnnie Walker",
+  logo: "https://www.johnniewalker.com/_next/static/media/header-logo.c677900c.svg"
 }];
 
 const BrandShowcase = () => {
@@ -54,7 +59,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 ${
-                      brand.name === "Budweiser" || brand.name === "Jack Daniel's" || brand.name === "Heineken" ? "filter invert" : ""
+                      brand.name === "Budweiser" || brand.name === "Jack Daniel's" || brand.name === "Heineken" || brand.name === "Johnnie Walker" ? "filter invert" : ""
                     }`} 
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
