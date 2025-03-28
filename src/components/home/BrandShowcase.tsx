@@ -100,7 +100,7 @@ const brands = [{
   {
                   id: 25,
                     name: "Miclobultra",
-                    logo: "https://www.michelobultra.com/img/logos/newLogo.png"
+                    logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flogos-world.net%2Fwp-content%2Fuploads%2F2022%2F07%2FMichelob-Ultra-Symbol.png&f=1&nofb=1&ipt=cbff90c792c9c2934051948366b9adb4b02669ec7cfe7758cfe5749331d303a1&ipo=images"
 }];
 
 const BrandShowcase = () => {
@@ -135,7 +135,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${
-                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella", "bluemoon", "guinness"].includes(brand.name) ? "" : "invert"
+                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella", "bluemoon", "guinness", "Miclobultra"].includes(brand.name) ? "" : "invert"
                   }`}
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
