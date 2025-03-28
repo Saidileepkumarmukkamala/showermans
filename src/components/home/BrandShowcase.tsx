@@ -65,8 +65,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${
-                      // Apply special brightness for SVG-based or problematic logos
-                      ["Johnnie Walker", "Jameson", "Avion"].includes(brand.name) ? "invert brightness-[1.75]" : "invert"
+                      brand.name === "Johnnie Walker" ? "" : "invert"
                     }`} 
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
