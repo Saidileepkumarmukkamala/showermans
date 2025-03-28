@@ -26,7 +26,7 @@ const BrandShowcase = () => {
     skipSnaps: false,
     dragFree: false
   }, [Autoplay({
-    delay: 1000,
+    delay: 500,
     // 2 seconds delay between transitions
     stopOnInteraction: false,
     // Continue autoplay even after user interaction
