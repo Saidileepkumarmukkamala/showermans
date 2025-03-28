@@ -14,7 +14,7 @@ const brands = [{
 }, {
   id: 7,
   name: "Heineken",
-  logo: "/lovable-uploads/04a6035b-7724-4fe7-a0a7-562b975c7b8c.png"
+  logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F41%2F11%2F47%2F411147419f44f63c450700000ba43aff.png&f=1&nofb=1&ipt=bea5c0edf4b23364de1dd95e9976b9de3bf37f432edda11e5c0c079c8c97acdd&ipo=images"
 }, {
   id: 8,
   name: "Johnnie Walker",
@@ -135,7 +135,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${
-                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella", "bluemoon", "guinness", "Miclobultra"].includes(brand.name) ? "" : "invert"
+                    ["Johnnie Walker","Heineken", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella", "bluemoon", "guinness", "Miclobultra"].includes(brand.name) ? "" : "invert"
                   }`}
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
