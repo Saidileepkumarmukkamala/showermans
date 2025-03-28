@@ -17,7 +17,7 @@ const brands = [{
   name: "Heineken",
   logo: "/lovable-uploads/04a6035b-7724-4fe7-a0a7-562b975c7b8c.png"
 }, {
-  id: 8,
+  id: 9,
   name: "Johnnie Walker",
   logo: "https://www.johnniewalker.com/_next/static/media/header-logo.c677900c.svg"
 }, {
