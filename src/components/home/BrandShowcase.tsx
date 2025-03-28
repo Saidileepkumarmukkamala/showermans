@@ -14,7 +14,7 @@ const brands = [{
 }, {
   id: 7,
   name: "Heineken",
-  logo: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F41%2F11%2F47%2F411147419f44f63c450700000ba43aff.png&f=1&nofb=1&ipt=bea5c0edf4b23364de1dd95e9976b9de3bf37f432edda11e5c0c079c8c97acdd&ipo=images"
+  logo: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpluspng.com%2Fimg-png%2Fheineken-png-heineken-logo-7-png-16-de-abril-de-2017-197-kb-3500-1763-3500.png&f=1&nofb=1&ipt=46590357e4a5bc100d427d52a9acec01454f79b931b9cedad7371d95ee7c6557&ipo=images"
 }, {
   id: 8,
   name: "Johnnie Walker",
