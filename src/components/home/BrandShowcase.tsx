@@ -91,6 +91,11 @@ const brands = [{
                   id: 23,
                     name: "bluemoon",
                     logo: "https://www.bluemoonbrewingcompany.com/sites/bluemoon/files/BlueMoon-Logo-MD_0.png"
+},
+  {
+                  id: 24,
+                    name: "guinness",
+                    logo: "https://duckduckgo.com/i/b381c669fbaf7e2d.png"
 }];
 
 const BrandShowcase = () => {
@@ -125,7 +130,7 @@ const BrandShowcase = () => {
                     src={brand.logo} 
                     alt={brand.name} 
                     className={`max-h-16 w-auto object-contain transition-all duration-300 opacity-85 hover:opacity-100 filter ${
-                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella", "bluemoon"].includes(brand.name) ? "" : "invert"
+                    ["Johnnie Walker", "maker's mark", "CM", "yellow tail", "Barefoot", "GreyGoose","CoorsLight", "Modelo", "stella", "bluemoon", "guinness"].includes(brand.name) ? "" : "invert"
                   }`}
                     onError={e => {
                       console.log(`Failed to load brand image: ${brand.logo}`);
