@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from "sonner";
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { User } from '@supabase/supabase-js';
 
 type AuthContextType = {
@@ -31,6 +31,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  // Check if user is admin
+  const checkIsAdmin = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('admins')
+        .select('*')
+        .eq('user_id', userId)
+        .single();
+      
+      setIsAdmin(!!data && !error);
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+      setIsAdmin(false);
+    }
+  };
+
   // Handle session changes (login, logout, etc.)
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -40,13 +56,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         // Check if user is admin
         if (session?.user) {
-          const { data, error } = await supabase
-            .from('admins')
-            .select('*')
-            .eq('user_id', session.user.id)
-            .single();
-          
-          setIsAdmin(!!data && !error);
+          await checkIsAdmin(session.user.id);
         } else {
           setIsAdmin(false);
         }
@@ -60,14 +70,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       // Check if user is admin
       if (session?.user) {
-        supabase
-          .from('admins')
-          .select('*')
-          .eq('user_id', session.user.id)
-          .single()
-          .then(({ data, error }) => {
-            setIsAdmin(!!data && !error);
-          });
+        checkIsAdmin(session.user.id);
       }
     });
 
