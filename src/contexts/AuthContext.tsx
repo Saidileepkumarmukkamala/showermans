@@ -1,27 +1,27 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { toast } from "@/components/ui/use-toast";
-
-type User = {
-  id: string;
-  name: string;
-  email: string;
-};
+import { toast } from "sonner";
+import { supabase } from '@/lib/supabase';
+import { User } from '@supabase/supabase-js';
 
 type AuthContextType = {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   isLoading: boolean;
+  isAdmin: boolean;
+  loginWithGoogle: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   login: async () => {},
   register: async () => {},
-  logout: () => {},
+  logout: async () => {},
   isLoading: false,
+  isAdmin: false,
+  loginWithGoogle: async () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -29,86 +29,154 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  // Load user from localStorage on mount
+  // Handle session changes (login, logout, etc.)
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (e) {
-        console.error('Failed to parse user from localStorage', e);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setUser(session?.user || null);
+        setIsLoading(false);
+        
+        // Check if user is admin
+        if (session?.user) {
+          const { data, error } = await supabase
+            .from('admins')
+            .select('*')
+            .eq('user_id', session.user.id)
+            .single();
+          
+          setIsAdmin(!!data && !error);
+        } else {
+          setIsAdmin(false);
+        }
       }
-    }
-    setIsLoading(false);
+    );
+
+    // Initialize session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user || null);
+      setIsLoading(false);
+      
+      // Check if user is admin
+      if (session?.user) {
+        supabase
+          .from('admins')
+          .select('*')
+          .eq('user_id', session.user.id)
+          .single()
+          .then(({ data, error }) => {
+            setIsAdmin(!!data && !error);
+          });
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  // In a real app, this would be an API call
+  // Login with email and password
   const login = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Simple validation - in a real app, this would be handled by the server
-      if (password.length < 6) {
-        throw new Error('Invalid email or password');
-      }
-      
-      const newUser = {
-        id: Date.now().toString(),
-        name: email.split('@')[0],
+      const { error } = await supabase.auth.signInWithPassword({
         email,
-      };
-      
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
-      
-      toast({
-        title: "Login successful",
-        description: `Welcome back, ${newUser.name}!`,
+        password,
       });
+      
+      if (error) throw error;
+      
+      toast.success("Login successful");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to login");
+      throw error;
     } finally {
       setIsLoading(false);
     }
   };
 
-  // In a real app, this would be an API call
+  // Register with email and password
   const register = async (name: string, email: string, password: string) => {
     try {
       setIsLoading(true);
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const newUser = {
-        id: Date.now().toString(),
-        name,
+      const { error, data } = await supabase.auth.signUp({
         email,
-      };
-      
-      setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
-      
-      toast({
-        title: "Registration successful",
-        description: `Welcome to Showerman's, ${name}!`,
+        password,
+        options: {
+          data: {
+            full_name: name,
+          },
+        },
       });
+      
+      if (error) throw error;
+      
+      // Add user profile to profiles table
+      if (data.user) {
+        await supabase
+          .from('profiles')
+          .insert([
+            {
+              id: data.user.id,
+              full_name: name,
+              email: email,
+            },
+          ]);
+      }
+      
+      toast.success("Registration successful");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to register");
+      throw error;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
-    toast({
-      title: "Logged out",
-      description: "You have been logged out successfully",
-    });
+  // Login with Google
+  const loginWithGoogle = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      
+      if (error) throw error;
+    } catch (error: any) {
+      toast.error(error.message || "Failed to login with Google");
+      throw error;
+    }
+  };
+
+  // Logout
+  const logout = async () => {
+    try {
+      setIsLoading(true);
+      await supabase.auth.signOut();
+      toast.success("Logged out successfully");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to logout");
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, isLoading }}>
+    <AuthContext.Provider value={{
+      user,
+      login,
+      register,
+      logout,
+      isLoading,
+      isAdmin,
+      loginWithGoogle
+    }}>
       {children}
     </AuthContext.Provider>
   );
