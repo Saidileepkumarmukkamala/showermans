@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import Navbar from '@/components/layout/Navbar';
@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AdminProducts from '@/components/admin/AdminProducts';
 import AdminInventory from '@/components/admin/AdminInventory';
 import AdminOrders from '@/components/admin/AdminOrders';
+import MakeAdminButton from '@/components/admin/MakeAdminButton';
 import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
@@ -64,9 +65,29 @@ const AdminDashboard = () => {
     );
   }
 
-  // Redirect if not logged in or not an admin
-  if (!user || !isAdmin) {
-    toast.error('You must be an admin to access this page');
+  // Show admin setup page if user is logged in but not an admin
+  if (user && !isAdmin) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow container mx-auto px-4 py-8">
+          <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+            <h1 className="text-2xl font-serif font-bold mb-4">Admin Access Required</h1>
+            <p className="mb-6">
+              You need admin privileges to access this page. If this is your first time setting up the application,
+              you can make your account an admin using the button below.
+            </p>
+            <MakeAdminButton />
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Redirect if not logged in
+  if (!user) {
+    toast.error('You must be logged in to access this page');
     return <Navigate to="/" replace />;
   }
 
