@@ -191,15 +191,30 @@ const Navbar = () => {
       setAuthDialogOpen(true);
     }
   };
-
-  const getInitials = (name: string) => {
-    return name
+  
+  const getInitials = (displayName: string) => {
+    if (!displayName) return 'U';
+    return displayName
       .split(' ')
       .map(part => part[0])
       .join('')
       .toUpperCase()
       .substring(0, 2);
   };
+
+  const getUserDisplayName = () => {
+    if (!user) return '';
+    // Try to get name from user_metadata first, then fall back to email
+    return (
+      user.user_metadata?.full_name || 
+      user.user_metadata?.name || 
+      user.email?.split('@')[0] || 
+      'User'
+    );
+  };
+
+  const userDisplayName = getUserDisplayName();
+  const userEmail = user?.email || '';
 
   return (
     <>
@@ -275,14 +290,14 @@ const Navbar = () => {
                   <DropdownMenuTrigger className="p-1 hover:bg-white/30 backdrop-blur-sm rounded-full transition-colors duration-200">
                     <Avatar className="h-8 w-8">
                       <AvatarFallback className="bg-gold/20 text-gold">
-                        {getInitials(user.name)}
+                        {getInitials(userDisplayName)}
                       </AvatarFallback>
                     </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <div className="px-3 py-2">
-                      <p className="font-medium">{user.name}</p>
-                      <p className="text-xs text-muted-foreground">{user.email}</p>
+                      <p className="font-medium">{userDisplayName}</p>
+                      <p className="text-xs text-muted-foreground">{userEmail}</p>
                     </div>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
