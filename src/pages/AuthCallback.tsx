@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
+import { toast } from 'sonner';
 
 const AuthCallback = () => {
   const navigate = useNavigate();
@@ -9,12 +10,20 @@ const AuthCallback = () => {
   useEffect(() => {
     // Handle the OAuth callback
     const handleAuthCallback = async () => {
-      const { error } = await supabase.auth.getSession();
-      
-      if (error) {
-        console.error('Error during auth callback:', error);
-        navigate('/');
-      } else {
+      try {
+        const { error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error('Error during auth callback:', error);
+          toast.error('Authentication failed. Please try again.');
+          navigate('/');
+        } else {
+          toast.success('Successfully authenticated!');
+          navigate('/');
+        }
+      } catch (e) {
+        console.error('Exception during auth callback:', e);
+        toast.error('Something went wrong during authentication');
         navigate('/');
       }
     };
