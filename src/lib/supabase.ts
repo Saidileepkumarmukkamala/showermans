@@ -23,16 +23,18 @@ export type InventoryItem = {
   product?: Product;
 };
 
+export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+
 export type Order = {
   id: string;
   user_id: string;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  status: OrderStatus;
   total: number;
   created_at: string;
   updated_at: string;
   user?: {
     id: string;
-    email: string;
+    email: string | null;
     full_name: string | null;
   };
 };

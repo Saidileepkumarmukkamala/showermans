@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   Table, 
@@ -14,9 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Eye, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
-import { Order, OrderItem, Product } from '@/lib/supabase';
-
-type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+import { Order, OrderItem, Product, OrderStatus } from '@/lib/supabase';
 
 type ExtendedOrderItem = OrderItem & {
   product: Product;
@@ -49,13 +46,10 @@ const AdminOrders = () => {
     try {
       setIsLoading(true);
       
-      // Fetch orders with basic user info
+      // Fetch orders data first
       const { data: ordersData, error: ordersError } = await supabase
         .from('orders')
-        .select(`
-          *,
-          user:profiles(id, full_name, email)
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
       
       if (ordersError) throw ordersError;
@@ -65,10 +59,33 @@ const AdminOrders = () => {
         return;
       }
 
+      // Fetch profiles data separately to avoid the relation error
+      const userIds = ordersData.map(order => order.user_id);
+      
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('*')
+        .in('id', userIds);
+        
+      if (profilesError) {
+        console.error('Error fetching profiles:', profilesError);
+      }
+      
+      // Create a map of user profiles by ID for easier lookup
+      const userProfilesMap = (profilesData || []).reduce((map, profile) => {
+        map[profile.id] = profile;
+        return map;
+      }, {} as Record<string, any>);
+      
       // For each order, fetch the order items and associated products
       const extendedOrders: ExtendedOrder[] = [];
       
       for (const order of ordersData) {
+        // Validate the status is one of the expected enum values
+        const validStatus = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'].includes(order.status) 
+          ? order.status as OrderStatus 
+          : 'pending' as OrderStatus;
+        
         // Fetch order items with product details
         const { data: itemsData, error: itemsError } = await supabase
           .from('order_items')
@@ -79,6 +96,9 @@ const AdminOrders = () => {
           .eq('order_id', order.id);
         
         if (itemsError) throw itemsError;
+        
+        // Get user profile data
+        const userProfile = userProfilesMap[order.user_id];
         
         // Use sample shipping data for now (this would come from a real shipping_addresses table in a complete implementation)
         const sampleShippingAddress = {
@@ -91,8 +111,9 @@ const AdminOrders = () => {
         
         extendedOrders.push({
           ...order,
-          customerName: order.user?.full_name || 'Unknown',
-          customerEmail: order.user?.email || 'unknown@example.com',
+          status: validStatus,
+          customerName: userProfile?.full_name || 'Unknown',
+          customerEmail: userProfile?.email || 'unknown@example.com',
           phoneNumber: '+1 (555) 123-4567', // Sample phone number
           shippingAddress: sampleShippingAddress,
           items: itemsData || []
