@@ -117,18 +117,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       if (error) throw error;
       
-      // Add user profile to profiles table
-      if (data.user) {
-        await supabase
-          .from('profiles')
-          .insert([
-            {
-              id: data.user.id,
-              full_name: name,
-              email: email,
-            },
-          ]);
-      }
+      // The profile will be automatically created by the database trigger
+      // that we set up in our SQL migration
       
       toast.success("Registration successful");
     } catch (error: any) {
