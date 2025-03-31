@@ -11,64 +11,136 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Minus, Save } from 'lucide-react';
-import { products as dummyProducts } from '@/data/products';
+import { Plus, Minus, Save, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
-
-// Add inventory status to products
-type ProductWithInventory = {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  image: string;
-  inStock: number;
-};
+import { Product, InventoryItem } from '@/lib/supabase';
 
 const AdminInventory = () => {
-  const [inventory, setInventory] = useState<ProductWithInventory[]>([]);
+  const [inventory, setInventory] = useState<InventoryItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [inventoryUpdates, setInventoryUpdates] = useState<Record<string, boolean>>({});
   
-  // Initialize with dummy data but add inventory count
   useEffect(() => {
-    const productsWithInventory = dummyProducts.map(product => ({
-      ...product,
-      inStock: Math.floor(Math.random() * 50) // Random stock for demonstration
-    }));
-    
-    setInventory(productsWithInventory);
+    fetchInventory();
   }, []);
 
-  const updateStock = (id: number, amount: number) => {
+  const fetchInventory = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Join inventory with products to get all product information
+      const { data, error } = await supabase
+        .from('inventory')
+        .select(`
+          *,
+          product:products(*)
+        `)
+        .order('updated_at', { ascending: false });
+      
+      if (error) {
+        throw error;
+      }
+
+      const typedData = data as (InventoryItem & {product: Product})[];
+      
+      setInventory(typedData || []);
+    } catch (error: any) {
+      toast.error('Failed to fetch inventory: ' + error.message);
+      console.error('Error fetching inventory:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateStock = (id: string, amount: number) => {
     setInventory(prev => 
-      prev.map(item => 
-        item.id === id 
-          ? { ...item, inStock: Math.max(0, item.inStock + amount) }
-          : item
-      )
+      prev.map(item => {
+        if (item.id === id) {
+          const newStock = Math.max(0, item.in_stock + amount);
+          setInventoryUpdates({...inventoryUpdates, [id]: true});
+          return { ...item, in_stock: newStock };
+        }
+        return item;
+      })
     );
   };
   
-  const handleStockChange = (id: number, value: string) => {
+  const handleStockChange = (id: string, value: string) => {
     const newValue = parseInt(value) || 0;
     
     setInventory(prev => 
-      prev.map(item => 
-        item.id === id ? { ...item, inStock: Math.max(0, newValue) } : item
-      )
+      prev.map(item => {
+        if (item.id === id) {
+          setInventoryUpdates({...inventoryUpdates, [id]: true});
+          return { ...item, in_stock: Math.max(0, newValue) };
+        }
+        return item;
+      })
     );
   };
   
-  const saveInventoryChanges = () => {
-    // This would save to Supabase in the full implementation
-    toast.success("Inventory updated successfully");
+  const saveInventoryChanges = async () => {
+    try {
+      setIsSaving(true);
+      
+      // Only update items that have changed
+      const updates = inventory.filter(item => inventoryUpdates[item.id]);
+      
+      if (updates.length === 0) {
+        toast.info('No changes to save');
+        setIsSaving(false);
+        return;
+      }
+      
+      // Process updates in batches to avoid potential rate limits
+      for (const item of updates) {
+        const { error } = await supabase
+          .from('inventory')
+          .update({
+            in_stock: item.in_stock,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', item.id);
+          
+        if (error) throw error;
+      }
+      
+      toast.success('Inventory updated successfully');
+      setInventoryUpdates({});
+    } catch (error: any) {
+      toast.error('Failed to update inventory: ' + error.message);
+      console.error('Error updating inventory:', error);
+    } finally {
+      setIsSaving(false);
+    }
   };
+
+  if (isLoading && inventory.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  const hasChanges = Object.keys(inventoryUpdates).length > 0;
 
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-medium">Inventory Management</h2>
-        <Button onClick={saveInventoryChanges} className="flex items-center gap-2">
-          <Save size={16} />
+        <Button 
+          onClick={saveInventoryChanges} 
+          className="flex items-center gap-2"
+          disabled={!hasChanges || isSaving}
+        >
+          {isSaving ? (
+            <Loader2 size={16} className="animate-spin" />
+          ) : (
+            <Save size={16} />
+          )}
           Save Changes
         </Button>
       </div>
@@ -85,49 +157,57 @@ const AdminInventory = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {inventory.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell className="flex items-center gap-2">
-                  <div className="h-10 w-10 rounded overflow-hidden">
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <span className="font-medium">{item.name}</span>
-                </TableCell>
-                <TableCell>{item.category}</TableCell>
-                <TableCell className="text-right">
-                  <Input 
-                    type="number" 
-                    value={item.inStock} 
-                    onChange={(e) => handleStockChange(item.id, e.target.value)}
-                    className="w-20 text-right" 
-                    min="0"
-                  />
-                </TableCell>
-                <TableCell>
-                  <div className="flex space-x-2">
-                    <Button 
-                      variant="outline" 
-                      size="icon" 
-                      onClick={() => updateStock(item.id, -1)}
-                      disabled={item.inStock <= 0}
-                    >
-                      <Minus size={16} />
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      size="icon" 
-                      onClick={() => updateStock(item.id, 1)}
-                    >
-                      <Plus size={16} />
-                    </Button>
-                  </div>
+            {inventory.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={4} className="text-center h-24 text-muted-foreground">
+                  No inventory items found
                 </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              inventory.map((item) => (
+                <TableRow key={item.id} className={inventoryUpdates[item.id] ? 'bg-muted/30' : ''}>
+                  <TableCell className="flex items-center gap-2">
+                    <div className="h-10 w-10 rounded overflow-hidden">
+                      <img 
+                        src={item.product?.image} 
+                        alt={item.product?.name} 
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <span className="font-medium">{item.product?.name}</span>
+                  </TableCell>
+                  <TableCell>{item.product?.category}</TableCell>
+                  <TableCell className="text-right">
+                    <Input 
+                      type="number" 
+                      value={item.in_stock} 
+                      onChange={(e) => handleStockChange(item.id, e.target.value)}
+                      className="w-20 text-right ml-auto" 
+                      min="0"
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex space-x-2">
+                      <Button 
+                        variant="outline" 
+                        size="icon" 
+                        onClick={() => updateStock(item.id, -1)}
+                        disabled={item.in_stock <= 0}
+                      >
+                        <Minus size={16} />
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="icon" 
+                        onClick={() => updateStock(item.id, 1)}
+                      >
+                        <Plus size={16} />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </div>

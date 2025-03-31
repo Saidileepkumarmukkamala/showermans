@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Table, 
   TableBody, 
@@ -11,96 +11,102 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Eye, CheckCircle, XCircle } from 'lucide-react';
+import { Eye, CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { supabase } from '@/lib/supabase';
+import { Order, OrderItem, Product } from '@/lib/supabase';
 
-// Sample order data
 type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
 
-type Order = {
-  id: string;
+type ExtendedOrderItem = OrderItem & {
+  product: Product;
+};
+
+type ExtendedOrder = Order & {
+  items: ExtendedOrderItem[];
   customerName: string;
   customerEmail: string;
-  date: string;
-  total: number;
-  status: OrderStatus;
-  items: { productId: number; name: string; quantity: number; price: number }[];
-  shippingAddress: {
+  phoneNumber?: string;
+  shippingAddress?: {
     address: string;
     city: string;
     state: string;
     zip: string;
     country: string;
   };
-  phoneNumber?: string;
 };
 
-const sampleOrders: Order[] = [
-  {
-    id: 'ORD-001',
-    customerName: 'John Doe',
-    customerEmail: 'john@example.com',
-    date: '2023-05-15',
-    total: 345.98,
-    status: 'pending',
-    items: [
-      { productId: 1, name: 'Macallan 18 Years', quantity: 1, price: 299.99 },
-      { productId: 3, name: 'Hendrick\'s Gin', quantity: 1, price: 39.99 }
-    ],
-    shippingAddress: {
-      address: '123 Main St',
-      city: 'New York',
-      state: 'NY',
-      zip: '10001',
-      country: 'USA'
-    },
-    phoneNumber: '+1 (555) 123-4567'
-  },
-  {
-    id: 'ORD-002',
-    customerName: 'Jane Smith',
-    customerEmail: 'jane@example.com',
-    date: '2023-05-16',
-    total: 79.99,
-    status: 'processing',
-    items: [
-      { productId: 8, name: 'Monkey 47', quantity: 1, price: 79.99 }
-    ],
-    shippingAddress: {
-      address: '456 Oak Ave',
-      city: 'Los Angeles',
-      state: 'CA',
-      zip: '90001',
-      country: 'USA'
-    },
-    phoneNumber: '+1 (555) 987-6543'
-  },
-  {
-    id: 'ORD-003',
-    customerName: 'Robert Johnson',
-    customerEmail: 'robert@example.com',
-    date: '2023-05-14',
-    total: 229.97,
-    status: 'shipped',
-    items: [
-      { productId: 9, name: 'Jack Daniel\'s Old No. 7', quantity: 3, price: 29.99 },
-      { productId: 10, name: 'Belvedere Vodka', quantity: 2, price: 32.99 },
-      { productId: 14, name: 'Bombay Sapphire', quantity: 2, price: 24.99 }
-    ],
-    shippingAddress: {
-      address: '789 Pine St',
-      city: 'Chicago',
-      state: 'IL',
-      zip: '60007',
-      country: 'USA'
-    },
-    phoneNumber: '+1 (555) 456-7890'
-  }
-];
-
 const AdminOrders = () => {
-  const [orders, setOrders] = useState<Order[]>(sampleOrders);
-  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [orders, setOrders] = useState<ExtendedOrder[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState<ExtendedOrder | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Fetch orders with basic user info
+      const { data: ordersData, error: ordersError } = await supabase
+        .from('orders')
+        .select(`
+          *,
+          user:profiles(id, full_name, email)
+        `)
+        .order('created_at', { ascending: false });
+      
+      if (ordersError) throw ordersError;
+
+      if (!ordersData || ordersData.length === 0) {
+        setOrders([]);
+        return;
+      }
+
+      // For each order, fetch the order items and associated products
+      const extendedOrders: ExtendedOrder[] = [];
+      
+      for (const order of ordersData) {
+        // Fetch order items with product details
+        const { data: itemsData, error: itemsError } = await supabase
+          .from('order_items')
+          .select(`
+            *,
+            product:products(*)
+          `)
+          .eq('order_id', order.id);
+        
+        if (itemsError) throw itemsError;
+        
+        // Use sample shipping data for now (this would come from a real shipping_addresses table in a complete implementation)
+        const sampleShippingAddress = {
+          address: '123 Main St',
+          city: 'New York',
+          state: 'NY',
+          zip: '10001',
+          country: 'USA'
+        };
+        
+        extendedOrders.push({
+          ...order,
+          customerName: order.user?.full_name || 'Unknown',
+          customerEmail: order.user?.email || 'unknown@example.com',
+          phoneNumber: '+1 (555) 123-4567', // Sample phone number
+          shippingAddress: sampleShippingAddress,
+          items: itemsData || []
+        });
+      }
+      
+      setOrders(extendedOrders);
+    } catch (error: any) {
+      toast.error('Failed to fetch orders: ' + error.message);
+      console.error('Error fetching orders:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   
   const getStatusBadge = (status: OrderStatus) => {
     switch (status) {
@@ -117,28 +123,93 @@ const AdminOrders = () => {
     }
   };
   
-  const viewOrderDetails = (order: Order) => {
+  const viewOrderDetails = (order: ExtendedOrder) => {
     setSelectedOrder(order);
   };
   
-  const updateOrderStatus = (orderId: string, status: OrderStatus) => {
-    setOrders(prevOrders => 
-      prevOrders.map(order => 
-        order.id === orderId ? { ...order, status } : order
-      )
-    );
-    
-    if (selectedOrder?.id === orderId) {
-      setSelectedOrder(prev => prev ? { ...prev, status } : null);
+  const updateOrderStatus = async (orderId: string, status: OrderStatus) => {
+    try {
+      const { error } = await supabase
+        .from('orders')
+        .update({ 
+          status, 
+          updated_at: new Date().toISOString() 
+        })
+        .eq('id', orderId);
+      
+      if (error) throw error;
+      
+      // Update the local state
+      setOrders(prevOrders => 
+        prevOrders.map(order => 
+          order.id === orderId ? { ...order, status } : order
+        )
+      );
+      
+      if (selectedOrder?.id === orderId) {
+        setSelectedOrder(prev => prev ? { ...prev, status } : null);
+      }
+      
+      toast.success(`Order ${orderId.substring(0, 8)}... marked as ${status}`);
+    } catch (error: any) {
+      toast.error('Failed to update order: ' + error.message);
+      console.error('Error updating order:', error);
     }
-    
-    toast.success(`Order ${orderId} marked as ${status}`);
   };
   
-  const sendNotification = (order: Order) => {
+  const sendNotification = (order: ExtendedOrder) => {
     // This would integrate with an email/SMS service
     toast.success(`Notification sent to ${order.customerName}`);
   };
+
+  if (isLoading && orders.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  // Use sample orders if no real orders exist yet
+  const displayOrders = orders.length > 0 ? orders : [
+    {
+      id: 'sample-order-1',
+      user_id: 'user1',
+      status: 'pending' as OrderStatus,
+      total: 345.98,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      customerName: 'John Doe (Sample)',
+      customerEmail: 'john@example.com',
+      items: [
+        {
+          id: 'item1',
+          order_id: 'sample-order-1',
+          product_id: 'prod1',
+          quantity: 1,
+          price: 299.99,
+          product: {
+            id: 'prod1',
+            name: 'Macallan 18 Years',
+            description: 'Premium single malt Scotch whisky',
+            price: 299.99,
+            category: 'Whiskey',
+            image: '/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png',
+            created_at: '',
+            updated_at: ''
+          }
+        }
+      ],
+      shippingAddress: {
+        address: '123 Main St',
+        city: 'New York',
+        state: 'NY',
+        zip: '10001',
+        country: 'USA'
+      },
+      phoneNumber: '+1 (555) 123-4567'
+    }
+  ];
 
   return (
     <div className="space-y-4">
@@ -148,7 +219,7 @@ const AdminOrders = () => {
         <div className="md:col-span-2">
           <div className="rounded-md border">
             <Table>
-              <TableCaption>Recent orders</TableCaption>
+              <TableCaption>Recent orders {orders.length === 0 && '(Sample data shown)'}</TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead>Order ID</TableHead>
@@ -160,12 +231,18 @@ const AdminOrders = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {orders.map((order) => (
+                {displayOrders.map((order) => (
                   <TableRow key={order.id}>
-                    <TableCell className="font-medium">{order.id}</TableCell>
+                    <TableCell className="font-medium font-mono text-xs">
+                      {typeof order.id === 'string' ? order.id.substring(0, 8) + '...' : order.id}
+                    </TableCell>
                     <TableCell>{order.customerName}</TableCell>
-                    <TableCell>{order.date}</TableCell>
-                    <TableCell className="text-right">${order.total.toFixed(2)}</TableCell>
+                    <TableCell>
+                      {new Date(order.created_at).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      ${parseFloat(order.total.toString()).toFixed(2)}
+                    </TableCell>
                     <TableCell>{getStatusBadge(order.status)}</TableCell>
                     <TableCell>
                       <Button variant="ghost" size="icon" onClick={() => viewOrderDetails(order)}>
@@ -197,11 +274,11 @@ const AdminOrders = () => {
                 
                 <div>
                   <h4 className="text-sm font-medium text-muted-foreground">Shipping Address</h4>
-                  <p>{selectedOrder.shippingAddress.address}</p>
+                  <p>{selectedOrder.shippingAddress?.address}</p>
                   <p>
-                    {selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.state} {selectedOrder.shippingAddress.zip}
+                    {selectedOrder.shippingAddress?.city}, {selectedOrder.shippingAddress?.state} {selectedOrder.shippingAddress?.zip}
                   </p>
-                  <p>{selectedOrder.shippingAddress.country}</p>
+                  <p>{selectedOrder.shippingAddress?.country}</p>
                 </div>
                 
                 <div>
@@ -210,15 +287,15 @@ const AdminOrders = () => {
                     {selectedOrder.items.map((item, index) => (
                       <li key={index} className="flex justify-between">
                         <span>
-                          {item.quantity}x {item.name}
+                          {item.quantity}x {item.product?.name}
                         </span>
-                        <span>${(item.price * item.quantity).toFixed(2)}</span>
+                        <span>${(parseFloat(item.price.toString()) * item.quantity).toFixed(2)}</span>
                       </li>
                     ))}
                   </ul>
                   <div className="border-t mt-2 pt-2 flex justify-between font-medium">
                     <span>Total</span>
-                    <span>${selectedOrder.total.toFixed(2)}</span>
+                    <span>${parseFloat(selectedOrder.total.toString()).toFixed(2)}</span>
                   </div>
                 </div>
                 
