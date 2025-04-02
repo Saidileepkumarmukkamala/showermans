@@ -32,8 +32,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isAdmin, setIsAdmin] = useState(false);
 
   // Check if user is admin
-  const checkIsAdmin = async (userId: string) => {
+  const checkIsAdmin = async (userId: string, email?: string | null) => {
     try {
+      // Special case for the admin credentials you specified
+      if (email === 'adminnn') {
+        setIsAdmin(true);
+        return;
+      }
+      
       const { data, error } = await supabase
         .from('admins')
         .select('*')
@@ -56,7 +62,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         // Check if user is admin
         if (session?.user) {
-          await checkIsAdmin(session.user.id);
+          await checkIsAdmin(session.user.id, session.user.email);
         } else {
           setIsAdmin(false);
         }
@@ -70,7 +76,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       // Check if user is admin
       if (session?.user) {
-        checkIsAdmin(session.user.id);
+        checkIsAdmin(session.user.id, session.user.email);
       }
     });
 
@@ -84,6 +90,41 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       setIsLoading(true);
       
+      // Special case for admin login
+      if (email === 'adminnn' && password === 'adminshower') {
+        const { error } = await supabase.auth.signUp({
+          email: 'adminnn',
+          password: 'adminshower',
+        });
+        
+        if (error && error.message !== 'User already registered') throw error;
+        
+        const { error: loginError } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        
+        if (loginError) throw loginError;
+        
+        // Make sure this user is in the admins table
+        const { data: adminData } = await supabase
+          .from('admins')
+          .select('*')
+          .eq('user_id', (await supabase.auth.getUser()).data.user?.id || '')
+          .single();
+        
+        if (!adminData) {
+          await supabase.from('admins').insert({
+            user_id: (await supabase.auth.getUser()).data.user?.id
+          });
+        }
+        
+        setIsAdmin(true);
+        toast.success("Admin login successful");
+        return;
+      }
+      
+      // Regular login
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -105,7 +146,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       setIsLoading(true);
       
-      const { error, data } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -116,9 +157,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       
       if (error) throw error;
-      
-      // The profile will be automatically created by the database trigger
-      // that we set up in our SQL migration
       
       toast.success("Registration successful");
     } catch (error: any) {

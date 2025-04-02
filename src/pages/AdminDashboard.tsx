@@ -65,7 +65,7 @@ const AdminDashboard = () => {
     );
   }
 
-  // Show admin setup page if user is logged in but not an admin
+  // Show admin access required page if user is logged in but not an admin
   if (user && !isAdmin) {
     return (
       <div className="min-h-screen flex flex-col">
@@ -74,8 +74,8 @@ const AdminDashboard = () => {
           <div className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
             <h1 className="text-2xl font-serif font-bold mb-4">Admin Access Required</h1>
             <p className="mb-6">
-              You need admin privileges to access this page. If this is your first time setting up the application,
-              you can make your account an admin using the button below.
+              This area is restricted to authorized administrators only.
+              Please use the admin credentials to access this area.
             </p>
             <MakeAdminButton />
           </div>
