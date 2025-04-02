@@ -1,11 +1,40 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
-import { products } from '@/data/products';
+import { supabase } from '@/lib/supabase';
+import { Product } from '@/lib/supabase';
+import { Loader2 } from 'lucide-react';
 
 const FeaturedProducts = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const productsRef = useRef<HTMLDivElement>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .order('name')
+          .limit(8);
+        
+        if (error) {
+          throw error;
+        }
+        
+        setProducts(data || []);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,7 +44,7 @@ const FeaturedProducts = () => {
             if (entry.target === sectionRef.current) {
               entry.target.classList.add('opacity-100');
               entry.target.classList.remove('opacity-0');
-            } else if (entry.target === productsRef.current) {
+            } else if (entry.target === productsRef.current && products.length > 0) {
               entry.target.querySelectorAll('.product-item').forEach((item, index) => {
                 setTimeout(() => {
                   (item as HTMLElement).classList.add('opacity-100', 'translate-y-0');
@@ -37,10 +66,7 @@ const FeaturedProducts = () => {
       if (sectionRef.current) observer.unobserve(sectionRef.current);
       if (productsRef.current) observer.unobserve(productsRef.current);
     };
-  }, []);
-
-  // Get only 8 featured products
-  const featuredProducts = products.slice(0, 8);
+  }, [products]);
 
   return (
     <section id="shop" className="section-padding">
@@ -62,20 +88,39 @@ const FeaturedProducts = () => {
         </div>
 
         {/* Products Grid */}
-        <div
-          ref={productsRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
-        >
-          {featuredProducts.map((product, index) => (
-            <div 
-              key={product.id}
-              className="product-item opacity-0 translate-y-8 transition-all duration-500"
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <ProductCard {...product} />
-            </div>
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center items-center h-64">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : (
+          <div
+            ref={productsRef}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+          >
+            {products.length > 0 ? (
+              products.map((product, index) => (
+                <div 
+                  key={product.id}
+                  className="product-item opacity-0 translate-y-8 transition-all duration-500"
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <ProductCard 
+                    id={parseInt(product.id)} 
+                    name={product.name} 
+                    category={product.category} 
+                    price={parseFloat(product.price.toString())} 
+                    image={product.image}
+                    description={product.description || undefined}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="col-span-4 text-center py-8">
+                <p className="text-muted-foreground">No products found</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );
