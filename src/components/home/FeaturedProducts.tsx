@@ -19,7 +19,7 @@ const FeaturedProducts = () => {
           .from('products')
           .select('*')
           .order('name')
-          .limit(8);
+          .limit(9); // Limit to 9 products for featured section
         
         if (error) {
           throw error;
@@ -95,7 +95,7 @@ const FeaturedProducts = () => {
         ) : (
           <div
             ref={productsRef}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
           >
             {products.length > 0 ? (
               products.map((product, index) => (
@@ -115,7 +115,7 @@ const FeaturedProducts = () => {
                 </div>
               ))
             ) : (
-              <div className="col-span-4 text-center py-8">
+              <div className="col-span-3 text-center py-8">
                 <p className="text-muted-foreground">No products found</p>
               </div>
             )}
