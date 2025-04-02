@@ -19,7 +19,7 @@ const FeaturedProducts = () => {
           .from('products')
           .select('*')
           .order('name')
-          .limit(9); // Limit to 9 products for featured section
+          .limit(8);
         
         if (error) {
           throw error;

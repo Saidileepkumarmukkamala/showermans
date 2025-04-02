@@ -16,7 +16,6 @@ interface ProductCardProps {
   isNew?: boolean;
   isSale?: boolean;
   className?: string;
-  description?: string;
 }
 
 const ProductCard = ({
@@ -28,8 +27,7 @@ const ProductCard = ({
   image,
   isNew = false,
   isSale = false,
-  className,
-  description
+  className
 }: ProductCardProps) => {
   const { addToCart } = useCart();
   
