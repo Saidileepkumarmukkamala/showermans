@@ -10,7 +10,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Separator } from '@/components/ui/separator';
 
 const formSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email address' }),
+  email: z.string().min(1, { message: 'Email or username is required' }),
   password: z.string().min(6, { message: 'Password must be at least 6 characters long' }),
 });
 
@@ -83,9 +83,9 @@ const LoginForm = ({ onSuccess }: { onSuccess: () => void }) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Email or Username</FormLabel>
                 <FormControl>
-                  <Input placeholder="your.email@example.com" {...field} />
+                  <Input placeholder="your.email@example.com or username" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -10,7 +10,7 @@ const MakeAdminButton = () => {
       <AlertTitle>Admin Access Only</AlertTitle>
       <AlertDescription>
         This area is restricted to authorized administrators only. 
-        Please contact management if you need access.
+        Please use admin credentials to access this area.
       </AlertDescription>
     </Alert>
   );

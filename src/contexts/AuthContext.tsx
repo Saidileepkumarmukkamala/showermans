@@ -34,8 +34,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Check if user is admin
   const checkIsAdmin = async (userId: string, email?: string | null) => {
     try {
-      // Special case for the admin credentials you specified
-      if (email === 'adminnn') {
+      // Special case for the admin credentials - using email here as identifier
+      if (email === 'admin@example.com') {
         setIsAdmin(true);
         return;
       }
@@ -92,31 +92,45 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       // Special case for admin login
       if (email === 'adminnn' && password === 'adminshower') {
-        const { error } = await supabase.auth.signUp({
-          email: 'adminnn',
-          password: 'adminshower',
-        });
+        // Use a valid email format for Supabase authentication
+        const adminEmail = 'admin@example.com';
         
-        if (error && error.message !== 'User already registered') throw error;
-        
-        const { error: loginError } = await supabase.auth.signInWithPassword({
-          email,
+        // Check if admin account exists, if not create it
+        const { data: existingUser, error: checkError } = await supabase.auth.signInWithPassword({
+          email: adminEmail,
           password,
         });
         
-        if (loginError) throw loginError;
-        
-        // Make sure this user is in the admins table
-        const { data: adminData } = await supabase
-          .from('admins')
-          .select('*')
-          .eq('user_id', (await supabase.auth.getUser()).data.user?.id || '')
-          .single();
-        
-        if (!adminData) {
-          await supabase.from('admins').insert({
-            user_id: (await supabase.auth.getUser()).data.user?.id
+        // If login fails (user doesn't exist), create the admin account
+        if (checkError) {
+          // Create admin account with valid email but using our special identifier
+          const { error } = await supabase.auth.signUp({
+            email: adminEmail,
+            password,
           });
+          
+          if (error && error.message !== 'User already registered') throw error;
+          
+          // Sign in with the newly created account
+          const { error: loginError } = await supabase.auth.signInWithPassword({
+            email: adminEmail,
+            password,
+          });
+          
+          if (loginError) throw loginError;
+          
+          // Make sure this user is in the admins table
+          const { data: adminData } = await supabase
+            .from('admins')
+            .select('*')
+            .eq('user_id', (await supabase.auth.getUser()).data.user?.id || '')
+            .single();
+          
+          if (!adminData) {
+            await supabase.from('admins').insert({
+              user_id: (await supabase.auth.getUser()).data.user?.id
+            });
+          }
         }
         
         setIsAdmin(true);
