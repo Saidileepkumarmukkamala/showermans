@@ -55,12 +55,42 @@ const HeroCarousel = () => {
   const [api, setApi] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(Array(heroSlides.length).fill(false));
 
-  // Set loaded state when component mounts
+  // Preload images
   useEffect(() => {
+    const preloadImages = () => {
+      const loadedStatus = [...imagesLoaded];
+      
+      heroSlides.forEach((slide, index) => {
+        const img = new Image();
+        img.src = slide.image;
+        img.onload = () => {
+          loadedStatus[index] = true;
+          if (loadedStatus.every(status => status)) {
+            setIsLoaded(true);
+          }
+          setImagesLoaded(loadedStatus);
+        };
+        img.onerror = () => {
+          console.error(`Failed to load image: ${slide.image}`);
+          // Mark as loaded anyway to prevent endless loading state
+          loadedStatus[index] = true;
+          setImagesLoaded(loadedStatus);
+        };
+      });
+    };
+    
+    preloadImages();
+
+    // Fallback in case images fail to load
     const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 300);
+      if (!isLoaded) {
+        console.warn("Images taking too long to load, showing carousel anyway");
+        setIsLoaded(true);
+      }
+    }, 3000);
+    
     return () => clearTimeout(timer);
   }, []);
 
