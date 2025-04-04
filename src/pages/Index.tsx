@@ -34,17 +34,20 @@ const Index = () => {
       <Navbar />
       
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Full-width Hero Section */}
         <Hero />
         
-        {/* Brand Showcase - Added between Hero and Categories */}
-        <BrandShowcase />
-        
-        {/* Categories */}
-        <Categories />
+        {/* Content needs to be in a container */}
+        <div className="container mx-auto px-4 md:px-6">
+          {/* Brand Showcase */}
+          <BrandShowcase />
+          
+          {/* Categories */}
+          <Categories />
+        </div>
         
         {/* Promotion Banner with whiskey bottles background image */}
-        <section className="py-16 relative overflow-hidden rounded-md">
+        <section className="py-16 relative overflow-hidden">
           {/* Background image with overlay */}
           <div className="absolute inset-0">
             <img 
@@ -75,12 +78,12 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Featured Products */}
-        <FeaturedProducts />
-        
-        {/* Features */}
-        <section className="section-padding">
-          <div className="container mx-auto px-4 md:px-6">
+        <div className="container mx-auto px-4 md:px-6">
+          {/* Featured Products */}
+          <FeaturedProducts />
+          
+          {/* Features */}
+          <section className="section-padding">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/10 text-gold rounded-full mb-4">
                 Why Choose Us
@@ -130,11 +133,11 @@ const Index = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Newsletter */}
-        <Newsletter />
+          {/* Newsletter */}
+          <Newsletter />
+        </div>
       </main>
 
       <Footer />
