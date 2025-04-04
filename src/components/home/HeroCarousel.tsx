@@ -10,7 +10,7 @@ import { products } from '@/data/products';
 const heroSlides = [
   {
     id: 1,
-    image: "/lovable-uploads/b7cdd800-7470-480b-958d-7fb505ee3bf9.png", // Using uploaded image instead of external URL
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.KachAE_iMtp0yCVqOqK9oAHaDt%26pid%3DApi&f=1&ipt=8657157393a5014dbc15f1c4fa665cd54e61eb1efd77461f19e3d20f0d7d3e5e&ipo=images", // Using uploaded image instead of external URL
     title: "Premium Whiskey Collection",
     description: "Discover our curated selection of rare and aged whiskies from renowned distilleries around the world.",
     cta: "Shop Collection",
@@ -21,7 +21,7 @@ const heroSlides = [
   },
   {
     id: 2,
-    image: "/lovable-uploads/2f8cebd6-fce7-4648-a875-4cbc73e740aa.png", // Using uploaded image instead of external URL
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.ctfassets.net%2Fhl3shjo07dh9%2F4gfoNu8FFqmHkM4ifQO17x%2Fb3ced21f486a0ec9b075682b2a9db474%2FPLP-Desktop_Dewars19.jpg&f=1&nofb=1&ipt=570c2383a428ab2ed23e928fd0d042269e0b8a5351d0d7605f3e2f80c9b31217&ipo=images", // Using uploaded image instead of external URL
     title: "Limited Edition Spirits",
     description: "Exclusive bottles for the most discerning connoisseurs. Premium quality guaranteed.",
     cta: "Explore Now",
@@ -32,7 +32,7 @@ const heroSlides = [
   },
   {
     id: 3,
-    image: "/lovable-uploads/afe2eb7d-d6b4-4031-854f-23f91a100b3b.png", // Using uploaded image instead of external URL
+    image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg.freepik.com%2Fpremium-photo%2Fvintage-wine-elegance-exploring-restaurant-s-fine-wine-selection_925962-18399.jpg&f=1&nofb=1&ipt=454370558585c3addb683f386bc34b0793ffe0a9487c73f3b9ec5e35f0ee7c7e&ipo=images", // Using uploaded image instead of external URL
     title: "Exquisite Wine Selection",
     description: "From bold reds to crisp whites, explore our hand-picked selection of fine wines from around the world.",
     cta: "View Collection",
