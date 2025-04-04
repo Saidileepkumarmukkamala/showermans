@@ -64,7 +64,7 @@ const AgeVerification = () => {
           <Button
             variant="outline"
             onClick={handleReject}
-            className="border-[#D6BCFA] text-white hover:bg-[#D6BCFA]/20 hover:text-white"
+            className="border-[#D6BCFA] bg-transparent text-white hover:bg-[#D6BCFA]/20 hover:text-white"
           >
             No, I'm Not
           </Button>

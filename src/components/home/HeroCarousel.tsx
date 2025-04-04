@@ -49,14 +49,9 @@ const HeroCarousel = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState<Record<number, boolean>>({});
 
-  // Auto-play the carousel
+  // Set the component to loaded after a short delay
   useEffect(() => {
-    // Set a small delay to ensure images have time to load
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 300);
-    
-    return () => clearTimeout(timer);
+    setIsLoaded(true);
   }, []);
 
   // Check if all images are loaded
@@ -117,7 +112,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className={`relative w-full h-[85vh] ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+    <div className="relative w-full h-[85vh] transition-opacity duration-500">
       <Carousel
         opts={{
           loop: true,
