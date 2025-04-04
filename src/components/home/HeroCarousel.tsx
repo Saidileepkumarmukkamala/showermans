@@ -66,16 +66,12 @@ const HeroCarousel = () => {
   useEffect(() => {
     if (!api) return;
 
-    // Set up auto-play interval
     const interval = setInterval(() => {
-      api.scrollNext();
+      if (api) {
+        api.scrollNext();
+      }
+    }, 6000);
 
-      // Update current slide for indicators
-      setCurrentSlide(prev => {
-        const nextSlide = prev + 1 >= heroSlides.length ? 0 : prev + 1;
-        return nextSlide;
-      });
-    }, 6000); // Change slide every 6 seconds
 
     // Handle manual navigation events
     const onSelect = () => {
@@ -112,7 +108,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="relative w-full min-h-[600px] mt-20 overflow-hidden">
+    <div className="relative w-full h-screen pt-20 overflow-hidden transition-opacity duration-500">
       <Carousel
         opts={{
           loop: true,
@@ -144,7 +140,7 @@ const HeroCarousel = () => {
                 slide.alignment === "right" ? "justify-end text-right" : 
                 "justify-center text-center"
               )}>
-                <div className="max-w-xl backdrop-blur-sm bg-black/20 p-8 rounded-lg">
+                <div className="max-w-xl bg-transparent p-8">
                   {slide.badge && (
                     <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/20 text-gold rounded-full mb-4">
                       {slide.badge}
