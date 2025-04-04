@@ -112,7 +112,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="relative w-full h-[85vh] transition-opacity duration-500">
+    <div className="relative w-full min-h-[600px] mt-20 overflow-hidden">
       <Carousel
         opts={{
           loop: true,
@@ -121,9 +121,9 @@ const HeroCarousel = () => {
         setApi={setApi}
         className="w-full h-full"
       >
-        <CarouselContent className="h-full">
+        <CarouselContent className="flex w-full h-full">
           {heroSlides.map((slide) => (
-            <CarouselItem key={slide.id} className="relative min-h-[600px] w-full overflow-hidden">
+            <CarouselItem key={slide.id} className="relative min-h-[600px] w-full flex-shrink-0">
               {/* Image Background */}
               <div className="absolute inset-0 w-full h-full z-0">
                 <img 
