@@ -10,7 +10,7 @@ import { products } from '@/data/products';
 const heroSlides = [
   {
     id: 1,
-    image: "/lovable-uploads/b7cdd800-7470-480b-958d-7fb505ee3bf9.png", // Using uploaded image instead of external URL
+    image: "https://tse1.mm.bing.net/th?id=OIP.KachAE_iMtp0yCVqOqK9oAHaDt&pid=Api", // Using uploaded image instead of external URL
     title: "Premium Whiskey Collection",
     description: "Discover our curated selection of rare and aged whiskies from renowned distilleries around the world.",
     cta: "Shop Collection",
@@ -21,7 +21,7 @@ const heroSlides = [
   },
   {
     id: 2,
-    image: "/lovable-uploads/2f8cebd6-fce7-4648-a875-4cbc73e740aa.png", // Using uploaded image instead of external URL
+    image: "https://images.ctfassets.net/hl3shjo07dh9/4gfoNu8FFqmHkM4ifQO17x/b3ced21f486a0ec9b075682b2a9db474/PLP-Desktop_Dewars19.jpg", // Using uploaded image instead of external URL
     title: "Limited Edition Spirits",
     description: "Exclusive bottles for the most discerning connoisseurs. Premium quality guaranteed.",
     cta: "Explore Now",
@@ -32,7 +32,7 @@ const heroSlides = [
   },
   {
     id: 3,
-    image: "/lovable-uploads/afe2eb7d-d6b4-4031-854f-23f91a100b3b.png", // Using uploaded image instead of external URL
+    image: "https://img.freepik.com/premium-photo/vintage-wine-elegance-exploring-restaurant-s-fine-wine-selection_925962-18399.jpg", // Using uploaded image instead of external URL
     title: "Exquisite Wine Selection",
     description: "From bold reds to crisp whites, explore our hand-picked selection of fine wines from around the world.",
     cta: "View Collection",
@@ -123,9 +123,9 @@ const HeroCarousel = () => {
       >
         <CarouselContent className="h-full">
           {heroSlides.map((slide) => (
-            <CarouselItem key={slide.id} className="h-full relative overflow-hidden">
+            <CarouselItem key={slide.id} className="relative min-h-[600px] w-full overflow-hidden">
               {/* Image Background */}
-              <div className="absolute inset-0 w-full h-full">
+              <div className="absolute inset-0 w-full h-full z-0">
                 <img 
                   src={slide.image} 
                   alt={slide.title} 
@@ -139,7 +139,7 @@ const HeroCarousel = () => {
 
               {/* Content Overlay */}
               <div className={cn(
-                "absolute inset-0 flex items-center px-6 md:px-16 lg:px-24",
+                "absolute inset-0 flex items-center px-6 md:px-16 lg:px-24 z-10",
                 slide.alignment === "left" ? "justify-start text-left" : 
                 slide.alignment === "right" ? "justify-end text-right" : 
                 "justify-center text-center"
