@@ -112,7 +112,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="relative w-full h-[85vh] transition-opacity duration-500">
+    <div className="relative w-full min-h-[600px] bg-red-100 transition-opacity duration-500">
       <Carousel
         opts={{
           loop: true,
