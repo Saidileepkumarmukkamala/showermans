@@ -22,7 +22,7 @@ const heroSlides = [
   },
   {
     id: 2,
-    image: "https://images.ctfassets.net/hl3shjo07dh9/4gfoNu8FFqmHkM4ifQO17x/b3ced21f486a0ec9b075682b2a9db474/PLP-Desktop_Dewars19.jpg",
+    image: "https://sdmntprwestus.oaiusercontent.com/files/00000000-9b40-5230-956f-917b9c2d9770/raw?se=2025-04-04T02%3A42%3A19Z&sp=r&sv=2024-08-04&sr=b&scid=2f945b6e-8bc0-5044-babf-f413511f0f0c&skoid=e872f19f-7b7f-4feb-9998-20052dec61d6&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-03T23%3A27%3A46Z&ske=2025-04-04T23%3A27%3A46Z&sks=b&skv=2024-08-04&sig=64tbC7T56Zx7arEorG%2BYLC4byms6cLtjGXGcQA2N0b0%3D",
     title: "Limited Edition Spirits",
     description: "Exclusive bottles for the most discerning connoisseurs. Premium quality guaranteed.",
     cta: "Explore Now",
