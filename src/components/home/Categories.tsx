@@ -15,7 +15,7 @@ const categories = [
     id: 2,
     name: "Whiskey",
     description: "Single Malt & Blended",
-    image: "https://sdmntprwestus.oaiusercontent.com/files/00000000-ee38-5230-b5b6-21245ebd360d/raw?se=2025-04-04T03%3A42%3A03Z&sp=r&sv=2024-08-04&sr=b&scid=980ee007-79f6-5008-907e-659bfbaade8b&skoid=e872f19f-7b7f-4feb-9998-20052dec61d6&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-04T02%3A08%3A58Z&ske=2025-04-05T02%3A08%3A58Z&sks=b&skv=2024-08-04&sig=O%2BV2giM4eNnHzwKhRuTgJfKJmGYMxiRYhvJKD0z7sb4%3D",
+    image: "/lovable-uploads/b2322c9f-a55a-4816-bed7-910c45d9df93.png",
     path: "/category/whiskey"
   },
   {
@@ -43,7 +43,7 @@ const categories = [
     id: 6,
     name: "Gin",
     description: "London Dry & Botanical",
-    image: "https://sdmntprwestus.oaiusercontent.com/files/00000000-2b60-5230-bc88-fd758cbe0dd8/raw?se=2025-04-04T03%3A39%3A44Z&sp=r&sv=2024-08-04&sr=b&scid=e572283f-291e-5083-aae8-d019434ee5d5&skoid=e872f19f-7b7f-4feb-9998-20052dec61d6&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-04T01%3A59%3A45Z&ske=2025-04-05T01%3A59%3A45Z&sks=b&skv=2024-08-04&sig=N02jv5bFqGmPoWeEuY9vX%2B3dALcfrlKIu10Kb8mFYag%3D",
+    image: "/lovable-uploads/db67a993-5e70-4c88-920c-0c3bcad65e96.png",
     path: "/category/gin"
   },
   {
