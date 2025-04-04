@@ -47,7 +47,7 @@ const heroSlides = [
 const HeroCarousel = () => {
   const [api, setApi] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (!api) return;
@@ -59,36 +59,46 @@ const HeroCarousel = () => {
     api.on("select", onSelect);
     onSelect();
 
-    // Start autoplay with fast scroll and delay between slides
-    intervalRef.current = setInterval(() => {
+    const autoplay = () => {
+      if (!api) return;
+
       api.scrollNext();
-    }, 5000); // wait 5s at each slide
+
+      autoplayRef.current = setTimeout(() => {
+        autoplay();
+      }, 5000); // wait 5s on each slide
+    };
+
+    autoplayRef.current = setTimeout(() => {
+      autoplay();
+    }, 5000); // initial wait
 
     return () => {
       api.off("select", onSelect);
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (autoplayRef.current) clearTimeout(autoplayRef.current);
     };
   }, [api]);
 
   const scrollToSlide = (index: number) => {
     if (!api) return;
     api.scrollTo(index);
+    // optional: reset autoplay on manual interaction
+    if (autoplayRef.current) {
+      clearTimeout(autoplayRef.current);
+    }
   };
 
   return (
     <div className="relative w-full h-screen mt-20 overflow-hidden">
       <Carousel
-        opts={{
-          loop: true,
-          duration: 500 // fast, smooth transition
-        }}
+        opts={{ loop: true, duration: 500 }} // fast transition
         setApi={setApi}
         className="w-full h-full"
       >
         <CarouselContent className="flex w-full h-full">
           {heroSlides.map((slide) => (
             <CarouselItem key={slide.id} className="relative min-h-screen w-full flex-shrink-0">
-              {/* Image Background */}
+              {/* Image */}
               <div className="absolute inset-0 w-full h-full z-0">
                 <img
                   src={slide.image}
@@ -98,7 +108,7 @@ const HeroCarousel = () => {
                 <div className={`absolute inset-0 bg-gradient-to-t ${slide.overlayColor} via-transparent to-transparent`} />
               </div>
 
-              {/* Text Overlay */}
+              {/* Content */}
               <div
                 className={cn(
                   "absolute inset-0 flex items-center px-6 md:px-16 lg:px-24 z-10",
@@ -131,15 +141,13 @@ const HeroCarousel = () => {
           ))}
         </CarouselContent>
 
-        {/* Dot Navigation */}
+        {/* Dots */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 z-20">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => scrollToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index ? "bg-white w-6" : "bg-white/50"
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? "bg-white w-6" : "bg-white/50"}`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
