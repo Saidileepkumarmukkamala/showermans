@@ -11,7 +11,7 @@ import { ArrowRight } from 'lucide-react';
 const heroSlides = [
   {
     id: 1,
-    image: "https://tse1.mm.bing.net/th?id=OIP.KachAE_iMtp0yCVqOqK9oAHaDt&pid=Api",
+    image: "https://sdmntprwestus.oaiusercontent.com/files/00000000-4fe4-5230-9233-88e42a1e7e36/raw?se=2025-04-04T02%3A40%3A29Z&sp=r&sv=2024-08-04&sr=b&scid=a68b49bf-6876-5f2a-a236-d694f17a519e&skoid=e872f19f-7b7f-4feb-9998-20052dec61d6&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-03T21%3A18%3A21Z&ske=2025-04-04T21%3A18%3A21Z&sks=b&skv=2024-08-04&sig=%2B3u0xMgwbIvTYynFqiZSMOwSirZ8i3qXMUbn5mEhb6Y%3D",
     title: "Premium Whiskey Collection",
     description: "Discover our curated selection of rare and aged whiskies from renowned distilleries around the world.",
     cta: "Shop Collection",
