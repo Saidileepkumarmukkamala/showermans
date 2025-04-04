@@ -6,19 +6,11 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { products } from '@/data/products';
 
-// Get featured products for hero slides
-const heroProducts = [
-  products.find(p => p.id === 1), // Macallan
-  products.find(p => p.id === 6), // Patron
-  products.find(p => p.id === 5), // Remy Martin
-  products.find(p => p.id === 9), // Johnnie Walker
-].filter(Boolean);
-
-// Hero slide data
+// Hero slide data with properly referenced images
 const heroSlides = [
   {
     id: 1,
-    image: "/lovable-uploads/b55decef-0602-49e0-90e9-045021ab6403.png",
+    image: "/lovable-uploads/b55decef-0602-49e0-90e9-045021ab6403.png", // Wine bottles image
     title: "Premium Whiskey Collection",
     description: "Discover our curated selection of rare and aged whiskies from renowned distilleries around the world.",
     cta: "Shop Collection",
@@ -29,7 +21,7 @@ const heroSlides = [
   },
   {
     id: 2,
-    image: "/lovable-uploads/2f8cebd6-fce7-4648-a875-4cbc73e740aa.png",
+    image: "/lovable-uploads/2f8cebd6-fce7-4648-a875-4cbc73e740aa.png", // Premium whiskey bottles
     title: "Limited Edition Spirits",
     description: "Exclusive bottles for the most discerning connoisseurs. Premium quality guaranteed.",
     cta: "Explore Now",
@@ -40,7 +32,7 @@ const heroSlides = [
   },
   {
     id: 3,
-    image: "/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png",
+    image: "/lovable-uploads/f9924295-59f0-4ae6-8c8c-edc26c0e9f3b.png", // Wine display image
     title: "Exquisite Wine Selection",
     description: "From bold reds to crisp whites, explore our hand-picked selection of fine wines from around the world.",
     cta: "View Collection",
@@ -55,46 +47,18 @@ const HeroCarousel = () => {
   const [api, setApi] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(Array(heroSlides.length).fill(false));
 
-  // Preload images
+  // Auto-play the carousel
   useEffect(() => {
-    const preloadImages = () => {
-      const loadedStatus = [...imagesLoaded];
-      
-      heroSlides.forEach((slide, index) => {
-        const img = new Image();
-        img.src = slide.image;
-        img.onload = () => {
-          loadedStatus[index] = true;
-          if (loadedStatus.every(status => status)) {
-            setIsLoaded(true);
-          }
-          setImagesLoaded(loadedStatus);
-        };
-        img.onerror = () => {
-          console.error(`Failed to load image: ${slide.image}`);
-          // Mark as loaded anyway to prevent endless loading state
-          loadedStatus[index] = true;
-          setImagesLoaded(loadedStatus);
-        };
-      });
-    };
-    
-    preloadImages();
-
-    // Fallback in case images fail to load
+    // Set a small delay to ensure images have time to load
     const timer = setTimeout(() => {
-      if (!isLoaded) {
-        console.warn("Images taking too long to load, showing carousel anyway");
-        setIsLoaded(true);
-      }
-    }, 3000);
+      setIsLoaded(true);
+    }, 300);
     
     return () => clearTimeout(timer);
   }, []);
 
-  // Auto-play the carousel
+  // Control auto-rotation and slides
   useEffect(() => {
     if (!api) return;
 
@@ -131,7 +95,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className={`relative w-full h-[85vh] ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
+    <div className={`relative w-full h-[85vh] ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
       <Carousel
         opts={{
           loop: true,
@@ -148,7 +112,11 @@ const HeroCarousel = () => {
                 <img 
                   src={slide.image} 
                   alt={slide.title} 
-                  className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    console.error(`Failed to load image: ${slide.image}`);
+                    e.currentTarget.src = "/placeholder.svg"; // Fallback image
+                  }}
                 />
                 {/* Gradient Overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-t ${slide.overlayColor} via-transparent to-transparent`}></div>
@@ -161,7 +129,7 @@ const HeroCarousel = () => {
                 slide.alignment === "right" ? "justify-end text-right" : 
                 "justify-center text-center"
               )}>
-                <div className="max-w-xl backdrop-blur-sm bg-black/20 p-8 rounded-lg animate-fade-in">
+                <div className="max-w-xl backdrop-blur-sm bg-black/20 p-8 rounded-lg">
                   {slide.badge && (
                     <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/20 text-gold rounded-full mb-4">
                       {slide.badge}
