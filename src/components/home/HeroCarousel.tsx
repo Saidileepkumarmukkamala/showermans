@@ -112,7 +112,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="relative w-full min-h-[600px] mt-20 overflow-hidden">
+    <div className="relative w-full min-h-[800px] mt-20 overflow-hidden">
       <Carousel
         opts={{
           loop: true,
