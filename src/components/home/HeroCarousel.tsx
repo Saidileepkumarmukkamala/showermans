@@ -112,7 +112,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="relative w-full min-h-[600px] bg-red-100 transition-opacity duration-500">
+    <div className="relative w-full h-[85vh] transition-opacity duration-500">
       <Carousel
         opts={{
           loop: true,
@@ -123,9 +123,9 @@ const HeroCarousel = () => {
       >
         <CarouselContent className="h-full">
           {heroSlides.map((slide) => (
-            <CarouselItem key={slide.id} className="h-full relative overflow-hidden">
+            <CarouselItem key={slide.id} className="relative min-h-[600px] w-full overflow-hidden">
               {/* Image Background */}
-              <div className="absolute inset-0 w-full h-full">
+              <div className="absolute inset-0 w-full h-full z-0">
                 <img 
                   src={slide.image} 
                   alt={slide.title} 
@@ -139,7 +139,7 @@ const HeroCarousel = () => {
 
               {/* Content Overlay */}
               <div className={cn(
-                "absolute inset-0 flex items-center px-6 md:px-16 lg:px-24",
+                "absolute inset-0 flex items-center px-6 md:px-16 lg:px-24 z-10",
                 slide.alignment === "left" ? "justify-start text-left" : 
                 slide.alignment === "right" ? "justify-end text-right" : 
                 "justify-center text-center"
