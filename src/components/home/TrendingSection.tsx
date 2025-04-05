@@ -1,73 +1,114 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import { products } from '@/data/products';
-import ProductCard from './ProductCard';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from '@/components/ui/carousel';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-const TrendingSection = () => {
-  const trendingProducts = products.filter(p => [1, 3, 7, 10].includes(p.id)).slice(0, 8);
+// Dummy data: replace or fetch from CMS/backend
+const trendingCategories = [
+  {
+    id: 1,
+    title: 'Shop Tourney Essentials',
+    image: '/images/tourney-essentials.jpg',
+    isNew: false,
+  },
+  {
+    id: 2,
+    title: 'Best Kentucky Bourbons',
+    image: '/images/kentucky-bourbons.jpg',
+    isNew: false,
+  },
+  {
+    id: 3,
+    title: 'Stars of Vodka',
+    image: '/images/vodka-stars.jpg',
+    isNew: false,
+  },
+  {
+    id: 4,
+    title: 'New Arrivals',
+    image: '/images/new-arrivals-wine.jpg',
+    isNew: true,
+  },
+  {
+    id: 5,
+    title: 'New Beer & Seltzer',
+    image: '/images/beer-seltzer.jpg',
+    isNew: true,
+  },
+];
+
+const TrendingNowSection = () => {
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    const container = scrollRef.current;
+    if (container) {
+      const scrollAmount = 220;
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-12 bg-white">
       <div className="container mx-auto px-4 md:px-6">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-10">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight text-gray-900">
-            Trending Alcohol
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-black relative">
+            Trending Now
+            <span className="block w-10 h-1 bg-emerald-600 mt-1" />
           </h2>
-          <Link
-            to="/category/all"
-            className="text-sm font-medium text-primary hover:text-gold flex items-center transition-colors"
-          >
-            Shop All
-            <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
+
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full"
+              onClick={() => scroll('left')}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full"
+              onClick={() => scroll('right')}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
 
-        {/* Carousel */}
-        <div className="relative">
-          <Carousel opts={{ align: 'start', loop: true }}>
-            <CarouselContent>
-              {trendingProducts.map((product) => (
-                <CarouselItem
-                  key={product.id}
-                  className="px-2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
-                >
-                  <div className="bg-white border rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-64 object-cover"
-                    />
-                    <div className="p-4">
-                      <h3 className="text-base font-semibold text-gray-900">{product.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">{product.volume || '750ml'}</p>
-                      <p className="text-lg font-bold text-primary mb-3">${product.price.toFixed(2)}</p>
-                      <Link
-                        to={`/product/${product.id}`}
-                        className="inline-block w-full text-center px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded"
-                      >
-                        Shop Now
-                      </Link>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="-left-4" />
-            <CarouselNext className="-right-4" />
-          </Carousel>
+        <div className="overflow-x-auto">
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-scroll no-scrollbar pb-4"
+          >
+            {trendingCategories.map((item) => (
+              <div key={item.id} className="flex-shrink-0 w-40 text-center relative">
+                {/* NEW Badge */}
+                {item.isNew && (
+                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded-full z-10">
+                    NEW
+                  </span>
+                )}
+
+                {/* Circular Image */}
+                <div className="w-40 h-40 rounded-full overflow-hidden border border-gray-200 shadow-sm mb-3 mx-auto">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-sm font-medium text-gray-900 leading-tight">
+                  {item.title}
+                </h3>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default TrendingSection;
+export default TrendingNowSection;
