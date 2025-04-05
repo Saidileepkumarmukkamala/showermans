@@ -15,6 +15,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AuthCallback from "./pages/AuthCallback";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
+import AgeVerificationDialog from "./components/AgeVerificationDialog";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ function App() {
           <TooltipProvider>
             <Toaster />
             <Sonner position="top-right" />
+            <AgeVerificationDialog />
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Index />} />
