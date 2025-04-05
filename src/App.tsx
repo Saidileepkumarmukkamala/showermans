@@ -35,6 +35,7 @@ const App = () => (
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/auth/callback" element={<AuthCallback />} />
+              <Route path="/catering/*" element={<CategoryPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
