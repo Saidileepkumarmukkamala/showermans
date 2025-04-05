@@ -54,9 +54,9 @@ const CategoryPage = () => {
       'red-wine': 'Bold and complex red wines to complement your meal or collection',
       'white-wine': 'Crisp and refreshing white wines for any occasion',
       'whiskey': 'From bourbon to scotch, explore our premium whiskey selection',
-      'bourbon': 'Kentucky's finest bourbons with rich caramel and vanilla notes',
+      'bourbon': "Kentucky's finest bourbons with rich caramel and vanilla notes",
       'vodka': 'Premium vodkas from around the world, perfectly distilled for smoothness',
-      'tequila': 'Authentic tequilas from Mexico's finest agave plants',
+      'tequila': "Authentic tequilas from Mexico's finest agave plants",
       'gin': 'Botanical gins with complex flavor profiles for the perfect cocktail',
       'beer': 'Craft beers from local breweries and international favorites',
       'accessories': 'Everything you need to enhance your drinking experience'
