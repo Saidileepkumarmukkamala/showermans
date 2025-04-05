@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TrendingUp, ArrowRight, Star } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { products } from '@/data/products';
 import ProductCard from './ProductCard';
 import {
@@ -12,54 +12,57 @@ import {
 } from '@/components/ui/carousel';
 
 const TrendingSection = () => {
-  // Get trending products (for demo purposes)
-  const trendingProducts = products.filter(p => [1, 3, 7, 10].includes(p.id)).slice(0, 4);
+  const trendingProducts = products.filter(p => [1, 3, 7, 10].includes(p.id)).slice(0, 8);
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-muted/50">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
-          <div className="flex items-center gap-3">
-            <div className="bg-gold/20 p-3 rounded-full shadow-sm">
-              <TrendingUp className="text-gold h-6 w-6" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight text-foreground">
-              Trending Now
-            </h2>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight text-gray-900">
+            Trending Alcohol
+          </h2>
           <Link
             to="/category/all"
             className="text-sm font-medium text-primary hover:text-gold flex items-center transition-colors"
           >
-            View All
+            Shop All
             <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </div>
 
         {/* Carousel */}
-        <div className="relative px-4 sm:px-6">
-          <Carousel opts={{ align: "start", loop: true }}>
+        <div className="relative">
+          <Carousel opts={{ align: 'start', loop: true }}>
             <CarouselContent>
               {trendingProducts.map((product) => (
                 <CarouselItem
                   key={product.id}
-                  className="pl-4 md:basis-1/2 lg:basis-1/4"
+                  className="px-2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                 >
-                  <div className="relative group">
-                    <ProductCard {...product} />
-                    <div className="absolute top-3 right-3 bg-gold/90 text-white px-2 py-1 rounded-md flex items-center text-xs font-medium shadow-sm z-10">
-                      <Star className="h-3 w-3 mr-1 fill-white" />
-                      Trending
+                  <div className="bg-white border rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-64 object-cover"
+                    />
+                    <div className="p-4">
+                      <h3 className="text-base font-semibold text-gray-900">{product.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{product.volume || '750ml'}</p>
+                      <p className="text-lg font-bold text-primary mb-3">${product.price.toFixed(2)}</p>
+                      <Link
+                        to={`/product/${product.id}`}
+                        className="inline-block w-full text-center px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded"
+                      >
+                        Shop Now
+                      </Link>
                     </div>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-
-            {/* Arrows */}
-            <CarouselPrevious className="absolute -left-6 top-1/2 -translate-y-1/2 z-10 h-10 w-10 bg-black/40 hover:bg-black/60 text-white rounded-full backdrop-blur-sm shadow-md" />
-            <CarouselNext className="absolute -right-6 top-1/2 -translate-y-1/2 z-10 h-10 w-10 bg-black/40 hover:bg-black/60 text-white rounded-full backdrop-blur-sm shadow-md" />
+            <CarouselPrevious className="-left-4" />
+            <CarouselNext className="-right-4" />
           </Carousel>
         </div>
       </div>
