@@ -7,9 +7,12 @@ import FeaturedProducts from '@/components/home/FeaturedProducts';
 import Categories from '@/components/home/Categories';
 import Newsletter from '@/components/home/Newsletter';
 import BrandShowcase from '@/components/home/BrandShowcase';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, TrendingUp, Percent, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { products } from '@/data/products';
+import TrendingSection from '@/components/home/TrendingSection';
+import DealsSection from '@/components/home/DealsSection';
+import PopularCategories from '@/components/home/PopularCategories';
 
 const Index = () => {
   useEffect(() => {
@@ -39,6 +42,15 @@ const Index = () => {
         
         {/* Brand Showcase - Added between Hero and Categories */}
         <BrandShowcase />
+        
+        {/* Trending Now Section */}
+        <TrendingSection />
+        
+        {/* Deals Section */}
+        <DealsSection />
+        
+        {/* Popular Categories in Livonia Section */}
+        <PopularCategories />
         
         {/* Categories */}
         <Categories />
