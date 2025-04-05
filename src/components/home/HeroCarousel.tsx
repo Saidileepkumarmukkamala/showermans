@@ -1,158 +1,155 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem
-} from "@/components/ui/carousel";
-import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 
-const heroSlides = [
+import React, { useEffect, useState } from 'react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { products } from '@/data/products';
+
+// Get product references for the hero images
+const macallan = products.find(p => p.id === 1);
+const greyGoose = products.find(p => p.id === 2);
+const johnnieWalker = products.find(p => p.id === 9);
+const patron = products.find(p => p.id === 6);
+const remyMartin = products.find(p => p.id === 5);
+
+// Updated hero images to use the correct references from the products
+const heroImages = [
   {
     id: 1,
-    image: "https://tse1.mm.bing.net/th?id=OIP.KachAE_iMtp0yCVqOqK9oAHaDt&pid=Api",
-    title: "Premium Whiskey Collection",
-    description: "Discover our curated selection of rare and aged whiskies from renowned distilleries around the world.",
-    cta: "Shop Collection",
-    link: "/category/whiskey",
-    alignment: "left",
-    overlayColor: "from-black/70",
-    badge: "New Arrival"
+    src: greyGoose?.image || "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png",
+    alt: greyGoose?.name || "Grey Goose Vodka"
   },
   {
     id: 2,
-    image: "https://images.ctfassets.net/hl3shjo07dh9/4gfoNu8FFqmHkM4ifQO17x/b3ced21f486a0ec9b075682b2a9db474/PLP-Desktop_Dewars19.jpg",
-    title: "Limited Edition Spirits",
-    description: "Exclusive bottles for the most discerning connoisseurs. Premium quality guaranteed.",
-    cta: "Explore Now",
-    link: "/category/all",
-    alignment: "right",
-    overlayColor: "from-black/60",
-    badge: "Limited Stock"
+    src: macallan?.image || "/lovable-uploads/fa48fcd8-00c2-460c-a526-31075be3a614.png",
+    alt: macallan?.name || "The Macallan 18 Years Double Cask"
   },
   {
     id: 3,
-    image: "https://img.freepik.com/premium-photo/vintage-wine-elegance-exploring-restaurant-s-fine-wine-selection_925962-18399.jpg",
-    title: "Exquisite Wine Selection",
-    description: "From bold reds to crisp whites, explore our hand-picked selection of fine wines from around the world.",
-    cta: "View Collection",
-    link: "/category/wine",
-    alignment: "center",
-    overlayColor: "from-black/50",
-    badge: "Featured"
+    src: johnnieWalker?.image || "/lovable-uploads/769cfbd3-b7bd-4f57-a8a2-beb41cb8711e.png",
+    alt: johnnieWalker?.name || "Johnnie Walker Black Label"
+  },
+  {
+    id: 4,
+    // Updated to use the corrected Patrón image
+    src: patron?.image || "/lovable-uploads/3f3fd353-7ef4-459d-816b-aded65a7a7e3.png",
+    alt: patron?.name || "Patrón Silver"
+  },
+  {
+    id: 5,
+    // Updated to use the corrected Rémy Martin image
+    src: remyMartin?.image || "/lovable-uploads/360eb85e-ddf4-4ca5-9164-96c80523e308.png",
+    alt: remyMartin?.name || "Rémy Martin XO"
   }
 ];
 
 const HeroCarousel = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [api, setApi] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Set loaded state when component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Auto-play the carousel with improved reliability
   useEffect(() => {
     if (!api) return;
 
-    const onSelect = () => {
-      setCurrentSlide(api.selectedScrollSnap());
-    };
-
-    api.on("select", onSelect);
-    onSelect();
-
-    const autoplay = () => {
-      if (!api) return;
-
+    // Set up auto-play interval
+    const interval = setInterval(() => {
       api.scrollNext();
 
-      autoplayRef.current = setTimeout(() => {
-        autoplay();
-      }, 5000); // wait 5s on each slide
+      // Update current slide for indicators
+      setCurrentSlide(prev => {
+        const nextSlide = prev + 1 >= heroImages.length ? 0 : prev + 1;
+        return nextSlide;
+      });
+    }, 5000); // Change slide every 5 seconds for better viewing experience
+
+    // Handle manual navigation events
+    const onSelect = () => {
+      if (!api) return;
+      setCurrentSlide(api.selectedScrollSnap());
     };
+    api.on("select", onSelect);
 
-    autoplayRef.current = setTimeout(() => {
-      autoplay();
-    }, 5000); // initial wait
-
+    // Cleanup on component unmount
     return () => {
+      clearInterval(interval);
       api.off("select", onSelect);
-      if (autoplayRef.current) clearTimeout(autoplayRef.current);
     };
   }, [api]);
 
+  // Handle dot indicator clicks
   const scrollToSlide = (index: number) => {
     if (!api) return;
     api.scrollTo(index);
-    // optional: reset autoplay on manual interaction
-    if (autoplayRef.current) {
-      clearTimeout(autoplayRef.current);
-    }
+    setCurrentSlide(index);
   };
 
   return (
-    <div className="relative w-full h-screen mt-20 overflow-hidden">
+    <div className={`relative rounded-2xl overflow-hidden glass-card transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       <Carousel
-        opts={{ loop: true, duration: 500 }} // fast transition
+        opts={{
+          loop: true,
+          duration: 600 // Smoother transitions
+        }}
         setApi={setApi}
-        className="w-full h-full"
+        className="w-full"
       >
-        <CarouselContent className="flex w-full h-full">
-          {heroSlides.map((slide) => (
-            <CarouselItem key={slide.id} className="relative min-h-screen w-full flex-shrink-0">
-              {/* Image */}
-              <div className="absolute inset-0 w-full h-full z-0">
+        <CarouselContent>
+          {heroImages.map(image => (
+            <CarouselItem key={image.id}>
+              <div className="aspect-[16/9] w-full overflow-hidden">
                 <img
-                  src={slide.image}
-                  alt={slide.title}
-                  className="w-full h-full object-cover"
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-10000 hover:scale-105"
+                  onError={e => {
+                    // Fallback image if the primary one fails to load
+                    console.log(`Failed to load image: ${image.src}`);
+                    e.currentTarget.src = "/lovable-uploads/c2382e18-1567-4a53-ae88-bab7265675d6.png";
+                    e.currentTarget.alt = "Grey Goose Vodka";
+                  }}
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t ${slide.overlayColor} via-transparent to-transparent`} />
-              </div>
-
-              {/* Content */}
-              <div
-                className={cn(
-                  "absolute inset-0 flex items-center px-6 md:px-16 lg:px-24 z-10",
-                  slide.alignment === "left"
-                    ? "justify-start text-left"
-                    : slide.alignment === "right"
-                    ? "justify-end text-right"
-                    : "justify-center text-center"
-                )}
-              >
-                <div className="max-w-xl p-8">
-                  {slide.badge && (
-                    <span className="inline-block py-1 px-3 text-xs font-medium bg-gold/20 text-gold rounded-full mb-4">
-                      {slide.badge}
-                    </span>
-                  )}
-                  <h1 className="text-3xl md:text-5xl font-serif font-bold text-white mb-4">
-                    {slide.title}
-                  </h1>
-                  <p className="text-white/80 text-lg mb-6 max-w-lg">
-                    {slide.description}
-                  </p>
-                  <Link to={slide.link} className="inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-primary bg-white hover:bg-white/90 transition-colors duration-200">
-                    {slide.cta}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
+                
+                {/* Caption overlay for better UX */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-6 rounded-sm">
+                  <h3 className="text-white text-xl md:text-2xl font-serif font-bold">{image.alt}</h3>
                 </div>
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        {/* Dots */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 z-20">
-          {heroSlides.map((_, index) => (
+        
+        {/* Navigation arrows (visible but carousel will auto-play) */}
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10" />
+        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10" />
+        
+        {/* Dot indicators for enhanced user experience */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 z-10">
+          {heroImages.map((_, index) => (
             <button
               key={index}
               onClick={() => scrollToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? "bg-white w-6" : "bg-white/50"}`}
+              className={`w-2 h-2 rounded-full transition-all ${currentSlide === index ? "bg-white w-4" : "bg-white/50"}`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
       </Carousel>
+      
+      <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-gold/10 filter blur-xl mix-blend-multiply" />
+      <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
+        <div className="bg-white/90 backdrop-blur-sm shadow-xl rounded-full p-4 w-24 h-24 flex flex-col items-center justify-center animate-image-glow">
+          <span className="text-xs font-medium text-muted-foreground">Up to</span>
+          <span className="text-xl font-bold text-gold">30%</span>
+          <span className="text-sm font-medium">Off</span>
+        </div>
+      </div>
     </div>
   );
 };

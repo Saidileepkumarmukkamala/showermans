@@ -15,7 +15,6 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AuthCallback from "./pages/AuthCallback";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
-import AgeVerification from "./components/AgeVerification";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +23,6 @@ const App = () => (
     <AuthProvider>
       <CartProvider>
         <TooltipProvider>
-          <AgeVerification />
           <Toaster />
           <Sonner position="top-right" />
           <BrowserRouter>
